@@ -38,7 +38,7 @@ captures/
 
 # Android Studio
 *.iml
-.gradle
+*.gradle
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
