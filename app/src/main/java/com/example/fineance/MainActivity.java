@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         moneyCircleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent newActivity=new Intent(MainActivity.this, Historique.class);
+                Intent newActivity=new Intent(MainActivity.this, ListeTransaction.class);
                 startActivity(newActivity);
             }
         });

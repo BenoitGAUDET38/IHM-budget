@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FineAnce">
         <activity
-            android:name=".Historique"
+            android:name=".ListeTransaction"
             android:exported="false" />
         <activity android:name=".MainActivity"
             android:exported="true">
