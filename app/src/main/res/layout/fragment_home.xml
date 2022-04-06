@@ -20,12 +20,15 @@
     app:labelVisibilityMode="unlabeled"
     app:menu="@menu/bottom_menu"
     />
-android:textSize="30dp"
-android:layout_alignParentLeft="true"
-android:layout_alignParentTop="true"
-android:layout_marginLeft="40dp"
-android:layout_marginTop="20dp"
-android:text="Fineance\nBonjour Matis!" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    android:textSize="30dp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginLeft="40dp"
+    android:layout_marginTop="20dp"
+    android:text="Fineance\nBonjour Matis!" />
 <ImageView
     android:layout_width="80dp"
     android:layout_height="80dp"

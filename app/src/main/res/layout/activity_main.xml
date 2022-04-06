@@ -20,6 +20,10 @@
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_menu"
         />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:textSize="30dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
