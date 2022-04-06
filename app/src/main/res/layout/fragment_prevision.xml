@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PrevisionFragment"
-    android:background="@color/prevision">
+    android:background="@color/prevision"
+    tools:context=".PrevisionFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="Prevision"
-        android:textSize="30dp"
-        />
+        android:textSize="30sp" />
 
 </LinearLayout>

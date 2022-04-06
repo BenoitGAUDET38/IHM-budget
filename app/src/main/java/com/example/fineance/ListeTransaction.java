@@ -1,8 +1,10 @@
 package com.example.fineance;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ListeTransaction extends AppCompatActivity {
 
@@ -10,6 +12,10 @@ public class ListeTransaction extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.liste_transaction);
+//        ImageView ticketScanner = this.findViewById(R.id.ticketScanner);
+//        ticketScanner.setOnClickListener(view -> {
+//            Intent intent = new Intent(this.getApplicationContext(), ScanningActivity.class);
+//            this.startActivity(intent);
+//        });
     }
-
 }

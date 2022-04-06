@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/nav_categorie"
-        android:title="Categorie"
-        android:icon="@drawable/ic_baseline_sort_24"/>
+    <item
+        android:id="@+id/nav_categories"
+        android:icon="@drawable/ic_baseline_sort_24"
+        android:title="Categorie" />
 
-    <item android:id="@+id/nav_home"
-        android:title="Home"
-        android:icon="@drawable/ic_baseline_home_24"/>
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home" />
 
-    <item android:id="@+id/nav_prevision"
-        android:title="Prevision"
-        android:icon="@drawable/ic_baseline_query_stats_24"/>
+    <item
+        android:id="@+id/nav_prevision"
+        android:icon="@drawable/ic_baseline_query_stats_24"
+        android:title="Prevision" />
 </menu>

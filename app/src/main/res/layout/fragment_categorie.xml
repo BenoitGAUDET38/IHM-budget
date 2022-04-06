@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CategorieFragment"
-    android:background="@color/categorie">
+    android:background="@color/categorie"
+    tools:context=".CategorieFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="Categorie"
-        android:textSize="30dp"
-        />
+        android:textSize="30sp" />
 
 </LinearLayout>
