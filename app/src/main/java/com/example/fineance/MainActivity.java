@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*
         moneyCircleButton=findViewById(R.id.moneyCircleButton);
 
         moneyCircleButton.setOnClickListener(new View.OnClickListener() {
@@ -59,5 +60,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(newActivity);
             }
         });
+         */
     }
 }

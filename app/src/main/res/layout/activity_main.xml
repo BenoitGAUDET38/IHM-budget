@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity"
-    android:id="@+id/main_container">
-
-
+    android:id="@+id/main_container"
+    >
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bot_nav_bar"
@@ -20,40 +19,6 @@
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_menu"
         />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="30dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:text="Fineance\nBonjour Matis!" />
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/ic_baseline_account_circle_24"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_alignParentTop="true"
-        />
-    <ImageView
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:src="@drawable/circle"
-        android:id="@+id/moneyCircleButton"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="127$" />
 
 
 </RelativeLayout>
