@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/takenPicture"
         android:layout_margin="30dp"
-        android:text="Display Detected Text From Image"
+        android:text=""
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp" />
@@ -27,15 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/scannedText"
         android:layout_centerInParent="true"
-        android:text="Take Pickture" />
-
-    <Button
-        android:id="@+id/scanImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/takePicture"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="10dp"
-        android:text="Scan Image" />
+        android:text="Scan Ticket" />
 
 </RelativeLayout>

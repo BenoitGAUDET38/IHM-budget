@@ -7,12 +7,14 @@ import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
@@ -23,16 +25,13 @@ public class ScanningActivity extends AppCompatActivity {
     private Bitmap imageToScanBitmap;
     private ImageView imageView;
     private TextView scannedText;
-    private Button takePictureButton;
-    private Button scanImageButton;
     private final ActivityResultLauncher<Intent> activityResultLaunch = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                     this.imageToScanBitmap = (Bitmap) result.getData().getExtras().get("data");
                     this.imageView.setImageBitmap(this.imageToScanBitmap);
-                    this.scannedText.setText("Picture was taken");
-                    this.scanImageButton.setEnabled(true);
+                    this.detectTextFromImage();
                 }
             });
 
@@ -43,12 +42,9 @@ public class ScanningActivity extends AppCompatActivity {
 
         this.imageView = this.findViewById(R.id.takenPicture);
         this.scannedText = this.findViewById(R.id.scannedText);
-        this.takePictureButton = this.findViewById(R.id.takePicture);
-        this.scanImageButton = this.findViewById(R.id.scanImageButton);
+        Button takePictureButton = this.findViewById(R.id.takePicture);
 
-        this.scanImageButton.setEnabled(false);
-        this.takePictureButton.setOnClickListener(view -> this.takePictureIntent());
-        this.scanImageButton.setOnClickListener(view -> this.detectTextFromImage());
+        takePictureButton.setOnClickListener(view -> this.takePictureIntent());
     }
 
     private void takePictureIntent() {
@@ -60,11 +56,21 @@ public class ScanningActivity extends AppCompatActivity {
         InputImage image = InputImage.fromBitmap(this.imageToScanBitmap, 0);
         recognizer.process(image)
                 .addOnSuccessListener(visionText -> {
-                    this.scannedText.setText(visionText.getText());
+                    String amount = "0";
+                    String block;
+                    for (Text.TextBlock textBlock : visionText.getTextBlocks()) {
+                        block = textBlock.getText().replaceAll("\\D", "");
+                        if (!block.isEmpty()) {
+                            amount = block;
+                        }
+                    }
+                    this.scannedText.setText(amount);
+                    Toast.makeText(this.getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(
                         e -> {
-                            this.scannedText.setText("Was not able to Scan Image");
+                            this.scannedText.setText("No Text Was Found");
+                            Toast.makeText(this.getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
                         });
     }
 
