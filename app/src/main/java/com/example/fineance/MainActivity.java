@@ -36,8 +36,9 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new PrevisionFragment();
                     break;
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
-
+            if (fragment != null) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
+            }
             return true;
         });
     }

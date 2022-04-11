@@ -1,10 +1,14 @@
 package com.example.fineance;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -22,6 +26,8 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ImageView moneyCircle;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -59,5 +65,15 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        this.moneyCircle = this.requireView().findViewById(R.id.moneyCircleButton);
+        this.moneyCircle.setOnClickListener(v -> {
+            Intent intent = new Intent(this.getActivity(), ListeTransaction.class);
+            this.startActivity(intent);
+        });
+        super.onViewCreated(view, savedInstanceState);
     }
 }

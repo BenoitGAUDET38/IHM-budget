@@ -3,9 +3,11 @@
     package="com.example.fineance">
 
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,10 +17,7 @@
         android:theme="@style/Theme.FineAnce">
         <activity
             android:name=".ScanningActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
-            android:label="@string/title_activity_scanning"
-            android:theme="@style/Theme.FineAnce.Fullscreen" />
+            android:exported="false" />
         <activity
             android:name=".ListeTransaction"
             android:exported="false" />
@@ -36,4 +35,5 @@
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="ocr" />
     </application>
+
 </manifest>

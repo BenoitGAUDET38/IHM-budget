@@ -12,10 +12,11 @@ public class ListeTransaction extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.liste_transaction);
-//        ImageView ticketScanner = this.findViewById(R.id.ticketScanner);
-//        ticketScanner.setOnClickListener(view -> {
-//            Intent intent = new Intent(this.getApplicationContext(), ScanningActivity.class);
-//            this.startActivity(intent);
-//        });
+
+        ImageView ticketScanner = this.findViewById(R.id.ticketScanner);
+        ticketScanner.setOnClickListener(view -> {
+            Intent intent = new Intent(this.getApplicationContext(), ScanningActivity.class);
+            this.startActivity(intent);
+        });
     }
 }
