@@ -12,6 +12,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
@@ -19,6 +20,7 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 public class ScanningActivity extends AppCompatActivity {
 
     private final TextRecognizer recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
+    private Bitmap imageToScanBitmap;
     private ImageView imageView;
     private TextView scannedText;
     private Button takePictureButton;
@@ -27,8 +29,8 @@ public class ScanningActivity extends AppCompatActivity {
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    Bitmap imageBitmap = (Bitmap) result.getData().getExtras().get("data");
-                    this.imageView.setImageBitmap(imageBitmap);
+                    this.imageToScanBitmap = (Bitmap) result.getData().getExtras().get("data");
+                    this.imageView.setImageBitmap(this.imageToScanBitmap);
                     this.scannedText.setText("Picture was taken");
                     this.scanImageButton.setEnabled(true);
                 }
@@ -55,6 +57,16 @@ public class ScanningActivity extends AppCompatActivity {
     }
 
     private void detectTextFromImage() {
-
+        InputImage image = InputImage.fromBitmap(this.imageToScanBitmap, 0);
+        recognizer.process(image)
+                .addOnSuccessListener(visionText -> {
+                    this.scannedText.setText(visionText.getText());
+                })
+                .addOnFailureListener(
+                        e -> {
+                            this.scannedText.setText("Was not able to Scan Image");
+                        });
     }
+
+
 }
