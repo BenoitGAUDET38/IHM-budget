@@ -4,18 +4,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.fineance.R;
+import com.example.fineance.model.Depense;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNav;
-
+    ArrayList<Depense> depenseArrayList;
     ImageView moneyCircleButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +53,17 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
 
-        /*
-        moneyCircleButton=findViewById(R.id.moneyCircleButton);
-
-        moneyCircleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent newActivity=new Intent(MainActivity.this, ListeTransaction.class);
-                startActivity(newActivity);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent intent = getIntent();
+        if (intent != null){
+            Depense depense = intent.getParcelableExtra("depense");
+            if (depense != null){
+                depenseArrayList.add(depense);
             }
-        });
-         */
+        }
     }
 }

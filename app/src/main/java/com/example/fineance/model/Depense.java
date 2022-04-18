@@ -5,13 +5,22 @@ import android.os.Parcelable;
 
 public class Depense implements Parcelable {
     String catégorie;
+    String provenanace;
     double montant;
     String commentaire;
 
 
+    public Depense(String catégorie, String provenanace, int montant, String commentaire) {
+        this.catégorie=catégorie;
+        this.provenanace=provenanace;
+        this.montant=montant;
+        this.commentaire=commentaire;
+    }
 
-    protected Depense(Parcel in) {
+
+    public Depense(Parcel in) {
         catégorie=in.readString();
+        provenanace=in.readString();
         montant=in.readDouble();
         commentaire=in.readString();
     }
@@ -28,6 +37,7 @@ public class Depense implements Parcelable {
         }
     };
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -36,6 +46,7 @@ public class Depense implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(catégorie);
+        parcel.writeString(provenanace);
         parcel.writeDouble(montant);
         parcel.writeString(commentaire);
     }

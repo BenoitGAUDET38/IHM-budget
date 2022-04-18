@@ -10,9 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FineAnce">
         <activity
+            android:name=".controller.AjoutDepenseActivity"
+            android:exported="false" />
+        <activity
             android:name=".controller.ListeTransaction"
             android:exported="false" />
-        <activity android:name=".controller.MainActivity"
+        <activity
+            android:name=".controller.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
