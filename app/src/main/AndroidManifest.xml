@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FineAnce">
         <activity
-            android:name=".controller.AjoutDepenseActivity"
+            android:name=".controller.SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".controller.ListeTransaction"

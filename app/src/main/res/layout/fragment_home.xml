@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".controller.HomeFragment"
+    tools:context=".HomeFragment"
     android:background="@color/home">
 
 
@@ -20,6 +20,7 @@
     app:labelVisibilityMode="unlabeled"
     app:menu="@menu/bottom_menu"
     />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,6 +30,14 @@
     android:layout_marginLeft="40dp"
     android:layout_marginTop="20dp"
     android:text="Fineance\nBonjour Matis!" />
+
+    <Button
+        android:id="@+id/settings_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="azeazeza"
+        />
+
 <ImageView
     android:layout_width="80dp"
     android:layout_height="80dp"
@@ -38,6 +47,7 @@
     android:layout_marginTop="40dp"
     android:layout_alignParentTop="true"
     />
+
 <ImageView
     android:layout_width="250dp"
     android:layout_height="250dp"
@@ -47,7 +57,7 @@
     android:layout_centerVertical="true"
     />
 
-    <TextView
+<TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textSize="40dp"
