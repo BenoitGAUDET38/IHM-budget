@@ -1,5 +1,6 @@
 package com.example.fineance.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -32,6 +33,8 @@ public class CategorieFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    ArrayList<Depense> depenseArrayList;
 
     public CategorieFragment() {
         // Required empty public constructor
@@ -70,13 +73,13 @@ public class CategorieFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_categorie, container, false);
         ListView listView = view.findViewById(R.id.listView);
-        List<Depense> depenseList= new ArrayList<>();
-        depenseList.add(new Depense("Petit pain","Course","Boulangerie",1,"A acheter"));
-        depenseList.add(new Depense("Haricots","Course","Auchan",0.6,"A acheter"));
-        depenseList.add(new Depense("Big mac","Fast-Food","Macdo",8,"A acheter"));
-        ArrayAdapter<Depense> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1 , depenseList);
+        depenseArrayList=new ArrayList<>();
+        depenseArrayList.clear();
+        depenseArrayList.add(new Depense("Petit pain","Course","Boulangerie",1,"A acheter"));
+        depenseArrayList.add(new Depense("Haricots","Course","Auchan",0.6,"A acheter"));
+        depenseArrayList.add(new Depense("Big mac","Fast-Food","Macdo",8,"A acheter"));
 
-        listView.setAdapter(new CustomListAdapter(getActivity(), depenseList));
+        listView.setAdapter(new CustomListAdapter(getActivity(), depenseArrayList));
 
         return view;
     }
