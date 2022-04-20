@@ -3,7 +3,9 @@ package com.example.fineance.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Depense implements Parcelable {
+import java.io.Serializable;
+
+public class Depense implements Parcelable, Serializable {
     String catégorie;
     String provenanace;
     double montant;
@@ -49,5 +51,15 @@ public class Depense implements Parcelable {
         parcel.writeString(provenanace);
         parcel.writeDouble(montant);
         parcel.writeString(commentaire);
+    }
+
+    @Override
+    public String toString() {
+        return "Depense{" +
+                "catégorie='" + catégorie + '\'' +
+                ", provenanace='" + provenanace + '\'' +
+                ", montant=" + montant +
+                ", commentaire='" + commentaire + '\'' +
+                '}';
     }
 }

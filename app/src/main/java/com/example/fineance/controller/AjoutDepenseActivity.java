@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +34,7 @@ public class AjoutDepenseActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent ajouteDepenseIntent=new Intent(AjoutDepenseActivity.this,MainActivity.class);
                 Depense depense= new Depense(String.valueOf(catégorieEditText.getText()),String.valueOf(provenanceEditText.getText()),Integer.parseInt(String.valueOf(montantEditText.getText())),String.valueOf(commentaireEditText.getText()));
-                ajouteDepenseIntent.putExtra("depense", depense);
+                ajouteDepenseIntent.putExtra("depense", (Parcelable) depense);
                 finish();
             }
         });
