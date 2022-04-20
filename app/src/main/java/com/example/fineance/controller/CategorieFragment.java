@@ -71,9 +71,9 @@ public class CategorieFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_categorie, container, false);
         ListView listView = view.findViewById(R.id.listView);
         List<Depense> depenseList= new ArrayList<>();
-        depenseList.add(new Depense("cat","depense",1,"A acheter"));
-        depenseList.add(new Depense("bli","depense",1,"A acheter"));
-        depenseList.add(new Depense("bla","depense",1,"A acheter"));
+        depenseList.add(new Depense("Petit pain","Course","Boulangerie",1,"A acheter"));
+        depenseList.add(new Depense("Haricots","Course","Auchan",0.6,"A acheter"));
+        depenseList.add(new Depense("Big mac","Fast-Food","Macdo",8,"A acheter"));
         ArrayAdapter<Depense> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1 , depenseList);
 
         listView.setAdapter(new CustomListAdapter(getActivity(), depenseList));

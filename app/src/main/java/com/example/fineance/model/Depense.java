@@ -6,6 +6,14 @@ import android.os.Parcelable;
 import java.io.Serializable;
 
 public class Depense implements Parcelable, Serializable {
+    String nom;
+    String categorie;
+    String provenanace;
+    double montant;
+    String commentaire;
+
+
+
     public static final Creator<Depense> CREATOR = new Creator<Depense>() {
         @Override
         public Depense createFromParcel(Parcel in) {
@@ -17,12 +25,9 @@ public class Depense implements Parcelable, Serializable {
             return new Depense[size];
         }
     };
-    String categorie;
-    String provenanace;
-    double montant;
-    String commentaire;
 
-    public Depense(String categorie, String provenanace, int montant, String commentaire) {
+    public Depense(String nom,String categorie, String provenanace, double montant, String commentaire) {
+        this.nom=nom;
         this.categorie = categorie;
         this.provenanace = provenanace;
         this.montant = montant;
@@ -30,6 +35,7 @@ public class Depense implements Parcelable, Serializable {
     }
 
     public Depense(Parcel in) {
+        nom=in.readString();
         categorie = in.readString();
         provenanace = in.readString();
         montant = in.readDouble();
@@ -43,21 +49,14 @@ public class Depense implements Parcelable, Serializable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(nom);
         parcel.writeString(categorie);
         parcel.writeString(provenanace);
         parcel.writeDouble(montant);
         parcel.writeString(commentaire);
     }
 
-    @Override
-    public String toString() {
-        return "Depense{" +
-                "catégorie='" + categorie + '\'' +
-                ", provenanace='" + provenanace + '\'' +
-                ", montant=" + montant +
-                ", commentaire='" + commentaire + '\'' +
-                '}';
-    }
+    public String getNom() { return nom; }
 
     public String getCategorie() {
         return categorie;

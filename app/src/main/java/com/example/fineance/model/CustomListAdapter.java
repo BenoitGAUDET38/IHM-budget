@@ -41,8 +41,9 @@ public class CustomListAdapter  extends BaseAdapter {
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.list_item_layout, null);
             holder = new ViewHolder();
-            holder.categorieNameView = convertView.findViewById(R.id.textView_categorie);
-            holder.provenanceView = convertView.findViewById(R.id.textView_provenance);
+            holder.categorieNameView = convertView.findViewById(R.id.item_layout_textView_categorie);
+            holder.provenanceView = convertView.findViewById(R.id.item_layout_textView_provenance);
+            holder.nomEtPrixView = convertView.findViewById(R.id.item_layout_textView_nomprix);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -50,8 +51,8 @@ public class CustomListAdapter  extends BaseAdapter {
 
         Depense depense = this.listData.get(position);
         holder.categorieNameView.setText(depense.getCategorie());
-        holder.provenanceView.setText("Provenance: " + depense.getProvenanace());
-
+        holder.provenanceView.setText(depense.getProvenanace());
+        holder.nomEtPrixView.setText(depense.getNom()+"    "+depense.getMontant()+"$");
 
         return convertView;
     }
@@ -59,6 +60,7 @@ public class CustomListAdapter  extends BaseAdapter {
     static class ViewHolder {
         TextView categorieNameView;
         TextView provenanceView;
+        TextView nomEtPrixView;
     }
 
 }

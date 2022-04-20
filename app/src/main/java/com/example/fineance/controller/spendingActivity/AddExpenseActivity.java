@@ -15,6 +15,7 @@ import com.example.fineance.model.Depense;
 
 public class AddExpenseActivity extends AppCompatActivity {
 
+    EditText nomEditText;
     EditText categorieEditText;
     EditText provenanceEditText;
     EditText montantEditText;
@@ -26,6 +27,7 @@ public class AddExpenseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajout_depense);
+        nomEditText=findViewById(R.id.ajout_depense_nom_edit_text);
         categorieEditText = findViewById(R.id.ajout_depense_catégorie_edit_text);
         provenanceEditText = findViewById(R.id.ajout_depense_provenance_edit_text);
         commentaireEditText = findViewById(R.id.ajout_depense_commentaire_edit_text);
@@ -34,7 +36,7 @@ public class AddExpenseActivity extends AppCompatActivity {
         montantEditText = findViewById(R.id.ajout_depense_montant_editText);
         validerButton.setOnClickListener(view -> {
             Intent ajouteDepenseIntent = new Intent(AddExpenseActivity.this, MainActivity.class);
-            Depense depense = new Depense(String.valueOf(categorieEditText.getText()), String.valueOf(provenanceEditText.getText()), Integer.parseInt(String.valueOf(montantEditText.getText())), String.valueOf(commentaireEditText.getText()));
+            Depense depense = new Depense(String.valueOf(nomEditText.getText()),String.valueOf(categorieEditText.getText()), String.valueOf(provenanceEditText.getText()), Integer.parseInt(String.valueOf(montantEditText.getText())), String.valueOf(commentaireEditText.getText()));
             ajouteDepenseIntent.putExtra("depense", (Parcelable) depense);
             finish();
         });
