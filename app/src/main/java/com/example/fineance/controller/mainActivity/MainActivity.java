@@ -1,26 +1,19 @@
-package com.example.fineance.controller;
+package com.example.fineance.controller.mainActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.example.fineance.R;
 import com.example.fineance.model.Depense;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.Objects;
-import com.google.android.material.navigation.NavigationBarView;
-
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -29,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("NonConstantResourceId")
     ArrayList<Depense> depenseArrayList;
-    ImageView moneyCircleButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -38,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 == PackageManager.PERMISSION_DENIED) {
             this.requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
         }
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
@@ -70,9 +64,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Intent intent = getIntent();
-        if (intent != null){
+        if (intent != null) {
             Depense depense = intent.getParcelableExtra("depense");
-            if (depense != null){
+            if (depense != null) {
                 depenseArrayList.add(depense);
             }
         }

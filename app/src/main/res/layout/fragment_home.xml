@@ -2,10 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Theme.FineAnce.HomeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/home"
-    tools:context=".HomeFragment">
+    tools:context=".controller.mainActivity.HomeFragment">
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -28,12 +28,6 @@
         android:layout_marginTop="20dp"
         android:text="Fineance\nBonjour Matis!"
         android:textSize="30sp" />
-
-    <Button
-        android:id="@+id/settings_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="azeazeza" />
 
     <ImageView
         android:layout_width="60dp"

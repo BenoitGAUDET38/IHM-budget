@@ -1,4 +1,4 @@
-package com.example.fineance.controller;
+package com.example.fineance.controller.optionsActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
