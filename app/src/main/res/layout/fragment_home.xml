@@ -1,69 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Theme.FineAnce.HomeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment"
-    android:background="@color/home">
+    tools:context=".controller.mainActivity.HomeFragment">
 
 
-
-<com.google.android.material.bottomnavigation.BottomNavigationView
-    android:id="@+id/bot_nav_bar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:elevation="3dp"
-    app:itemIconSize="30dp"
-    app:itemIconTint="@drawable/item_selector"
-    app:labelVisibilityMode="unlabeled"
-    app:menu="@menu/bottom_menu"
-    />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bot_nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:elevation="3dp"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/bottom_menu" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-    android:textSize="30dp"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentTop="true"
-    android:layout_marginLeft="40dp"
-    android:layout_marginTop="20dp"
-    android:text="Fineance\nBonjour Matis!" />
-
-    <Button
-        android:id="@+id/settings_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="azeazeza"
-        />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Fineance\nBonjour Matis!"
+        android:textSize="30sp" />
 
-<ImageView
-    android:layout_width="80dp"
-    android:layout_height="80dp"
-    android:src="@drawable/ic_baseline_account_circle_24"
-    android:layout_alignParentRight="true"
-    android:layout_marginRight="40dp"
-    android:layout_marginTop="40dp"
-    android:layout_alignParentTop="true"
-    />
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_baseline_account_circle_24" />
 
-<ImageView
-    android:layout_width="250dp"
-    android:layout_height="250dp"
-    android:src="@drawable/circle"
-    android:id="@+id/moneyCircleButton"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true"
-    />
+    <ImageView
+        android:id="@+id/moneyCircleButton"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/circle" />
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textSize="40dp"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true"
-    android:text="127$" />
-
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/MoneyLeft"
+        android:textSize="40sp" />
 </RelativeLayout>
