@@ -2,7 +2,10 @@ package com.example.fineance.controller.spendingActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.*;
+import android.os.Parcelable;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,7 +35,7 @@ public class AddExpenseActivity extends AppCompatActivity {
         validerButton.setOnClickListener(view -> {
             Intent ajouteDepenseIntent = new Intent(AddExpenseActivity.this, MainActivity.class);
             Depense depense = new Depense(String.valueOf(categorieEditText.getText()), String.valueOf(provenanceEditText.getText()), Integer.parseInt(String.valueOf(montantEditText.getText())), String.valueOf(commentaireEditText.getText()));
-            ajouteDepenseIntent.putExtra("depense", depense);
+            ajouteDepenseIntent.putExtra("depense", (Parcelable) depense);
             finish();
         });
 

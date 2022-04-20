@@ -6,11 +6,21 @@ import android.os.Parcelable;
 import java.io.Serializable;
 
 public class Depense implements Parcelable, Serializable {
-    String catégorie;
+    public static final Creator<Depense> CREATOR = new Creator<Depense>() {
+        @Override
+        public Depense createFromParcel(Parcel in) {
+            return new Depense(in);
+        }
+
+        @Override
+        public Depense[] newArray(int size) {
+            return new Depense[size];
+        }
+    };
+    String categorie;
     String provenanace;
     double montant;
     String commentaire;
-
 
     public Depense(String categorie, String provenanace, int montant, String commentaire) {
         this.categorie = categorie;
@@ -25,19 +35,6 @@ public class Depense implements Parcelable, Serializable {
         montant = in.readDouble();
         commentaire = in.readString();
     }
-
-    public static final Creator<Depense> CREATOR = new Creator<Depense>() {
-        @Override
-        public Depense createFromParcel(Parcel in) {
-            return new Depense(in);
-        }
-
-        @Override
-        public Depense[] newArray(int size) {
-            return new Depense[size];
-        }
-    };
-
 
     @Override
     public int describeContents() {
@@ -55,7 +52,7 @@ public class Depense implements Parcelable, Serializable {
     @Override
     public String toString() {
         return "Depense{" +
-                "catégorie='" + catégorie + '\'' +
+                "catégorie='" + categorie + '\'' +
                 ", provenanace='" + provenanace + '\'' +
                 ", montant=" + montant +
                 ", commentaire='" + commentaire + '\'' +

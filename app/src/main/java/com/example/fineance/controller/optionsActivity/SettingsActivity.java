@@ -1,8 +1,8 @@
 package com.example.fineance.controller.optionsActivity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fineance.R;
 

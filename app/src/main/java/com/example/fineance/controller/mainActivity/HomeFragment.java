@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import com.example.fineance.R;
 import com.example.fineance.controller.optionsActivity.SettingsActivity;
 import com.example.fineance.controller.spendingActivity.AddExpenseActivity;
-import com.example.fineance.controller.spendingActivity.ScanningActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,8 +41,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         ImageView moneyCircle = this.requireView().findViewById(R.id.moneyCircleButton);
         moneyCircle.setOnClickListener(v -> {
-            Intent intent = new Intent(this.getActivity(), AddExpenseActivity.class);
-            this.startActivity(intent);
+            this.startActivity(new Intent(this.getActivity(), AddExpenseActivity.class));
         });
         super.onViewCreated(view, savedInstanceState);
     }

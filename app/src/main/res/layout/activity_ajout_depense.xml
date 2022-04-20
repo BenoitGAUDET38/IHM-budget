@@ -16,7 +16,9 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/sommeLayout"
             android:layout_centerHorizontal="true"
-            android:layout_marginEnd="10dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
             android:layout_toStartOf="@+id/sommeLayout"
             android:src="@android:drawable/ic_menu_camera" />

@@ -26,6 +26,7 @@ public class ScanningActivity extends AppCompatActivity {
     private Bitmap imageToScanBitmap;
     private ImageView imageView;
     private TextView scannedText;
+    private Button takePictureButton;
     private final ActivityResultLauncher<Intent> activityResultLaunch = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -33,6 +34,7 @@ public class ScanningActivity extends AppCompatActivity {
                     this.imageToScanBitmap = (Bitmap) result.getData().getExtras().get("data");
                     this.imageView.setImageBitmap(this.imageToScanBitmap);
                     this.detectTextFromImage();
+                    this.takePictureButton.setText("Re-Scan Ticket");
                 }
             });
 
@@ -43,7 +45,7 @@ public class ScanningActivity extends AppCompatActivity {
 
         this.imageView = this.findViewById(R.id.takenPicture);
         this.scannedText = this.findViewById(R.id.scannedText);
-        Button takePictureButton = this.findViewById(R.id.takePicture);
+        this.takePictureButton = this.findViewById(R.id.takePicture);
 
         takePictureButton.setOnClickListener(view -> this.takePictureIntent());
     }

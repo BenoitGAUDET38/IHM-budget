@@ -63,13 +63,13 @@ public class CategorieFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_categorie, container, false);
+        View view = inflater.inflate(R.layout.fragment_categorie, container, false);
         ListView listView = view.findViewById(R.id.listView);
-        Depense depense1= new Depense("cat","depense",1,"A acheter");
-        Depense depense2= new Depense("bli","depense",1,"A acheter");
-        Depense depense3= new Depense("bla","depense",1,"A acheter");
-        Depense[] depenseList= new Depense[]{depense1,depense2,depense3};
-        ArrayAdapter<Depense> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1 , depenseList);
+        Depense depense1 = new Depense("cat", "depense", 1, "A acheter");
+        Depense depense2 = new Depense("bli", "depense", 1, "A acheter");
+        Depense depense3 = new Depense("bla", "depense", 1, "A acheter");
+        Depense[] depenseList = new Depense[]{depense1, depense2, depense3};
+        ArrayAdapter<Depense> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, depenseList);
 
         listView.setAdapter(arrayAdapter);
 
