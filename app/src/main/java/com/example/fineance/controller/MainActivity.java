@@ -1,4 +1,4 @@
-package com.example.fineance;
+package com.example.fineance.controller;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -9,14 +9,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+
+import com.example.fineance.R;
+import com.example.fineance.model.Depense;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Objects;
+import com.google.android.material.navigation.NavigationBarView;
+
+import android.widget.ImageView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNav;
 
     @SuppressLint("NonConstantResourceId")
+    ArrayList<Depense> depenseArrayList;
+    ImageView moneyCircleButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -51,5 +64,17 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent intent = getIntent();
+        if (intent != null){
+            Depense depense = intent.getParcelableExtra("depense");
+            if (depense != null){
+                depenseArrayList.add(depense);
+            }
+        }
     }
 }

@@ -19,6 +19,9 @@
             android:name=".ScanningActivity"
             android:exported="false" />
         <activity
+            android:name=".Settings"
+            android:exported="false" />
+        <activity
             android:name=".ListeTransaction"
             android:exported="false" />
         <activity
