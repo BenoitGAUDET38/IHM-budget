@@ -4,22 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment"
+    tools:context=".controller.HomeFragment"
     android:background="@color/home">
 
-
-
-<com.google.android.material.bottomnavigation.BottomNavigationView
-    android:id="@+id/bot_nav_bar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:elevation="3dp"
-    app:itemIconSize="30dp"
-    app:itemIconTint="@drawable/item_selector"
-    app:labelVisibilityMode="unlabeled"
-    app:menu="@menu/bottom_menu"
-    />
 
     <TextView
         android:layout_width="match_parent"

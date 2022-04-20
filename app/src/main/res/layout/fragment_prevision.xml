@@ -4,15 +4,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".controller.PrevisionFragment"
-    android:background="@color/prevision">
+    android:background="@color/prevision"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="30dp"
+        android:layout_weight="0.1"
+        android:orientation="horizontal"
         android:gravity="center"
-        android:text="Prevision"
-        android:textSize="30dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Analyse : "
+            android:textSize="30sp"
+            />
+
+        <Spinner
+            android:id="@+id/spinner_prevision"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:background="@color/white"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        android:layout_marginBottom="10dp"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="Seuils de dépense"
+        android:textSize="20dp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graphView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="10dp"
+        />
+
+    <View
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="Seuils de dépense par catégorie"
+        android:textSize="20dp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <com.razerdp.widget.animatedpieview.AnimatedPieView
+        android:id="@+id/pie_chart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        android:layout_weight="1"
+        />
+
 
 </LinearLayout>
