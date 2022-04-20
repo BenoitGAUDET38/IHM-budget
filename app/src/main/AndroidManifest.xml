@@ -10,9 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FineAnce">
         <activity
+            android:name=".Settings"
+            android:exported="false" />
+        <activity
             android:name=".ListeTransaction"
             android:exported="false" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
