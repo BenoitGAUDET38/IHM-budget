@@ -1,4 +1,4 @@
-package com.example.fineance.controller;
+package com.example.fineance.controller.mainActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -6,9 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,9 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.fineance.R;
-import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.razerdp.widget.animatedpieview.AnimatedPieView;
@@ -28,9 +24,6 @@ import com.razerdp.widget.animatedpieview.callback.OnPieSelectListener;
 import com.razerdp.widget.animatedpieview.data.IPieInfo;
 import com.razerdp.widget.animatedpieview.data.SimplePieInfo;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Random;
 
 /**
