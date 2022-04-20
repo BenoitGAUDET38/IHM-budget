@@ -7,8 +7,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.fineance.R;
+import com.example.fineance.model.CustomListAdapter;
+import com.example.fineance.model.Depense;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +68,16 @@ public class CategorieFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_categorie, container, false);
+        View view = inflater.inflate(R.layout.fragment_categorie, container, false);
+        ListView listView = view.findViewById(R.id.listView);
+        List<Depense> depenseList= new ArrayList<>();
+        depenseList.add(new Depense("Petit pain","Course","Boulangerie",1,"A acheter"));
+        depenseList.add(new Depense("Haricots","Course","Auchan",0.6,"A acheter"));
+        depenseList.add(new Depense("Big mac","Fast-Food","Macdo",8,"A acheter"));
+        ArrayAdapter<Depense> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1 , depenseList);
+
+        listView.setAdapter(new CustomListAdapter(getActivity(), depenseList));
+
+        return view;
     }
 }

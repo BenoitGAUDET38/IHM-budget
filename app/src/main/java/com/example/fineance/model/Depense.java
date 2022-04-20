@@ -3,27 +3,16 @@ package com.example.fineance.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Depense implements Parcelable {
-    String catégorie;
+import java.io.Serializable;
+
+public class Depense implements Parcelable, Serializable {
+    String nom;
+    String categorie;
     String provenanace;
     double montant;
     String commentaire;
 
 
-    public Depense(String catégorie, String provenanace, int montant, String commentaire) {
-        this.catégorie=catégorie;
-        this.provenanace=provenanace;
-        this.montant=montant;
-        this.commentaire=commentaire;
-    }
-
-
-    public Depense(Parcel in) {
-        catégorie=in.readString();
-        provenanace=in.readString();
-        montant=in.readDouble();
-        commentaire=in.readString();
-    }
 
     public static final Creator<Depense> CREATOR = new Creator<Depense>() {
         @Override
@@ -37,6 +26,21 @@ public class Depense implements Parcelable {
         }
     };
 
+    public Depense(String nom,String categorie, String provenanace, double montant, String commentaire) {
+        this.nom=nom;
+        this.categorie = categorie;
+        this.provenanace = provenanace;
+        this.montant = montant;
+        this.commentaire = commentaire;
+    }
+
+    public Depense(Parcel in) {
+        nom=in.readString();
+        categorie = in.readString();
+        provenanace = in.readString();
+        montant = in.readDouble();
+        commentaire = in.readString();
+    }
 
     @Override
     public int describeContents() {
@@ -45,9 +49,28 @@ public class Depense implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(catégorie);
+        parcel.writeString(nom);
+        parcel.writeString(categorie);
         parcel.writeString(provenanace);
         parcel.writeDouble(montant);
         parcel.writeString(commentaire);
+    }
+
+    public String getNom() { return nom; }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public String getProvenanace() {
+        return provenanace;
+    }
+
+    public double getMontant() {
+        return montant;
+    }
+
+    public String getCommentaire() {
+        return commentaire;
     }
 }
