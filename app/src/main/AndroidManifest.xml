@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FineAnce">
         <activity
+            android:name=".controller.CustomListView"
+            android:exported="false" />
+        <activity
             android:name=".controller.AjoutCategorieActivity"
             android:exported="false" />
         <activity

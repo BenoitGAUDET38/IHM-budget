@@ -11,7 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.fineance.R;
+import com.example.fineance.model.CustomListAdapter;
 import com.example.fineance.model.Depense;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,13 +70,13 @@ public class CategorieFragment extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_categorie, container, false);
         ListView listView = view.findViewById(R.id.listView);
-        Depense depense1= new Depense("cat","depense",1,"A acheter");
-        Depense depense2= new Depense("bli","depense",1,"A acheter");
-        Depense depense3= new Depense("bla","depense",1,"A acheter");
-        Depense[] depenseList= new Depense[]{depense1,depense2,depense3};
+        List<Depense> depenseList= new ArrayList<>();
+        depenseList.add(new Depense("cat","depense",1,"A acheter"));
+        depenseList.add(new Depense("bli","depense",1,"A acheter"));
+        depenseList.add(new Depense("bla","depense",1,"A acheter"));
         ArrayAdapter<Depense> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1 , depenseList);
 
-        listView.setAdapter(arrayAdapter);
+        listView.setAdapter(new CustomListAdapter(getActivity(), depenseList));
 
         return view;
     }

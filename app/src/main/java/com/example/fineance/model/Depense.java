@@ -62,4 +62,20 @@ public class Depense implements Parcelable, Serializable {
                 ", commentaire='" + commentaire + '\'' +
                 '}';
     }
+
+    public String getCatégorie() {
+        return catégorie;
+    }
+
+    public String getProvenanace() {
+        return provenanace;
+    }
+
+    public double getMontant() {
+        return montant;
+    }
+
+    public String getCommentaire() {
+        return commentaire;
+    }
 }
