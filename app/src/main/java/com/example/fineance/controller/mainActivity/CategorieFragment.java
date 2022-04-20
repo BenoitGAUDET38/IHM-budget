@@ -14,6 +14,9 @@ import com.example.fineance.R;
 import com.example.fineance.model.CustomListAdapter;
 import com.example.fineance.model.Depense;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link CategorieFragment#newInstance} factory method to
