@@ -59,8 +59,8 @@ public class Depense implements Parcelable, Serializable {
                 '}';
     }
 
-    public String getCatégorie() {
-        return catégorie;
+    public String getCategorie() {
+        return categorie;
     }
 
     public String getProvenanace() {

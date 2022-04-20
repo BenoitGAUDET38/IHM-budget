@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
+import com.example.fineance.controller.CategorieFragment;
 import com.example.fineance.model.Depense;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

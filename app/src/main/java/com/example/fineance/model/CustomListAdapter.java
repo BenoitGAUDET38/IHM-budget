@@ -49,7 +49,7 @@ public class CustomListAdapter  extends BaseAdapter {
         }
 
         Depense depense = this.listData.get(position);
-        holder.categorieNameView.setText(depense.getCatégorie());
+        holder.categorieNameView.setText(depense.getCategorie());
         holder.provenanceView.setText("Provenance: " + depense.getProvenanace());
 
 
