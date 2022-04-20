@@ -1,4 +1,4 @@
-package com.example.fineance;
+package com.example.fineance.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.example.fineance.R;
 
 /**
  * A simple {@link Fragment} subclass.
