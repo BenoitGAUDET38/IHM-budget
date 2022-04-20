@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.fineance.R;
+import com.example.fineance.model.Categorie;
 import com.example.fineance.model.Depense;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNav;
     ArrayList<Depense> depenseArrayList;
-    ImageView moneyCircleButton;
+    ArrayList<Categorie> categorieArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +62,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null){
             Depense depense = intent.getParcelableExtra("depense");
+            Categorie categorie= intent.getParcelableExtra("categorie");
             if (depense != null){
                 depenseArrayList.add(depense);
+            }
+            if (categorie != null){
+                categorieArrayList.add(categorie);
             }
         }
     }
