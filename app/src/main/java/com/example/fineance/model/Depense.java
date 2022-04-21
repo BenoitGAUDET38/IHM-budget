@@ -3,13 +3,20 @@ package com.example.fineance.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class Depense implements Parcelable, Serializable {
+
+    private static int cmp;
+
+    int id;
     String nom;
     String categorie;
-    String provenanace;
+    String provenance;
     double montant;
+    String devise;
     String commentaire;
 
 
@@ -26,18 +33,21 @@ public class Depense implements Parcelable, Serializable {
         }
     };
 
-    public Depense(String nom,String categorie, String provenanace, double montant, String commentaire) {
-        this.nom=nom;
+    public Depense(String nom, String categorie, String provenance, double montant, String devise,String commentaire) {
+        this.id = cmp++;
+        this.nom = nom;
         this.categorie = categorie;
-        this.provenanace = provenanace;
+        this.provenance = provenance;
         this.montant = montant;
+        this.devise = devise;
         this.commentaire = commentaire;
     }
 
     public Depense(Parcel in) {
+        id=cmp++;
         nom=in.readString();
         categorie = in.readString();
-        provenanace = in.readString();
+        provenance = in.readString();
         montant = in.readDouble();
         commentaire = in.readString();
     }
@@ -51,17 +61,18 @@ public class Depense implements Parcelable, Serializable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(nom);
         parcel.writeString(categorie);
-        parcel.writeString(provenanace);
+        parcel.writeString(provenance);
         parcel.writeDouble(montant);
         parcel.writeString(commentaire);
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Depense{" +
                 "nom='" + nom + '\'' +
                 ", categorie='" + categorie + '\'' +
-                ", provenanace='" + provenanace + '\'' +
+                ", provenanace='" + provenance + '\'' +
                 ", montant=" + montant +
                 ", commentaire='" + commentaire + '\'' +
                 '}';
@@ -73,8 +84,8 @@ public class Depense implements Parcelable, Serializable {
         return categorie;
     }
 
-    public String getProvenanace() {
-        return provenanace;
+    public String getProvenance() {
+        return provenance;
     }
 
     public double getMontant() {

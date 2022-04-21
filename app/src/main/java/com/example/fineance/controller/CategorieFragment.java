@@ -1,22 +1,18 @@
 package com.example.fineance.controller;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
 import com.example.fineance.model.CustomListAdapter;
 import com.example.fineance.model.Depense;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,10 +70,9 @@ public class CategorieFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_categorie, container, false);
         ListView listView = view.findViewById(R.id.listView);
         depenseArrayList=new ArrayList<>();
-        depenseArrayList.clear();
-        depenseArrayList.add(new Depense("Petit pain","Course","Boulangerie",1,"A acheter"));
-        depenseArrayList.add(new Depense("Haricots","Course","Auchan",0.6,"A acheter"));
-        depenseArrayList.add(new Depense("Big mac","Fast-Food","Macdo",8,"A acheter"));
+        depenseArrayList.add(new Depense("Petit pain","Course","Boulangerie",1,"EUR","A acheter"));
+        depenseArrayList.add(new Depense("Haricots","Course","Auchan",0.6,"EUR","A acheter"));
+        depenseArrayList.add(new Depense("Big mac","Fast-Food","Macdo",8,"EUR","A acheter"));
 
         listView.setAdapter(new CustomListAdapter(getActivity(), depenseArrayList));
 
