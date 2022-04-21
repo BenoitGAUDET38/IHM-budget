@@ -56,6 +56,17 @@ public class Depense implements Parcelable, Serializable {
         parcel.writeString(commentaire);
     }
 
+    @Override
+    public String toString() {
+        return "Depense{" +
+                "nom='" + nom + '\'' +
+                ", categorie='" + categorie + '\'' +
+                ", provenanace='" + provenanace + '\'' +
+                ", montant=" + montant +
+                ", commentaire='" + commentaire + '\'' +
+                '}';
+    }
+
     public String getNom() { return nom; }
 
     public String getCategorie() {

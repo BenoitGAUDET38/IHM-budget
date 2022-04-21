@@ -5,6 +5,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
+import android.util.LogPrinter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -13,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
 import com.example.fineance.controller.CategorieFragment;
+import com.example.fineance.controller.spendingActivity.AddExpenseActivity;
 import com.example.fineance.model.Depense;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -22,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNav;
 
     @SuppressLint("NonConstantResourceId")
-    ArrayList<Depense> depenseArrayList;
+    ArrayList<Depense> depenseArrayList=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +64,22 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
     }
+    @Override
+    protected void onPause(){
+        super.onPause();
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
         Intent intent = getIntent();
+
         if (intent != null) {
             Depense depense = intent.getParcelableExtra("depense");
             if (depense != null) {
                 depenseArrayList.add(depense);
             }
         }
+
     }
 }
