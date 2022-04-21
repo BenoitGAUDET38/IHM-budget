@@ -7,18 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".controller.mainActivity.HomeFragment">
 
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bot_nav_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:elevation="3dp"
-        app:itemIconSize="30dp"
-        app:itemIconTint="@drawable/item_selector"
-        app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/bottom_menu" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
