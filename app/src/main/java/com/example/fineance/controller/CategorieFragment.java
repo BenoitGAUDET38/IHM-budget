@@ -4,9 +4,14 @@ import static com.example.fineance.model.PerformNetworkRequest.depenseList;
 import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
 
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
@@ -16,6 +21,7 @@ import com.example.fineance.model.CustomListAdapter;
 import com.example.fineance.model.Depense;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,7 +32,7 @@ public class CategorieFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+    public static final String ARG_DEPENSE = "depense";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
@@ -51,7 +57,6 @@ public class CategorieFragment extends Fragment {
     public static CategorieFragment newInstance(String param1, String param2) {
         CategorieFragment fragment = new CategorieFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -61,8 +66,8 @@ public class CategorieFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            depenseArrayList = getArguments().getParcelableArrayList(ARG_DEPENSE);
+            Log.d("TAG", "Récupération args");
         }
     }
 
@@ -72,11 +77,13 @@ public class CategorieFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_categorie, container, false);
         ListView listView = view.findViewById(R.id.listView);
-        getDepenses();
-        depenseArrayList = depenseList;
-        depenseArrayList.add(new Depense("Petit pain","Course","Boulangerie",1,"EUR","A acheter"));
-        depenseArrayList.add(new Depense("Haricots","Course","Auchan",0.6,"EUR","A acheter"));
-        depenseArrayList.add(new Depense("Big mac","Fast-Food","Macdo",8,"EUR","A acheter"));
+        /*
+        depenseArrayList.add(new Depense("Petit pain","Course","Boulangerie",1,"A acheter"));
+        depenseArrayList.add(new Depense("Haricots","Course","Auchan",0.6,"A acheter"));
+        depenseArrayList.add(new Depense("Big mac","Fast-Food","Macdo",8,"A acheter"));
+         */
+
+
 
         listView.setAdapter(new CustomListAdapter(getActivity(), depenseArrayList));
 
