@@ -1,5 +1,7 @@
 package com.example.fineance.controller.mainActivity;
 
+import static com.example.fineance.model.PerformNetworkRequest.createTransaction;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         if (intent != null) {
             Depense depense = intent.getParcelableExtra("depense");
             if (depense != null) {
-                depenseArrayList.add(depense);
+                createTransaction(depense);
             }
         }
 
