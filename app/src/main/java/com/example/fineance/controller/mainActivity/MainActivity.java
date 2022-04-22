@@ -1,14 +1,13 @@
 package com.example.fineance.controller.mainActivity;
 
 import static com.example.fineance.model.PerformNetworkRequest.createTransaction;
+import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         this.setContentView(R.layout.activity_main);
 
         depenseArrayList = new ArrayList<>();
-
+        getDepenses();
         bottomNav = this.findViewById(R.id.bot_nav_bar);
         this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new HomeFragment()).commit();
         bottomNav.setSelectedItemId(R.id.nav_home);
@@ -57,9 +56,6 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.nav_categories:
                     fragment = new CategorieFragment();
-                    Bundle args = new Bundle();
-                    args.putParcelableArrayList(CategorieFragment.ARG_DEPENSE, depenseArrayList);
-                    fragment.setArguments(args);
                     break;
                 case R.id.nav_prevision:
                     fragment = new PrevisionFragment();
