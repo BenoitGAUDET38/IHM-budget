@@ -1,5 +1,8 @@
 package com.example.fineance.controller;
 
+import static com.example.fineance.model.PerformNetworkRequest.depenseList;
+import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,7 +72,8 @@ public class CategorieFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_categorie, container, false);
         ListView listView = view.findViewById(R.id.listView);
-        depenseArrayList=new ArrayList<>();
+        getDepenses();
+        depenseArrayList = depenseList;
         depenseArrayList.add(new Depense("Petit pain","Course","Boulangerie",1,"EUR","A acheter"));
         depenseArrayList.add(new Depense("Haricots","Course","Auchan",0.6,"EUR","A acheter"));
         depenseArrayList.add(new Depense("Big mac","Fast-Food","Macdo",8,"EUR","A acheter"));
