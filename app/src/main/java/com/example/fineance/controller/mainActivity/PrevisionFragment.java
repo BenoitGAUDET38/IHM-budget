@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -37,9 +38,15 @@ public class PrevisionFragment extends Fragment {
     Spinner spinner;
     String[] duration = new String[]{"Hebdomadaire", "Mensuel", "Annuel"};
     int spinnerPosition = 1;
+    Button btn_swap;
+    int mode = 0;
 
     public PrevisionFragment() {
         // Required empty public constructor
+    }
+
+    public PrevisionFragment(int mode) {
+        this.mode = mode;
     }
 
     /**
@@ -70,17 +77,32 @@ public class PrevisionFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_prevision, container, false);
+        if (mode != 0) view = inflater.inflate(R.layout.fragment_prevision_big_pie, container, false);
 
 
         graphView = (GraphView) view.findViewById(R.id.graphView);
         pieChart = view.findViewById(R.id.pie_chart);
         spinner = view.findViewById(R.id.spinner_prevision);
+        btn_swap = view.findViewById(R.id.btn_swap);
+
+        setupSwapBtn();
 
         setupSpinner();
         drawLineGraph();
         drawPieChart();
 
         return view;
+    }
+
+    void setupSwapBtn() {
+        btn_swap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int argMode = 0;
+                if (mode == 0) argMode = 1;
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new PrevisionFragment(argMode)).commit();
+            }
+        });
     }
 
     void setupSpinner() {

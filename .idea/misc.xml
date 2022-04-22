@@ -8,6 +8,7 @@
         <entry key="..\:/Polytech/ihm/IHM-budget/app/src/main/res/layout/fragment_categorie.xml" value="0.2513586956521739" />
         <entry key="..\:/Polytech/ihm/IHM-budget/app/src/main/res/layout/fragment_home.xml" value="0.1762917933130699" />
         <entry key="..\:/Polytech/ihm/IHM-budget/app/src/main/res/layout/fragment_prevision.xml" value="0.1762917933130699" />
+        <entry key="..\:/Polytech/ihm/IHM-budget/app/src/main/res/layout/fragment_prevision_big_pie.xml" value="0.18541666666666667" />
         <entry key="..\:/Polytech/ihm/IHM-budget/app/src/main/res/menu/bottom_menu.xml" value="0.3625" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/activity_ajout_depense.xml" value="0.18819655521783182" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/activity_settings.xml" value="0.18819655521783182" />
@@ -31,18 +32,7 @@
         <entry key="..\:/Users/moura/OneDrive/Bureau/test/IHM-budget/app/src/main/res/layout/fragment_prevision.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/moura/OneDrive/Bureau/test/IHM-budget/app/src/main/res/layout/list_item_layout.xml" value="0.1" />
         <entry key="..\:/Users/moura/OneDrive/Bureau/test/IHM-budget/app/src/main/res/layout/liste_transaction.xml" value="0.25416666666666665" />
-        <entry key="app/src/main/res/drawable/circle.xml" value="0.1905" />
-        <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.1905" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18229166666666666" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/all_products.xml" value="0.18229166666666666" />
-        <entry key="app/src/main/res/layout/edit_productivity.xml" value="0.1082427536231884" />
-        <entry key="app/src/main/res/layout/fragment_categorie.xml" value="0.11854103343465046" />
-        <entry key="app/src/main/res/layout/list_item.xml" value="0.18229166666666666" />
-        <entry key="app/src/main/res/layout/liste_transaction.xml" value="0.18229166666666666" />
-        <entry key="app/src/main/res/layout/main_data.xml" value="0.22864583333333333" />
-        <entry key="app/src/main/res/layout/main_screen.xml" value="0.21289537712895376" />
-        <entry key="app/src/main/res/layout/new_product.xml" value="0.1082427536231884" />
       </map>
     </option>
   </component>

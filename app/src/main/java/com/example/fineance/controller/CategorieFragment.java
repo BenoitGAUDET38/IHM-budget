@@ -3,8 +3,6 @@ package com.example.fineance.controller;
 import static com.example.fineance.model.PerformNetworkRequest.depenseList;
 import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
 
-import static java.lang.Thread.sleep;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,13 +26,6 @@ public class CategorieFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     ArrayList<Depense> depenseArrayList;
 
     public CategorieFragment() {
@@ -53,8 +44,6 @@ public class CategorieFragment extends Fragment {
     public static CategorieFragment newInstance(String param1, String param2) {
         CategorieFragment fragment = new CategorieFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,8 +52,7 @@ public class CategorieFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            depenseArrayList = getArguments().getParcelableArrayList(ARG_DEPENSE);
         }
     }
 
@@ -75,17 +63,8 @@ public class CategorieFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_categorie, container, false);
         ListView listView = view.findViewById(R.id.listView);
         getDepenses();
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         depenseArrayList = depenseList;
-        depenseArrayList.add(new Depense("Petit pain","Course","Boulangerie",1,"EUR","A acheter"));
-        depenseArrayList.add(new Depense("Haricots","Course","Auchan",0.6,"EUR","A acheter"));
-        depenseArrayList.add(new Depense("Big mac","Fast-Food","Macdo",8,"EUR","A acheter"));
-
-        listView.setAdapter(new CustomListAdapter(getActivity(), depenseArrayList));
+       listView.setAdapter(new CustomListAdapter(getActivity(), depenseArrayList));
 
         return view;
     }
