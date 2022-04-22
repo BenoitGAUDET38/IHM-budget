@@ -5,6 +5,7 @@ import android.os.Parcelable;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class Depense implements Parcelable, Serializable {
 
@@ -17,7 +18,7 @@ public class Depense implements Parcelable, Serializable {
     double montant;
     String devise;
     String commentaire;
-//    Date date;
+    Timestamp date = new Timestamp(System.currentTimeMillis());
 
     public static final Creator<Depense> CREATOR = new Creator<Depense>() {
         @Override
@@ -39,6 +40,17 @@ public class Depense implements Parcelable, Serializable {
         this.montant = montant;
         this.devise = devise;
         this.commentaire = commentaire;
+    }
+
+    public Depense(int id, String nom, String categorie, String provenance, double montant, String devise, String commentaire,Timestamp date) {
+        this.id = id;
+        this.nom = nom;
+        this.categorie = categorie;
+        this.provenance = provenance;
+        this.montant = montant;
+        this.devise = devise;
+        this.commentaire = commentaire;
+        this.date = date;
     }
 
     public Depense(Parcel in) {
@@ -93,6 +105,7 @@ public class Depense implements Parcelable, Serializable {
                 ", montant=" + montant +
                 ", devise='" + devise + '\'' +
                 ", commentaire='" + commentaire + '\'' +
+                ", date=" + date +
                 '}';
     }
 

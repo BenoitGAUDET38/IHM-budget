@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -60,6 +61,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
                 //TODO Reporter la notif plus haut
 //                Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
                 //refreshing the herolist after every operation
+                Log.d("DEBUG", "depenseConstruction");
                 depenseList = refreshDepenseList(object.getJSONArray("transactions"));
             }
             Log.d("DEBUG", "onPostExecute: "+depenseList);
@@ -84,23 +86,24 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         request.execute();
     }
 
-    private static ArrayList<Depense> refreshDepenseList(JSONArray heroes) throws JSONException {
+    private static ArrayList<Depense> refreshDepenseList(JSONArray depenseArray) throws JSONException {
         ArrayList<Depense> depenses = new ArrayList<>();
 
         //traversing through all the items in the json array
         //the json we got from the response
-        for (int i = 0; i < heroes.length(); i++) {
+        for (int i = 0; i < depenseArray.length(); i++) {
             //getting each hero object
-            JSONObject obj = heroes.getJSONObject(i);
-
+            JSONObject obj = depenseArray.getJSONObject(i);
             //adding the hero to the list
             depenses.add(new Depense(
+                    obj.getInt("id"),
                     obj.getString("nom"),
                     obj.getString("categorie"),
                     obj.getString("provenance"),
                     obj.getDouble("montant"),
                     obj.getString("devise"),
-                    obj.getString("commentaire")
+                    obj.getString("commentaire"),
+                    Timestamp.valueOf(obj.getString("date"))
             ));
         }
         return depenses;
