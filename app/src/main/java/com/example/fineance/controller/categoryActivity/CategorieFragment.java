@@ -1,4 +1,4 @@
-package com.example.fineance.controller;
+package com.example.fineance.controller.categoryActivity;
 
 import static com.example.fineance.model.PerformNetworkRequest.depenseList;
 import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
