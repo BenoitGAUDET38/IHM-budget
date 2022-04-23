@@ -16,6 +16,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.fineance.R;
+import com.example.fineance.model.notifications.Notification;
+import com.example.fineance.model.notifications.notificationsFactories.AbstractNotificationFactory;
+import com.example.fineance.model.notifications.notificationsFactories.DefaultPriorityNotificationFactory;
+import com.example.fineance.model.notifications.notificationsFactories.HighPriorityNotificationFactory;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -101,6 +105,11 @@ public class PrevisionFragment extends Fragment {
                 int argMode = 0;
                 if (mode == 0) argMode = 1;
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new PrevisionFragment(argMode)).commit();
+                AbstractNotificationFactory factory = new HighPriorityNotificationFactory();
+                Notification notification;
+                if (argMode == 0) notification = factory.buildImageNotification(getActivity(), getActivity(), getResources(), "Image notif", "Ceci est une notifiaction qui viens tout droit de mon usine");
+                else notification = factory.buildBasicNotification(getActivity(), getActivity(), "Basic notif", "Ceci est une notifiaction qui viens tout droit de mon usine");
+                notification.sendNotificationOnChannel();
             }
         });
     }
