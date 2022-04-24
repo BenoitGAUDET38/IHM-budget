@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("NonConstantResourceId")
     ArrayList<Depense> depenseArrayList;
+    Boolean isOnPrevision=false;
+    String savedPrevision;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -43,12 +45,15 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment = null;
             switch (item.getItemId()) {
                 case R.id.nav_home:
+                    isOnPrevision=false;
                     fragment = new HomeFragment();
                     break;
                 case R.id.nav_categories:
+                    isOnPrevision=false;
                     fragment = new CategorieFragment();
                     break;
                 case R.id.nav_prevision:
+                    isOnPrevision=true;
                     fragment = new PrevisionFragment();
                     break;
             }
@@ -60,15 +65,42 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        // Always call the superclass so it can restore the view hierarchy
+        Fragment fragment;
+        isOnPrevision = savedInstanceState.getBoolean(savedPrevision);
+        if (isOnPrevision) {
+            fragment = new PrevisionFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
+        }
+        super.onRestoreInstanceState(savedInstanceState);
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current game state
+        savedInstanceState.putBoolean(savedPrevision, isOnPrevision);
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         Intent intent = getIntent();
-
+        Fragment fragment;
         if (intent != null) {
             Depense depense = intent.getParcelableExtra("depense");
             if (depense != null) {
                 createTransaction(depense);
             }
         }
+        if (isOnPrevision) {
+            fragment = new PrevisionFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
+        }
+
     }
 }

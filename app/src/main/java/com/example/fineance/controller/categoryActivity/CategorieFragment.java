@@ -3,6 +3,7 @@ package com.example.fineance.controller.categoryActivity;
 import static com.example.fineance.model.PerformNetworkRequest.depenseList;
 import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +51,7 @@ public class CategorieFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         super.onCreate(savedInstanceState);
     }
 
