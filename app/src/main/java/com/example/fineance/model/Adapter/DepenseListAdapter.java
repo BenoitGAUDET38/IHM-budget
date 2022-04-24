@@ -1,4 +1,4 @@
-package com.example.fineance.model;
+package com.example.fineance.model.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.fineance.R;
+import com.example.fineance.model.Depense;
 
 import java.util.List;
 
@@ -38,17 +39,17 @@ public class DepenseListAdapter extends BaseAdapter {
     }
 
     @SuppressLint("SetTextI18n")
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View view, ViewGroup parent) {
         ViewHolder holder;
-        if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.list_item_layout, null);
+        if (view == null) {
+            view = layoutInflater.inflate(R.layout.list_item_layout, null);
             holder = new ViewHolder();
-            holder.categorieNameView = convertView.findViewById(R.id.item_layout_textView_categorie);
-            holder.provenanceView = convertView.findViewById(R.id.item_layout_textView_provenance);
-            holder.nomEtPrixView = convertView.findViewById(R.id.item_layout_textView_nomprix);
-            convertView.setTag(holder);
+            holder.categorieNameView = view.findViewById(R.id.item_layout_textView_categorie);
+            holder.provenanceView = view.findViewById(R.id.item_layout_textView_provenance);
+            holder.nomEtPrixView = view.findViewById(R.id.item_layout_textView_nomprix);
+            view.setTag(holder);
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            holder = (ViewHolder) view.getTag();
         }
 
         Depense depense = this.listData.get(position);
@@ -56,10 +57,10 @@ public class DepenseListAdapter extends BaseAdapter {
         holder.provenanceView.setText(depense.getProvenance());
         holder.nomEtPrixView.setText(depense.getNom() + "    " + depense.getMontant() + "$");
 
-        return convertView;
+        return view;
     }
 
-    static class ViewHolder {
+    private static class ViewHolder {
         TextView categorieNameView;
         TextView provenanceView;
         TextView nomEtPrixView;

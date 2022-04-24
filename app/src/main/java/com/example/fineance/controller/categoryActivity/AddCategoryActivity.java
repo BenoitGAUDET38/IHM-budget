@@ -11,7 +11,7 @@ import com.example.fineance.R;
 import com.example.fineance.controller.mainActivity.MainActivity;
 import com.example.fineance.model.Categorie;
 
-public class AjoutCategorieActivity extends AppCompatActivity {
+public class AddCategoryActivity extends AppCompatActivity {
 
     EditText nomEditText;
     EditText seuilEditText;

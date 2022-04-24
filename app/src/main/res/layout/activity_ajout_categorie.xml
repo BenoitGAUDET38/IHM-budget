@@ -1,103 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.categoryActivity.AjoutCategorieActivity"
     android:orientation="vertical"
-    >
+    tools:context=".controller.categoryActivity.AddCategoryActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ajout d'une catégorie"
-            android:textSize="30sp"
-            />
+            android:textSize="30sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/rectangle"
         android:layout_marginTop="20dp"
-        >
+        android:background="@drawable/rectangle"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="50dp"
+            android:gravity="center_vertical"
             android:text="Nom:"
-            android:textSize="20sp"
-            android:gravity="center_vertical"
-            />
+            android:textSize="20sp" />
+
         <EditText
+            android:id="@+id/ajout_categorie_nom_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="20dp"
-            android:textSize="20sp"
-            android:id="@+id/ajout_categorie_nom_edit_text"
-            />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@drawable/rectangle"
-        >
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="50dp"
-            android:text="Seuil:"
-            android:textSize="20sp"
             android:gravity="center_vertical"
-            />
+            android:text="Seuil:"
+            android:textSize="20sp" />
+
         <EditText
+            android:id="@+id/ajout_categorie_seuil_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="20dp"
-            android:textSize="20sp"
-            android:id="@+id/ajout_categorie_seuil_edit_text"
-            />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@drawable/rectangle"
-        >
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:text="Commentaire:"
-            android:textSize="20sp"
             android:gravity="center_vertical"
-            />
+            android:text="Commentaire:"
+            android:textSize="20sp" />
+
         <EditText
+            android:id="@+id/ajout_categorie_commentaire_edit_text"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_margin="20dp"
             android:layout_marginHorizontal="20dp"
-            android:textSize="20sp"
             android:background="@drawable/rectangle"
-            android:id="@+id/ajout_categorie_commentaire_edit_text"
-            />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -105,27 +97,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_margin="30dp"
         android:gravity="center_horizontal"
-        >
+        android:orientation="horizontal">
+
         <Button
+            android:id="@+id/ajout_categorie_annuler_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:text="Annuler"
             android:textSize="20sp"
-            android:gravity="center_vertical"
-            android:id="@+id/ajout_categorie_annuler_button"
 
             />
+
         <Button
+            android:id="@+id/ajout_categorie_valide_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
             android:text="Valider"
             android:textSize="20sp"
-            android:gravity="center_vertical"
-            android:id="@+id/ajout_categorie_valide_button"
 
             />
 
