@@ -51,6 +51,7 @@ public class CategorieFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         super.onCreate(savedInstanceState);
     }
