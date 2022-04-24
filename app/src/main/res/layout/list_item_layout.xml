@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
 
     <TextView
@@ -17,30 +13,28 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="Nom+Prix"
         android:layout_weight="5"
-        android:textSize="22sp"
-         />
+        android:text="Nom+Prix"
+        android:textSize="22sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/item_layout_textView_categorie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity=""
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:text="Categorie"
-            android:textSize="22sp"
-            android:layout_gravity=""
-            />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/item_layout_textView_provenance"
@@ -51,12 +45,10 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="Provenance"/>
+            android:text="Provenance" />
 
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>

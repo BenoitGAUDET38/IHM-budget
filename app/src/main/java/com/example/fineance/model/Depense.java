@@ -9,17 +9,6 @@ import java.sql.Timestamp;
 
 public class Depense implements Parcelable, Serializable {
 
-    private static int cmp;
-
-    int id;
-    String nom;
-    String categorie;
-    String provenance;
-    double montant;
-    String devise;
-    String commentaire;
-    Timestamp date = new Timestamp(System.currentTimeMillis());
-
     public static final Creator<Depense> CREATOR = new Creator<Depense>() {
         @Override
         public Depense createFromParcel(Parcel in) {
@@ -31,8 +20,17 @@ public class Depense implements Parcelable, Serializable {
             return new Depense[size];
         }
     };
+    private static int cmp;
+    int id;
+    String nom;
+    String categorie;
+    String provenance;
+    double montant;
+    String devise;
+    String commentaire;
+    Timestamp date = new Timestamp(System.currentTimeMillis());
 
-    public Depense(String nom, String categorie, String provenance, double montant, String devise,String commentaire) {
+    public Depense(String nom, String categorie, String provenance, double montant, String devise, String commentaire) {
         this.id = cmp++;
         this.nom = nom;
         this.categorie = categorie;
@@ -42,7 +40,7 @@ public class Depense implements Parcelable, Serializable {
         this.commentaire = commentaire;
     }
 
-    public Depense(int id, String nom, String categorie, String provenance, double montant, String devise, String commentaire,Timestamp date) {
+    public Depense(int id, String nom, String categorie, String provenance, double montant, String devise, String commentaire, Timestamp date) {
         this.id = id;
         this.nom = nom;
         this.categorie = categorie;
@@ -54,27 +52,27 @@ public class Depense implements Parcelable, Serializable {
     }
 
     public Depense(Parcel in) {
-        id=cmp++;
-        nom=in.readString();
+        id = cmp++;
+        nom = in.readString();
         categorie = in.readString();
         provenance = in.readString();
         montant = in.readDouble();
         devise = in.readString();
         commentaire = in.readString();
         init();
-        Log.d("DEBUG", "Depense 'vide': "+this);
+        Log.d("DEBUG", "Depense 'vide': " + this);
     }
 
     private void init() {
-        if(nom.equals(""))
+        if (nom.equals(""))
             nom = " ";
-        if(categorie.equals(""))
+        if (categorie.equals(""))
             categorie = " ";
-        if(provenance.equals(""))
+        if (provenance.equals(""))
             provenance = " ";
-        if(devise.equals(""))
+        if (devise.equals(""))
             devise = "EUR";
-        if(commentaire.equals(""))
+        if (commentaire.equals(""))
             commentaire = " ";
 
     }
@@ -109,7 +107,9 @@ public class Depense implements Parcelable, Serializable {
                 '}';
     }
 
-    public String getNom() { return nom; }
+    public String getNom() {
+        return nom;
+    }
 
     public String getCategorie() {
         return categorie;
