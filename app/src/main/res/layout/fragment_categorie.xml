@@ -4,8 +4,7 @@
     style="@style/Theme.FineAnce.CategorieFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".controller.mainActivity.CategorieFragment">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"

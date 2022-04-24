@@ -1,5 +1,8 @@
 package com.example.fineance.controller.mainActivity;
 
+import static com.example.fineance.model.PerformNetworkRequest.createTransaction;
+import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
+import com.example.fineance.controller.categoryActivity.CategorieFragment;
 import com.example.fineance.model.Depense;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -20,9 +24,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNav;
 
+
     @SuppressLint("NonConstantResourceId")
     ArrayList<Depense> depenseArrayList;
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -36,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
 
+        depenseArrayList = new ArrayList<>();
+        getDepenses();
         bottomNav = this.findViewById(R.id.bot_nav_bar);
         this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new HomeFragment()).commit();
         bottomNav.setSelectedItemId(R.id.nav_home);
@@ -64,11 +72,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Intent intent = getIntent();
+
         if (intent != null) {
             Depense depense = intent.getParcelableExtra("depense");
             if (depense != null) {
-                depenseArrayList.add(depense);
+                createTransaction(depense);
             }
         }
+
     }
+
+
+
 }
