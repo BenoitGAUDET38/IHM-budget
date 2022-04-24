@@ -1,5 +1,6 @@
 package com.example.fineance.controller.mainActivity;
 
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -67,6 +68,7 @@ public class PrevisionFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }

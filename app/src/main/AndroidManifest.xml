@@ -29,8 +29,7 @@
             android:screenOrientation="nosensor" />
         <activity
             android:name=".controller.mainActivity.MainActivity"
-            android:exported="true"
-            android:screenOrientation="nosensor">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
