@@ -2,10 +2,10 @@ package com.example.fineance.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import androidx.annotation.NonNull;
+import android.util.Log;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class Depense implements Parcelable, Serializable {
 
@@ -18,8 +18,7 @@ public class Depense implements Parcelable, Serializable {
     double montant;
     String devise;
     String commentaire;
-
-
+    Timestamp date = new Timestamp(System.currentTimeMillis());
 
     public static final Creator<Depense> CREATOR = new Creator<Depense>() {
         @Override
@@ -43,13 +42,41 @@ public class Depense implements Parcelable, Serializable {
         this.commentaire = commentaire;
     }
 
+    public Depense(int id, String nom, String categorie, String provenance, double montant, String devise, String commentaire,Timestamp date) {
+        this.id = id;
+        this.nom = nom;
+        this.categorie = categorie;
+        this.provenance = provenance;
+        this.montant = montant;
+        this.devise = devise;
+        this.commentaire = commentaire;
+        this.date = date;
+    }
+
     public Depense(Parcel in) {
         id=cmp++;
         nom=in.readString();
         categorie = in.readString();
         provenance = in.readString();
         montant = in.readDouble();
+        devise = in.readString();
         commentaire = in.readString();
+        init();
+        Log.d("DEBUG", "Depense 'vide': "+this);
+    }
+
+    private void init() {
+        if(nom.equals(""))
+            nom = " ";
+        if(categorie.equals(""))
+            categorie = " ";
+        if(provenance.equals(""))
+            provenance = " ";
+        if(devise.equals(""))
+            devise = "EUR";
+        if(commentaire.equals(""))
+            commentaire = " ";
+
     }
 
     @Override
@@ -63,18 +90,22 @@ public class Depense implements Parcelable, Serializable {
         parcel.writeString(categorie);
         parcel.writeString(provenance);
         parcel.writeDouble(montant);
+        parcel.writeString(devise);
         parcel.writeString(commentaire);
+//        parcel.writeLong(date.getTime());
     }
 
-    @NonNull
     @Override
     public String toString() {
         return "Depense{" +
-                "nom='" + nom + '\'' +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
                 ", categorie='" + categorie + '\'' +
-                ", provenanace='" + provenance + '\'' +
+                ", provenance='" + provenance + '\'' +
                 ", montant=" + montant +
+                ", devise='" + devise + '\'' +
                 ", commentaire='" + commentaire + '\'' +
+                ", date=" + date +
                 '}';
     }
 
@@ -94,5 +125,13 @@ public class Depense implements Parcelable, Serializable {
 
     public String getCommentaire() {
         return commentaire;
+    }
+
+    public String getDevise() {
+        return devise;
+    }
+
+    public int getId() {
+        return id;
     }
 }
