@@ -41,8 +41,7 @@ public class AddExpenseActivity extends AppCompatActivity {
 
         ImageView ticketScanner = this.findViewById(R.id.ticketScannerImageView);
         ticketScanner.setOnClickListener(view -> {
-            Intent intent = new Intent(this.getApplicationContext(), ScanningActivity.class);
-            this.startActivity(intent);
+            this.startActivity(new Intent(this.getApplicationContext(), ScanningActivity.class));
         });
     }
 }
