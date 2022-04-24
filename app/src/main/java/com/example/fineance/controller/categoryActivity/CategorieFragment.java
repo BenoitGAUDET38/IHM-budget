@@ -12,7 +12,7 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
-import com.example.fineance.model.CustomListAdapter;
+import com.example.fineance.model.DepenseListAdapter;
 import com.example.fineance.model.Depense;
 
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class CategorieFragment extends Fragment {
         ListView listView = view.findViewById(R.id.listView);
         getDepenses();
         depenseArrayList = depenseList;
-       listView.setAdapter(new CustomListAdapter(getActivity(), depenseArrayList));
+       listView.setAdapter(new DepenseListAdapter(getActivity(), depenseArrayList));
 
         return view;
     }

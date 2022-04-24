@@ -29,11 +29,10 @@ public class AjoutCategorieActivity extends AppCompatActivity {
         validerButton = findViewById(R.id.ajout_categorie_valide_button);
         annulerButton = findViewById(R.id.ajout_categorie_annuler_button);
         validerButton.setOnClickListener(view -> {
-            Intent ajouteDepenseIntent = new Intent(AjoutCategorieActivity.this, MainActivity.class);
+            Intent ajouteDepenseIntent = new Intent(this, MainActivity.class);
             Categorie categorie = new Categorie(String.valueOf(nomEditText.getText()), Double.parseDouble(String.valueOf(seuilEditText.getText())), String.valueOf(commentaireEditText.getText()));
             ajouteDepenseIntent.putExtra("categorie", categorie);
             finish();
         });
     }
-
 }

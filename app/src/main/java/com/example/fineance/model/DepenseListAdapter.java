@@ -1,5 +1,6 @@
 package com.example.fineance.model;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +12,12 @@ import com.example.fineance.R;
 
 import java.util.List;
 
-public class CustomListAdapter  extends BaseAdapter {
+public class DepenseListAdapter extends BaseAdapter {
 
-    private List<Depense> listData;
-    private LayoutInflater layoutInflater;
+    private final List<Depense> listData;
+    private final LayoutInflater layoutInflater;
 
-    public CustomListAdapter(Context aContext,  List<Depense> listData) {
+    public DepenseListAdapter(Context aContext, List<Depense> listData) {
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
     }
@@ -36,6 +37,7 @@ public class CustomListAdapter  extends BaseAdapter {
         return position;
     }
 
+    @SuppressLint("SetTextI18n")
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
@@ -52,7 +54,7 @@ public class CustomListAdapter  extends BaseAdapter {
         Depense depense = this.listData.get(position);
         holder.categorieNameView.setText(depense.getCategorie());
         holder.provenanceView.setText(depense.getProvenance());
-        holder.nomEtPrixView.setText(depense.getNom()+"    "+depense.getMontant()+"$");
+        holder.nomEtPrixView.setText(depense.getNom() + "    " + depense.getMontant() + "$");
 
         return convertView;
     }
@@ -62,5 +64,4 @@ public class CustomListAdapter  extends BaseAdapter {
         TextView provenanceView;
         TextView nomEtPrixView;
     }
-
 }

@@ -33,16 +33,16 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
-    void openSettings() {
-        startActivity(new Intent(getActivity(), SettingsActivity.class));
-    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         ImageView moneyCircle = this.requireView().findViewById(R.id.moneyCircleButton);
         moneyCircle.setOnClickListener(v -> {
             this.startActivity(new Intent(this.getActivity(), AddExpenseActivity.class));
         });
-        super.onViewCreated(view, savedInstanceState);
+        ImageView account = this.requireView().findViewById(R.id.accountOptionImageView);
+        account.setOnClickListener(v -> {
+            this.startActivity(new Intent(getActivity(), SettingsActivity.class));
+        });
     }
 }

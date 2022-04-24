@@ -42,6 +42,4 @@ public class Categorie implements Parcelable {
         parcel.writeDouble(seuil);
         parcel.writeString(Commentaire);
     }
-
-
 }
