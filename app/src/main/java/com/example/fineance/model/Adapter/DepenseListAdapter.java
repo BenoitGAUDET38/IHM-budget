@@ -53,7 +53,7 @@ public class DepenseListAdapter extends BaseAdapter {
         }
 
         Depense depense = this.listData.get(position);
-        holder.categorieNameView.setText(depense.getCategorie());
+        holder.categorieNameView.setText(depense.getCategorie()+"");
         holder.provenanceView.setText(depense.getProvenance());
         holder.nomEtPrixView.setText(depense.getNom() + "    " + depense.getMontant() + "$");
 

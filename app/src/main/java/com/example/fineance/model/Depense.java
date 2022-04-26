@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -23,14 +25,14 @@ public class Depense implements Parcelable, Serializable {
     private static int cmp;
     int id;
     String nom;
-    String categorie;
+    int categorie;
     String provenance;
     double montant;
     String devise;
     String commentaire;
     Timestamp date = new Timestamp(System.currentTimeMillis());
 
-    public Depense(String nom, String categorie, String provenance, double montant, String devise, String commentaire) {
+    public Depense(String nom, int categorie, String provenance, double montant, String devise, String commentaire) {
         this.id = cmp++;
         this.nom = nom;
         this.categorie = categorie;
@@ -40,7 +42,7 @@ public class Depense implements Parcelable, Serializable {
         this.commentaire = commentaire;
     }
 
-    public Depense(int id, String nom, String categorie, String provenance, double montant, String devise, String commentaire, Timestamp date) {
+    public Depense(int id, String nom, int categorie, String provenance, double montant, String devise, String commentaire, Timestamp date) {
         this.id = id;
         this.nom = nom;
         this.categorie = categorie;
@@ -54,7 +56,7 @@ public class Depense implements Parcelable, Serializable {
     public Depense(Parcel in) {
         id = cmp++;
         nom = in.readString();
-        categorie = in.readString();
+        categorie = in.readInt();
         provenance = in.readString();
         montant = in.readDouble();
         devise = in.readString();
@@ -66,8 +68,6 @@ public class Depense implements Parcelable, Serializable {
     private void init() {
         if (nom.equals(""))
             nom = " ";
-        if (categorie.equals(""))
-            categorie = " ";
         if (provenance.equals(""))
             provenance = " ";
         if (devise.equals(""))
@@ -85,7 +85,7 @@ public class Depense implements Parcelable, Serializable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(nom);
-        parcel.writeString(categorie);
+        parcel.writeInt(categorie);
         parcel.writeString(provenance);
         parcel.writeDouble(montant);
         parcel.writeString(devise);
@@ -93,6 +93,7 @@ public class Depense implements Parcelable, Serializable {
 //        parcel.writeLong(date.getTime());
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Depense{" +
@@ -111,7 +112,7 @@ public class Depense implements Parcelable, Serializable {
         return nom;
     }
 
-    public String getCategorie() {
+    public int getCategorie() {
         return categorie;
     }
 
