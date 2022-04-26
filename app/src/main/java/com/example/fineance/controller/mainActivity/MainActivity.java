@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             Depense depense = intent.getParcelableExtra("depense");
-            if (depense != null) {
+            if (depense != null && depense.valid()) {
                 createTransaction(depense);
                 AbstractNotificationFactory factory = new HighPriorityNotificationFactory();
                 Notification notif = factory.buildImageNotification(getApplicationContext(),

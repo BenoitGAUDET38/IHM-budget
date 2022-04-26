@@ -58,7 +58,7 @@ public class AddExpenseActivity extends AppCompatActivity {
         montantEditText = findViewById(R.id.ajout_depense_montant_editText);
         validerButton.setOnClickListener(view -> {
             Intent ajouteDepenseIntent = new Intent(this, MainActivity.class);
-            Depense depense = new Depense(String.valueOf(nomEditText.getText()), Integer.parseInt(String.valueOf(categorieEditText.getText())), String.valueOf(provenanceEditText.getText()), Double.parseDouble(String.valueOf(montantEditText.getText())),"EUR", String.valueOf(commentaireEditText.getText()));
+            Depense depense = new Depense(String.valueOf(nomEditText.getText()), Integer.parseInt(String.valueOf(categorieEditText.getText())), String.valueOf(provenanceEditText.getText()), Double.parseDouble(String.valueOf(montantEditText.getText())), "EUR", String.valueOf(commentaireEditText.getText()));
             ajouteDepenseIntent.putExtra("depense", (Parcelable) depense);
             startActivity(ajouteDepenseIntent);
             finish();
