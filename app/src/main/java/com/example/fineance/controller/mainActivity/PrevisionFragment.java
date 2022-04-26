@@ -21,6 +21,7 @@ import com.example.fineance.model.notifications.Notification;
 import com.example.fineance.model.notifications.notificationsFactories.AbstractNotificationFactory;
 import com.example.fineance.model.notifications.notificationsFactories.DefaultPriorityNotificationFactory;
 import com.example.fineance.model.notifications.notificationsFactories.HighPriorityNotificationFactory;
+import com.example.fineance.model.notifications.notificationsFactories.LowPriorityNotificationFactory;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -107,10 +108,10 @@ public class PrevisionFragment extends Fragment {
                 int argMode = 0;
                 if (mode == 0) argMode = 1;
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new PrevisionFragment(argMode)).commit();
-                AbstractNotificationFactory factory = new HighPriorityNotificationFactory();
+                AbstractNotificationFactory factory = new LowPriorityNotificationFactory();
                 Notification notification;
-                if (argMode == 0) notification = factory.buildImageNotification(getActivity(), getActivity(), getResources(), "Image notif", "Ceci est une notifiaction qui viens tout droit de mon usine");
-                else notification = factory.buildBasicNotification(getActivity(), getActivity(), "Basic notif", "Ceci est une notifiaction qui viens tout droit de mon usine");
+                if (argMode != 0) notification = factory.buildImageNotification(getActivity(), getResources(), AbstractNotificationFactory.ALARME_IMG, "Changement éléments", "Le graphique camembert est maintenant mieux visible");
+                else notification = factory.buildBasicNotification(getActivity(), "Changement éléments", "Les éléments sont de retour à l'affichage par défaut de la page");
                 notification.sendNotificationOnChannel();
             }
         });
@@ -137,6 +138,7 @@ public class PrevisionFragment extends Fragment {
         int sizeList = 3;
         String[] cat = {"Course", "Sport", "Liquide"};
         double[] value = {304.91, 267.56, 25.01};
+        String[] rgb = {"#07108c", "#661600", "#348f94"};
 
         Random rnd = new Random();
 
@@ -158,7 +160,8 @@ public class PrevisionFragment extends Fragment {
         // injection des données
         for (int i = 0; i < sizeList; i++) {
             config.addData(new SimplePieInfo(value[i],
-                    Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)),
+                    //Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)),
+                    Color.parseColor(rgb[i]),
                     cat[i] + " : " + value[i] + "€"));
         }
 

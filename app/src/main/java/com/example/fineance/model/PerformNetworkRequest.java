@@ -64,7 +64,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
             depenses.add(new Depense(
                     obj.getInt("id"),
                     obj.getString("nom"),
-                    obj.getString("categorie"),
+                    obj.getInt("categorie"),
                     obj.getString("provenance"),
                     obj.getDouble("montant"),
                     obj.getString("devise"),
@@ -94,10 +94,10 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         request.execute();
     }
 
-    public static void createTransaction(String nom, String categorie, String provenance, double montant, String devise, String commentaire) {
+    public static void createTransaction(String nom, int categorie, String provenance, double montant, String devise, String commentaire) {
         HashMap<String, String> params = new HashMap<>();
         params.put("nom", nom);
-        params.put("categorie", categorie);
+        params.put("categorie", String.valueOf(categorie));
         params.put("provenance", provenance);
         params.put("montant", String.valueOf(montant));
         params.put("devise", devise);
