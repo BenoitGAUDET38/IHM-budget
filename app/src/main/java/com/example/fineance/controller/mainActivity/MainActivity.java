@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
 import com.example.fineance.controller.categoryActivity.CategorieFragment;
+import com.example.fineance.model.CalculDepense;
 import com.example.fineance.model.Depense;
 import com.example.fineance.model.notifications.Notification;
 import com.example.fineance.model.notifications.notificationsFactories.AbstractNotificationFactory;
@@ -51,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.nav_home:
                     isOn="home";
                     fragment = new HomeFragment();
+                    Bundle args = new Bundle();
+                    args.putDouble(HomeFragment.TOTAL_KEY, CalculDepense.getTotalDepenses(depenseArrayList));
+                    args.putString(HomeFragment.DEVISE_KEY, "€"); // @TODO modifier plus tard en devise dynamique
+                    fragment.setArguments(args);
                     break;
                 case R.id.nav_categories:
                     isOn="categories";

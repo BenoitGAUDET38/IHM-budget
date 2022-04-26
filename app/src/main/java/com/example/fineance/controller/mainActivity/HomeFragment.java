@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,11 @@ import com.example.fineance.controller.spendingActivity.AddExpenseActivity;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+    public static String TOTAL_KEY = "total";
+    public static String DEVISE_KEY = "devise";
+
+    private double totalDepenses = 0;
+    private String devise = "€";
 
     public HomeFragment() {
         // Required empty public constructor
@@ -38,6 +44,15 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            this.totalDepenses = getArguments().getDouble(TOTAL_KEY, 0);
+            this.devise = getArguments().getString(DEVISE_KEY, "€");
+        }
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ImageView moneyCircle = this.requireView().findViewById(R.id.moneyCircleButton);
@@ -48,5 +63,11 @@ public class HomeFragment extends Fragment {
         account.setOnClickListener(v -> {
             this.startActivity(new Intent(getActivity(), SettingsActivity.class));
         });
+        setupInfos();
+    }
+
+    private void setupInfos() {
+        TextView infos = this.requireView().findViewById(R.id.info_total);
+        infos.setText(totalDepenses + devise);
     }
 }
