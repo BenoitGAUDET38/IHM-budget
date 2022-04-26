@@ -10,6 +10,15 @@ import org.json.JSONObject;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
 
@@ -23,6 +32,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     public static final String URL_UPDATE_TRANSACTION = ROOT_URL + "updatetransaction";
     public static final String URL_DELETE_TRANSACTION = ROOT_URL + "deletetransaction&id=";
     public static ArrayList<Depense> depenseList = new ArrayList<>();
+    private final CompositeDisposable disposable = new CompositeDisposable();
     //the url where we need to send the request
     String url;
     //the parameters
@@ -62,6 +72,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
                     Timestamp.valueOf(obj.getString("date"))
             ));
         }
+        Log.d("OBSERVER", "List de Dépense: " + depenses);
         return depenses;
     }
 
@@ -102,7 +113,6 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
 
     public static ArrayList<Depense> getDepenses() {
         readDepenses();
-//        while(depenseList.equals(new ArrayList<>()));
         return depenseList;
     }
 
@@ -125,7 +135,36 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
 //                Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
                 //refreshing the herolist after every operation
                 Log.d("DEBUG", "depenseConstruction");
-                depenseList = refreshDepenseList(object.getJSONArray("transactions"));
+                List<Depense> depenses = refreshDepenseList(object.getJSONArray("transactions"));
+                Observable<Depense> depenseObservable = Observable.fromIterable(depenses)
+                        .subscribeOn(Schedulers.io())
+                        .filter(depense -> !depense.getNom().equals(""))
+                        .observeOn(AndroidSchedulers.mainThread());
+
+                String tag = "OBSERVER";
+                depenseObservable.subscribe(new Observer<Depense>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.d(tag, "onSubscribe");
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Depense depense) {
+                        Log.d(tag, Thread.currentThread().getName() + " | onNext: " + depense);
+                        depenseList.add(depense);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d(tag, "onError: " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(tag, "onComplete: " + depenseList);
+                    }
+                });
             }
             Log.d("DEBUG", "onPostExecute: " + depenseList);
         } catch (JSONException e) {

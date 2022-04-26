@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.example.fineance.R;
 import com.example.fineance.controller.categoryActivity.CategorieFragment;
 import com.example.fineance.model.Depense;
+import com.example.fineance.model.PerformNetworkRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("NonConstantResourceId")
     ArrayList<Depense> depenseArrayList;
-    Boolean isOnPrevision=false;
+    Boolean isOnPrevision = false;
     String savedPrevision;
 
     @SuppressLint("NonConstantResourceId")
@@ -45,15 +46,15 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment = null;
             switch (item.getItemId()) {
                 case R.id.nav_home:
-                    isOnPrevision=false;
+                    isOnPrevision = false;
                     fragment = new HomeFragment();
                     break;
                 case R.id.nav_categories:
-                    isOnPrevision=false;
+                    isOnPrevision = false;
                     fragment = new CategorieFragment();
                     break;
                 case R.id.nav_prevision:
-                    isOnPrevision=true;
+                    isOnPrevision = true;
                     fragment = new PrevisionFragment();
                     break;
             }
@@ -101,6 +102,5 @@ public class MainActivity extends AppCompatActivity {
             fragment = new PrevisionFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
         }
-
     }
 }
