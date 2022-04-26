@@ -3,6 +3,7 @@ package com.example.fineance.controller.mainActivity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import com.example.fineance.R;
 import com.example.fineance.controller.optionsActivity.SettingsActivity;
 import com.example.fineance.controller.spendingActivity.AddExpenseActivity;
-import com.example.fineance.model.Depense;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,11 +27,11 @@ public class HomeFragment extends Fragment {
     public static String TOTAL_KEY = "total";
     public static String DEVISE_KEY = "devise";
 
-    private double totalDepenses = 0;
+    private double totalDepenses=0;
     private String devise = "€";
 
     public HomeFragment() {
-        // Required empty public constructor
+//        this.totalDepenses = total;
     }
 
     @Override
@@ -43,17 +43,14 @@ public class HomeFragment extends Fragment {
         this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
         TextView montant = view.findViewById(R.id.info_total);
-        montant.setText(Depense.getMontantTotal() + this.devise);
+        montant.setText(totalDepenses + this.devise);
+        Log.d("DEBUG","Create");
         return view;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            this.totalDepenses = getArguments().getDouble(TOTAL_KEY, 0);
-            this.devise = getArguments().getString(DEVISE_KEY, "€");
-        }
     }
 
     @Override
@@ -67,5 +64,11 @@ public class HomeFragment extends Fragment {
         account.setOnClickListener(v -> {
             this.startActivity(new Intent(getActivity(), SettingsActivity.class));
         });
+    }
+
+    public void updateTotal(double total){
+        TextView montant = getActivity().findViewById(R.id.info_total);
+        totalDepenses = total;
+        montant.setText(totalDepenses+devise);
     }
 }

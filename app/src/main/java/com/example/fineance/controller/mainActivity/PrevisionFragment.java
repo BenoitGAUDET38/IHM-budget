@@ -3,10 +3,6 @@ package com.example.fineance.controller.mainActivity;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,19 +12,17 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.fineance.R;
 import com.example.fineance.model.notifications.Notification;
 import com.example.fineance.model.notifications.notificationsFactories.AbstractNotificationFactory;
-import com.example.fineance.model.notifications.notificationsFactories.DefaultPriorityNotificationFactory;
-import com.example.fineance.model.notifications.notificationsFactories.HighPriorityNotificationFactory;
 import com.example.fineance.model.notifications.notificationsFactories.LowPriorityNotificationFactory;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.razerdp.widget.animatedpieview.AnimatedPieView;
 import com.razerdp.widget.animatedpieview.AnimatedPieViewConfig;
-import com.razerdp.widget.animatedpieview.callback.OnPieSelectListener;
-import com.razerdp.widget.animatedpieview.data.IPieInfo;
 import com.razerdp.widget.animatedpieview.data.SimplePieInfo;
 
 import java.util.Random;
@@ -75,8 +69,6 @@ public class PrevisionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @Override
@@ -84,7 +76,8 @@ public class PrevisionFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_prevision, container, false);
-        if (mode != 0) view = inflater.inflate(R.layout.fragment_prevision_big_pie, container, false);
+        if (mode != 0)
+            view = inflater.inflate(R.layout.fragment_prevision_big_pie, container, false);
 
 
         graphView = (GraphView) view.findViewById(R.id.graphView);
@@ -102,18 +95,17 @@ public class PrevisionFragment extends Fragment {
     }
 
     void setupSwapBtn() {
-        btn_swap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int argMode = 0;
-                if (mode == 0) argMode = 1;
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new PrevisionFragment(argMode)).commit();
-                AbstractNotificationFactory factory = new LowPriorityNotificationFactory();
-                Notification notification;
-                if (argMode != 0) notification = factory.buildImageNotification(getActivity(), getResources(), AbstractNotificationFactory.ALARME_IMG, "Changement éléments", "Le graphique camembert est maintenant mieux visible");
-                else notification = factory.buildBasicNotification(getActivity(), "Changement éléments", "Les éléments sont de retour à l'affichage par défaut de la page");
-                notification.sendNotificationOnChannel();
-            }
+        btn_swap.setOnClickListener(view -> {
+            int argMode = 0;
+            if (mode == 0) argMode = 1;
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new PrevisionFragment(argMode)).commit();
+            AbstractNotificationFactory factory = new LowPriorityNotificationFactory();
+            Notification notification;
+            if (argMode != 0)
+                notification = factory.buildImageNotification(getActivity(), getResources(), AbstractNotificationFactory.ALARME_IMG, "Changement éléments", "Le graphique camembert est maintenant mieux visible");
+            else
+                notification = factory.buildBasicNotification(getActivity(), "Changement éléments", "Les éléments sont de retour à l'affichage par défaut de la page");
+            notification.sendNotificationOnChannel();
         });
     }
 
@@ -149,12 +141,7 @@ public class PrevisionFragment extends Fragment {
                 .textSize(50)
                 .canTouch(true)
                 .focusAlpha(150)
-                .selectListener(new OnPieSelectListener<IPieInfo>() {
-                    @Override
-                    public void onSelectPie(@NonNull IPieInfo pieInfo, boolean isFloatUp) {
-                        Toast.makeText(getActivity(), pieInfo.getDesc(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                .selectListener((pieInfo, isFloatUp) -> Toast.makeText(getActivity(), pieInfo.getDesc(), Toast.LENGTH_SHORT).show());
 
 
         // injection des données
@@ -171,7 +158,7 @@ public class PrevisionFragment extends Fragment {
 
     void drawLineGraph() {
         // on below line we are adding data to our graph view.
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[]{
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
                 // on below line we are adding
                 // each point on our x and y axis.
                 new DataPoint(1, 12.68),

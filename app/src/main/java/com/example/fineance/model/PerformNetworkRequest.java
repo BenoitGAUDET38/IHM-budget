@@ -12,11 +12,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-
 public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
+    //TODO Decouper side-functions and execute
+    public static final DepenseObservable depensesObservable = new DepenseObservable();
 
     public static final int CODE_GET_REQUEST = 1024;
     public static final int CODE_POST_REQUEST = 1025;
@@ -150,7 +148,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         HashMap<String, String> params = new HashMap<>();
         params.put("nom", nom);
         params.put("montant", String.valueOf(seuil));
-        PerformNetworkRequest request = new PerformNetworkRequest(URL_CREATE_DEPENSE, params, CODE_POST_REQUEST);
+        PerformNetworkRequest request = new PerformNetworkRequest(URL_CREATE_CATEGORIE, params, CODE_POST_REQUEST);
         request.execute();
     }
 
@@ -185,16 +183,18 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
                 Log.d("DEBUG", "object JSON transactions" + object.getJSONArray("transactions"));
 
                 // Observable
-                Observable<List<Depense>> depenseObservable = Observable.fromArray(refreshDepenseList(object.getJSONArray("transactions")))
-                        .subscribeOn(Schedulers.io())
-                        .filter(depenses -> !depenses.isEmpty())
-                        .observeOn(AndroidSchedulers.mainThread());
-
-                // Observer
-                depenseObservable.subscribe(depenses -> {
-                    depenseList = new ArrayList<>(depenses);
-                    Log.d("OBSERVER", "List de Dépense: " + depenses.size() + " " + depenses);
-                });
+                depenseList = refreshDepenseList(object.getJSONArray("transactions"));
+                depensesObservable.setDepenseList(depenseList);
+//                Observable<List<Depense>> depenseObservable = Observable.fromArray(refreshDepenseList(object.getJSONArray("transactions")))
+//                        .subscribeOn(Schedulers.io())
+//                        .filter(depenses -> !depenses.isEmpty())
+//                        .observeOn(AndroidSchedulers.mainThread());
+//
+//                // Observer
+//                depenseObservable.subscribe(depenses -> {
+//                    depenseList = new ArrayList<>(depenses);
+//                    Log.d("OBSERVER", "List de Dépense: " + depenses.size() + " " + depenses);
+//                });
             }
             Log.d("DEBUG", "onPostExecute: " + depenseList);
         } catch (JSONException e) {

@@ -1,7 +1,5 @@
 package com.example.fineance.model;
 
-import static com.example.fineance.model.PerformNetworkRequest.depenseList;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
@@ -10,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Depense implements Parcelable, Serializable {
 
@@ -32,8 +31,8 @@ public class Depense implements Parcelable, Serializable {
     String devise;
     String commentaire;
     Timestamp date = new Timestamp(System.currentTimeMillis());
-    int id = PAS_VALEUR;
-    int categorie = PAS_VALEUR;
+    int id;
+    int categorie;
 
     public Depense(String nom, int categorie, String provenance, double montant, String devise, String commentaire) {
         this.id = cmp++;
@@ -68,7 +67,7 @@ public class Depense implements Parcelable, Serializable {
         Log.d("DEBUG", "Depense 'vide': " + this);
     }
 
-    public static double getMontantTotal() {
+    public static double getMontantTotal(List<Depense> depenseList) {
         return depenseList.stream().map(Depense::getMontant).reduce(0.0, Double::sum);
     }
 
