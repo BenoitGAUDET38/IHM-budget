@@ -3,6 +3,8 @@
     package="com.example.fineance">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -39,6 +41,9 @@
 
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="ocr" />
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="ocr" />
     </application>
 

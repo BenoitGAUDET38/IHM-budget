@@ -22,63 +22,19 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     public static final String URL_GET_TRANSACTIONS = ROOT_URL + "gettransactions";
     public static final String URL_UPDATE_TRANSACTION = ROOT_URL + "updatetransaction";
     public static final String URL_DELETE_TRANSACTION = ROOT_URL + "deletetransaction&id=";
-
-
+    public static ArrayList<Depense> depenseList = new ArrayList<>();
     //the url where we need to send the request
     String url;
-
     //the parameters
     HashMap<String, String> params;
-
     //the request code to define whether it is a GET or POST
     int requestCode;
-
-    public static ArrayList<Depense> depenseList = new ArrayList<>();
 
     //constructor to initialize values
     public PerformNetworkRequest(String url, HashMap<String, String> params, int requestCode) {
         this.url = url;
         this.params = params;
         this.requestCode = requestCode;
-    }
-
-    //when the task started displaying a progressbar
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        Log.d("DEBUG", "onPreExecute: ");
-    }
-
-
-    //this method will give the response from the request
-    @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-        Log.d("DEBUG", "onPostExecuteTry");
-        try {
-            JSONObject object = new JSONObject(s);
-            if (!object.getBoolean("error")) {
-                //TODO Reporter la notif plus haut
-//                Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
-                //refreshing the herolist after every operation
-                Log.d("DEBUG", "depenseConstruction");
-                depenseList = refreshDepenseList(object.getJSONArray("transactions"));
-            }
-            Log.d("DEBUG", "onPostExecute: "+depenseList);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //the network operation will be performed in background
-    @Override
-    protected String doInBackground(Void... voids) {
-        RequestHandler requestHandler = new RequestHandler();
-        if (requestCode == CODE_POST_REQUEST)
-            return requestHandler.sendPostRequest(url, params);
-        if (requestCode == CODE_GET_REQUEST)
-            return requestHandler.sendGetRequest(url);
-        return null;
     }
 
     private static void readDepenses() {
@@ -109,9 +65,9 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         return depenses;
     }
 
-    public static void updateTransaction(int id,String nom,double montant,String devise,String categorie, String commentaire,String provenance) {
+    public static void updateTransaction(int id, String nom, double montant, String devise, String categorie, String commentaire, String provenance) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("id",String.valueOf(id));
+        params.put("id", String.valueOf(id));
         params.put("nom", nom);
         params.put("montant", String.valueOf(montant));
         params.put("devise", devise);
@@ -127,7 +83,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         request.execute();
     }
 
-    public static void createTransaction(String nom, String categorie, String provenance,double montant,String devise,String commentaire) {
+    public static void createTransaction(String nom, String categorie, String provenance, double montant, String devise, String commentaire) {
         HashMap<String, String> params = new HashMap<>();
         params.put("nom", nom);
         params.put("categorie", categorie);
@@ -140,13 +96,51 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         request.execute();
     }
 
-    public static void createTransaction(Depense d){
-        createTransaction(d.getNom(),d.getCategorie(),d.getProvenance(),d.getMontant(),d.getDevise(),d.getCommentaire());
+    public static void createTransaction(Depense d) {
+        createTransaction(d.getNom(), d.getCategorie(), d.getProvenance(), d.getMontant(), d.getDevise(), d.getCommentaire());
     }
 
-    public static ArrayList<Depense> getDepenses(){
+    public static ArrayList<Depense> getDepenses() {
         readDepenses();
 //        while(depenseList.equals(new ArrayList<>()));
         return depenseList;
+    }
+
+    //when the task started displaying a progressbar
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        Log.d("DEBUG", "onPreExecute: ");
+    }
+
+    //this method will give the response from the request
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+        Log.d("DEBUG", "onPostExecuteTry");
+        try {
+            JSONObject object = new JSONObject(s);
+            if (!object.getBoolean("error")) {
+                //TODO Reporter la notif plus haut
+//                Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
+                //refreshing the herolist after every operation
+                Log.d("DEBUG", "depenseConstruction");
+                depenseList = refreshDepenseList(object.getJSONArray("transactions"));
+            }
+            Log.d("DEBUG", "onPostExecute: " + depenseList);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //the network operation will be performed in background
+    @Override
+    protected String doInBackground(Void... voids) {
+        RequestHandler requestHandler = new RequestHandler();
+        if (requestCode == CODE_POST_REQUEST)
+            return requestHandler.sendPostRequest(url, params);
+        if (requestCode == CODE_GET_REQUEST)
+            return requestHandler.sendGetRequest(url);
+        return null;
     }
 }

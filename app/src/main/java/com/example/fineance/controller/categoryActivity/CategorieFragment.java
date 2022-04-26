@@ -13,8 +13,8 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
-import com.example.fineance.model.CustomListAdapter;
 import com.example.fineance.model.Depense;
+import com.example.fineance.model.Adapter.DepenseListAdapter;
 
 import java.util.ArrayList;
 
@@ -61,10 +61,10 @@ public class CategorieFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_categorie, container, false);
-        ListView listView = view.findViewById(R.id.listView);
+        ListView listView = view.findViewById(R.id.categorieListView);
         getDepenses();
         depenseArrayList = depenseList;
-       listView.setAdapter(new CustomListAdapter(getActivity(), depenseArrayList));
+        listView.setAdapter(new DepenseListAdapter(getActivity(), depenseArrayList));
 
         return view;
     }

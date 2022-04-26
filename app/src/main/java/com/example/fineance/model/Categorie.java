@@ -31,6 +31,18 @@ public class Categorie implements Parcelable {
         Commentaire = in.readString();
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public Double getSeuil() {
+        return seuil;
+    }
+
+    public String getCommentaire() {
+        return Commentaire;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -42,6 +54,4 @@ public class Categorie implements Parcelable {
         parcel.writeDouble(seuil);
         parcel.writeString(Commentaire);
     }
-
-
 }
