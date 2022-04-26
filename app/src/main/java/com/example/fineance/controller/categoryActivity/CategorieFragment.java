@@ -17,6 +17,7 @@ import com.example.fineance.model.Depense;
 import com.example.fineance.model.Adapter.DepenseListAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +28,7 @@ public class CategorieFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    ArrayList<Depense> depenseArrayList;
+    List<Depense> depenseArrayList;
 
     public CategorieFragment() {
         // Required empty public constructor

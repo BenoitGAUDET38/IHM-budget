@@ -16,9 +16,7 @@ import com.example.fineance.controller.categoryActivity.CategorieFragment;
 import com.example.fineance.model.Depense;
 import com.example.fineance.model.notifications.Notification;
 import com.example.fineance.model.notifications.notificationsFactories.AbstractNotificationFactory;
-import com.example.fineance.model.notifications.notificationsFactories.DefaultPriorityNotificationFactory;
 import com.example.fineance.model.notifications.notificationsFactories.HighPriorityNotificationFactory;
-import com.example.fineance.model.PerformNetworkRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -50,15 +48,15 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment = null;
             switch (item.getItemId()) {
                 case R.id.nav_home:
-                    isOn="home";
+                    isOn = "home";
                     fragment = new HomeFragment();
                     break;
                 case R.id.nav_categories:
-                    isOn="categories";
+                    isOn = "categories";
                     fragment = new CategorieFragment();
                     break;
                 case R.id.nav_prevision:
-                    isOn="prevision";
+                    isOn = "prevision";
                     fragment = new PrevisionFragment();
                     break;
             }
@@ -77,8 +75,7 @@ public class MainActivity extends AppCompatActivity {
         if (isOn.equals("prevision")) {
             fragment = new PrevisionFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
-        }
-        else if (isOn.equals("categories")) {
+        } else if (isOn.equals("categories")) {
             fragment = new CategorieFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
         }

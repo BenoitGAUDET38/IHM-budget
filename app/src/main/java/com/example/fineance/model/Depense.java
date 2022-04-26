@@ -77,6 +77,10 @@ public class Depense implements Parcelable, Serializable {
 
     }
 
+    public boolean isValid() {
+        return !this.nom.equals("") && !this.categorie.equals(" ") && !this.provenance.equals(" ");
+    }
+
     @Override
     public int describeContents() {
         return 0;
