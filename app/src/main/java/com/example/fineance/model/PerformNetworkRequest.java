@@ -27,6 +27,10 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     public static final String URL_GET_TRANSACTIONS = ROOT_URL + "gettransactions";
     public static final String URL_UPDATE_TRANSACTION = ROOT_URL + "updatetransaction";
     public static final String URL_DELETE_TRANSACTION = ROOT_URL + "deletetransaction&id=";
+    public static final String URL_CREATE_CATEGORIE = ROOT_URL + "createcategorie";
+    public static final String URL_GET_CATEGORIES = ROOT_URL + "getcategorie";
+    public static final String URL_UPDATE_CATEGORIE = ROOT_URL + "updatecategorie";
+    public static final String URL_DELETE_CATEGORIE = ROOT_URL + "deletecategorie&id=";
     public static List<Depense> depenseList = new ArrayList<>();
     //the url where we need to send the request
     String url;
@@ -44,6 +48,11 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
 
     private static void readDepenses() {
         PerformNetworkRequest request = new PerformNetworkRequest(URL_GET_TRANSACTIONS, null, CODE_GET_REQUEST);
+        request.execute();
+    }
+
+    private static void readCategories() {
+        PerformNetworkRequest request = new PerformNetworkRequest(URL_GET_CATEGORIES, null, CODE_GET_REQUEST);
         request.execute();
     }
 
@@ -70,6 +79,25 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         return depenses;
     }
 
+    private static List<Categorie> refreshCategorieList(JSONArray depenseArray) throws JSONException {
+        ArrayList<Categorie> categories = new ArrayList<>();
+
+        //traversing through all the items in the json array
+        //the json we got from the response
+        for (int i = 0; i < depenseArray.length(); i++) {
+            //getting each hero object
+            JSONObject obj = depenseArray.getJSONObject(i);
+            //adding the hero to the list
+            categories.add(new Categorie(
+                    obj.getInt("id"),
+                    obj.getString("nom"),
+                    obj.getDouble("seuil"),
+                    ""
+            ));
+        }
+        return categories;
+    }
+
     public static void updateTransaction(int id, String nom, double montant, String devise, String categorie, String commentaire, String provenance) {
         HashMap<String, String> params = new HashMap<>();
         params.put("id", String.valueOf(id));
@@ -83,8 +111,22 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         request.execute();
     }
 
+    public static void updateCategorie(int id, String nom, double seuil) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id", String.valueOf(id));
+        params.put("nom", nom);
+        params.put("seuil", String.valueOf(seuil));
+        PerformNetworkRequest request = new PerformNetworkRequest(URL_UPDATE_CATEGORIE, params, CODE_POST_REQUEST);
+        request.execute();
+    }
+
     public static void deleteTransaction(int id) {
         PerformNetworkRequest request = new PerformNetworkRequest(URL_DELETE_TRANSACTION + id, null, CODE_GET_REQUEST);
+        request.execute();
+    }
+
+    public static void deleteCategorie(int id) {
+        PerformNetworkRequest request = new PerformNetworkRequest(URL_DELETE_CATEGORIE + id, null, CODE_GET_REQUEST);
         request.execute();
     }
 
@@ -96,13 +138,24 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         params.put("montant", String.valueOf(montant));
         params.put("devise", devise);
         params.put("commentaire", commentaire);
-        //Calling the create hero API
         PerformNetworkRequest request = new PerformNetworkRequest(URL_CREATE_DEPENSE, params, CODE_POST_REQUEST);
         request.execute();
     }
 
     public static void createTransaction(Depense d) {
         createTransaction(d.getNom(), d.getCategorie(), d.getProvenance(), d.getMontant(), d.getDevise(), d.getCommentaire());
+    }
+
+    public static void createCategorie(String nom, double seuil) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("nom", nom);
+        params.put("montant", String.valueOf(seuil));
+        PerformNetworkRequest request = new PerformNetworkRequest(URL_CREATE_DEPENSE, params, CODE_POST_REQUEST);
+        request.execute();
+    }
+
+    public static void createCategorie(Categorie d) {
+        createCategorie(d.getNom(), d.getSeuil());
     }
 
     public static List<Depense> getDepenses() {
@@ -125,22 +178,27 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         try {
             JSONObject object = new JSONObject(s);
             if (!object.getBoolean("error")) {
-                //TODO Reporter la notif plus haut
+//                if(object.getJSONArray("transactions")){
+                    //TODO Reporter la notif plus haut
 //                Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
-                //refreshing the herolist after every operation
-                Log.d("DEBUG", "depenseConstruction");
+//                    Log.d("DEBUG", "object JSON categorie"+object.getJSONArray("categories"));
+                    Log.d("DEBUG", "object JSON transactions"+object.getJSONArray("transactions"));
+                    //TODO Try catch en fonction du type
+                    // Observable
+                    Observable<List<Depense>> depenseObservable = Observable.fromArray(refreshDepenseList(object.getJSONArray("transactions")))
+                            .subscribeOn(Schedulers.io())
+                            .filter(depenses -> !depenses.isEmpty())
+                            .observeOn(AndroidSchedulers.mainThread());
 
-                // Observable
-                Observable<List<Depense>> depenseObservable = Observable.fromArray(refreshDepenseList(object.getJSONArray("transactions")))
-                        .subscribeOn(Schedulers.io())
-                        .filter(depenses -> !depenses.isEmpty())
-                        .observeOn(AndroidSchedulers.mainThread());
+                    // Observer
+                    depenseObservable.subscribe(depenses -> {
+                        depenseList = new ArrayList<>(depenses);
+                        Log.d("OBSERVER", "List de Dépense: " + depenses.size() + " " + depenses);
+                    });
+//                }else if(object.getJSONArray("categories")){
+//
+//                }
 
-                // Observer
-                depenseObservable.subscribe(depenses -> {
-                    depenseList = new ArrayList<>(depenses);
-                    Log.d("OBSERVER", "List de Dépense: " + depenses.size() + " " + depenses);
-                });
             }
             Log.d("DEBUG", "onPostExecute: " + depenseList);
         } catch (JSONException e) {

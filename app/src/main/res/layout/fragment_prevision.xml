@@ -1,95 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Theme.FineAnce.PrevisionFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.mainActivity.PrevisionFragment"
-    style="@style/Theme.FineAnce.PrevisionFragment"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    tools:context=".controller.mainActivity.PrevisionFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_weight="0.1"
-        android:orientation="horizontal"
         android:gravity="center"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Analyse : "
-            android:textSize="30sp"
-            />
+            android:textSize="30sp" />
 
         <Spinner
             android:id="@+id/spinner_prevision"
+            style="#FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="30sp"
-            style="#FFFFFF"
-            />
+            android:textSize="30sp" />
 
     </LinearLayout>
 
     <View
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#000000"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        />
+        android:background="#000000" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_weight="0"
         android:text="Seuils de dépense"
-        android:textSize="20dp"
-        android:layout_marginBottom="10dp"
-        />
+        android:textSize="20dp" />
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graphView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="10dp"
-        />
+        android:padding="10dp" />
 
     <View
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#000000"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        />
+        android:background="#000000" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_weight="0"
         android:text="Seuils de dépense par catégorie"
-        android:textSize="20dp"
-        android:layout_marginBottom="10dp"
-        />
+        android:textSize="20dp" />
 
     <com.razerdp.widget.animatedpieview.AnimatedPieView
         android:id="@+id/pie_chart"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="10dp"
         android:layout_weight="1"
-        />
+        android:padding="10dp" />
 
     <Button
         android:id="@+id/btn_swap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Agrandir le diagramme"
-        />
+        android:text="Agrandir le diagramme" />
 
 </LinearLayout>

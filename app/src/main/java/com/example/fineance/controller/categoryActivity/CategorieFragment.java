@@ -58,9 +58,9 @@ public class CategorieFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        PerformNetworkRequest.getDepenses();
         View view = inflater.inflate(R.layout.fragment_categorie, container, false);
         ListView listView = view.findViewById(R.id.categorieListView);
-        PerformNetworkRequest.getDepenses();
         listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList));
 
         TextView montant = view.findViewById(R.id.ajout_depense_montant_editText);
