@@ -16,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import com.example.fineance.R;
 import com.example.fineance.controller.optionsActivity.SettingsActivity;
 import com.example.fineance.controller.spendingActivity.AddExpenseActivity;
+import com.example.fineance.model.CalculDepense;
+import com.example.fineance.model.PerformNetworkRequest;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,5 +71,12 @@ public class HomeFragment extends Fragment {
     private void setupInfos() {
         TextView infos = this.requireView().findViewById(R.id.info_total);
         infos.setText(totalDepenses + devise);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        totalDepenses = CalculDepense.getTotalDepenses(PerformNetworkRequest.getDepenses());
+        setupInfos();
     }
 }
