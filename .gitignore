@@ -48,8 +48,8 @@ captures/
 .externalNativeBuild
 
 # IntelliJ
-*.iml
-.idea
+*.xml
+.idea/misc.xml
 # Android Studio 3 in .gitignore file.
 .idea/caches
 .idea/modules.xml
@@ -62,7 +62,6 @@ captures/
 #*.keystore
 
 # External native build folder generated in Android Studio 2.2 and later
-.externalNativeBuild
 .cxx/
 
 # Google Services (e.g. APIs or Firebase)
