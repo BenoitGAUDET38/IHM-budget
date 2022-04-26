@@ -22,7 +22,7 @@ public class Depense implements Parcelable, Serializable {
             return new Depense[size];
         }
     };
-    private static int cmp;
+    private static int cmp = 0;
     int id;
     String nom;
     int categorie;
@@ -75,6 +75,10 @@ public class Depense implements Parcelable, Serializable {
         if (commentaire.equals(""))
             commentaire = " ";
 
+    }
+
+    public boolean valid() {
+        return this.montant != 0.0 && !this.nom.equals("");
     }
 
     @Override
