@@ -137,6 +137,7 @@ public class PrevisionFragment extends Fragment {
         int sizeList = 3;
         String[] cat = {"Course", "Sport", "Liquide"};
         double[] value = {304.91, 267.56, 25.01};
+        String[] rgb = {"#07108c", "#661600", "#348f94"};
 
         Random rnd = new Random();
 
@@ -158,7 +159,8 @@ public class PrevisionFragment extends Fragment {
         // injection des données
         for (int i = 0; i < sizeList; i++) {
             config.addData(new SimplePieInfo(value[i],
-                    Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)),
+                    //Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)),
+                    Color.parseColor(rgb[i]),
                     cat[i] + " : " + value[i] + "€"));
         }
 
