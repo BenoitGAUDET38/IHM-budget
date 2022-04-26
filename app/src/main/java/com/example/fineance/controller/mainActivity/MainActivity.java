@@ -17,7 +17,6 @@ import com.example.fineance.model.CalculDepense;
 import com.example.fineance.model.Depense;
 import com.example.fineance.model.notifications.Notification;
 import com.example.fineance.model.notifications.notificationsFactories.AbstractNotificationFactory;
-import com.example.fineance.model.notifications.notificationsFactories.DefaultPriorityNotificationFactory;
 import com.example.fineance.model.notifications.notificationsFactories.HighPriorityNotificationFactory;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment = null;
             switch (item.getItemId()) {
                 case R.id.nav_home:
-                    isOn="home";
+                    isOn = "home";
                     fragment = new HomeFragment();
                     Bundle args = new Bundle();
                     args.putDouble(HomeFragment.TOTAL_KEY, CalculDepense.getTotalDepenses(depenseArrayList));
@@ -58,11 +57,11 @@ public class MainActivity extends AppCompatActivity {
                     fragment.setArguments(args);
                     break;
                 case R.id.nav_categories:
-                    isOn="categories";
+                    isOn = "categories";
                     fragment = new CategorieFragment();
                     break;
                 case R.id.nav_prevision:
-                    isOn="prevision";
+                    isOn = "prevision";
                     fragment = new PrevisionFragment();
                     break;
             }
@@ -81,8 +80,7 @@ public class MainActivity extends AppCompatActivity {
         if (isOn.equals("prevision")) {
             fragment = new PrevisionFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
-        }
-        else if (isOn.equals("categories")) {
+        } else if (isOn.equals("categories")) {
             fragment = new CategorieFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
         }

@@ -10,6 +10,11 @@ import org.json.JSONObject;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
 
@@ -22,7 +27,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     public static final String URL_GET_TRANSACTIONS = ROOT_URL + "gettransactions";
     public static final String URL_UPDATE_TRANSACTION = ROOT_URL + "updatetransaction";
     public static final String URL_DELETE_TRANSACTION = ROOT_URL + "deletetransaction&id=";
-    public static ArrayList<Depense> depenseList = new ArrayList<>();
+    public static List<Depense> depenseList = new ArrayList<>();
     //the url where we need to send the request
     String url;
     //the parameters
@@ -42,8 +47,8 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         request.execute();
     }
 
-    private static ArrayList<Depense> refreshDepenseList(JSONArray depenseArray) throws JSONException {
-        ArrayList<Depense> depenses = new ArrayList<>();
+    private static List<Depense> refreshDepenseList(JSONArray depenseArray) throws JSONException {
+        List<Depense> depenses = new ArrayList<>();
 
         //traversing through all the items in the json array
         //the json we got from the response
@@ -100,9 +105,8 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         createTransaction(d.getNom(), d.getCategorie(), d.getProvenance(), d.getMontant(), d.getDevise(), d.getCommentaire());
     }
 
-    public static ArrayList<Depense> getDepenses() {
+    public static List<Depense> getDepenses() {
         readDepenses();
-//        while(depenseList.equals(new ArrayList<>()));
         return depenseList;
     }
 
@@ -125,7 +129,18 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
 //                Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
                 //refreshing the herolist after every operation
                 Log.d("DEBUG", "depenseConstruction");
-                depenseList = refreshDepenseList(object.getJSONArray("transactions"));
+
+                // Observable
+                Observable<List<Depense>> depenseObservable = Observable.fromArray(refreshDepenseList(object.getJSONArray("transactions")))
+                        .subscribeOn(Schedulers.io())
+                        .filter(depenses -> !depenses.isEmpty())
+                        .observeOn(AndroidSchedulers.mainThread());
+
+                // Observer
+                depenseObservable.subscribe(depenses -> {
+                    depenseList = new ArrayList<>(depenses);
+                    Log.d("OBSERVER", "List de Dépense: " + depenses.size() + " " + depenses);
+                });
             }
             Log.d("DEBUG", "onPostExecute: " + depenseList);
         } catch (JSONException e) {
