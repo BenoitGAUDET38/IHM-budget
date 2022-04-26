@@ -179,26 +179,22 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
             JSONObject object = new JSONObject(s);
             if (!object.getBoolean("error")) {
 //                if(object.getJSONArray("transactions")){
-                    //TODO Reporter la notif plus haut
+                //TODO Reporter la notif plus haut
 //                Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
 //                    Log.d("DEBUG", "object JSON categorie"+object.getJSONArray("categories"));
-                    Log.d("DEBUG", "object JSON transactions"+object.getJSONArray("transactions"));
-                    //TODO Try catch en fonction du type
-                    // Observable
-                    Observable<List<Depense>> depenseObservable = Observable.fromArray(refreshDepenseList(object.getJSONArray("transactions")))
-                            .subscribeOn(Schedulers.io())
-                            .filter(depenses -> !depenses.isEmpty())
-                            .observeOn(AndroidSchedulers.mainThread());
+                Log.d("DEBUG", "object JSON transactions" + object.getJSONArray("transactions"));
 
-                    // Observer
-                    depenseObservable.subscribe(depenses -> {
-                        depenseList = new ArrayList<>(depenses);
-                        Log.d("OBSERVER", "List de Dépense: " + depenses.size() + " " + depenses);
-                    });
-//                }else if(object.getJSONArray("categories")){
-//
-//                }
+                // Observable
+                Observable<List<Depense>> depenseObservable = Observable.fromArray(refreshDepenseList(object.getJSONArray("transactions")))
+                        .subscribeOn(Schedulers.io())
+                        .filter(depenses -> !depenses.isEmpty())
+                        .observeOn(AndroidSchedulers.mainThread());
 
+                // Observer
+                depenseObservable.subscribe(depenses -> {
+                    depenseList = new ArrayList<>(depenses);
+                    Log.d("OBSERVER", "List de Dépense: " + depenses.size() + " " + depenses);
+                });
             }
             Log.d("DEBUG", "onPostExecute: " + depenseList);
         } catch (JSONException e) {

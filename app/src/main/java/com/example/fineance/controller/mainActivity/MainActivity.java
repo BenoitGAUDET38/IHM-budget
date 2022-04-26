@@ -1,7 +1,6 @@
 package com.example.fineance.controller.mainActivity;
 
 import static com.example.fineance.model.PerformNetworkRequest.createTransaction;
-import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.example.fineance.R;
 import com.example.fineance.controller.categoryActivity.CategorieFragment;
 import com.example.fineance.model.Depense;
+import com.example.fineance.model.PerformNetworkRequest;
 import com.example.fineance.model.notifications.Notification;
 import com.example.fineance.model.notifications.notificationsFactories.AbstractNotificationFactory;
 import com.example.fineance.model.notifications.notificationsFactories.HighPriorityNotificationFactory;
@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         this.setContentView(R.layout.activity_main);
 
+        PerformNetworkRequest.getDepenses();
         depenseArrayList = new ArrayList<>();
-        getDepenses();
         bottomNav = this.findViewById(R.id.bot_nav_bar);
         this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new HomeFragment()).commit();
         bottomNav.setSelectedItemId(R.id.nav_home);
@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         // Always call the superclass so it can restore the view hierarchy
+        super.onRestoreInstanceState(savedInstanceState);
         Fragment fragment;
         isOn = savedInstanceState.getString(savedIsOn);
         if (isOn.equals("prevision")) {
@@ -83,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
             fragment = new CategorieFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
         }
-        super.onRestoreInstanceState(savedInstanceState);
-
     }
 
     @Override
@@ -99,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        PerformNetworkRequest.getDepenses();
         Intent intent = getIntent();
         if (intent != null) {
             Depense depense = intent.getParcelableExtra("depense");
