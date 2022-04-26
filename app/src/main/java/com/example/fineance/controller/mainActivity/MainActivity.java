@@ -14,6 +14,10 @@ import androidx.fragment.app.Fragment;
 import com.example.fineance.R;
 import com.example.fineance.controller.categoryActivity.CategorieFragment;
 import com.example.fineance.model.Depense;
+import com.example.fineance.model.notifications.Notification;
+import com.example.fineance.model.notifications.notificationsFactories.AbstractNotificationFactory;
+import com.example.fineance.model.notifications.notificationsFactories.DefaultPriorityNotificationFactory;
+import com.example.fineance.model.notifications.notificationsFactories.HighPriorityNotificationFactory;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -98,6 +102,14 @@ public class MainActivity extends AppCompatActivity {
             Depense depense = intent.getParcelableExtra("depense");
             if (depense != null) {
                 createTransaction(depense);
+                AbstractNotificationFactory factory = new HighPriorityNotificationFactory();
+                Notification notif = factory.buildImageNotification(getApplicationContext(),
+                        getResources(),
+                        AbstractNotificationFactory.DEPENSE_IMG,
+                        "Nouvelle dépense", depense.getNom() + " d'une valeur de " +
+                                depense.getMontant() + depense.getDevise() + " à " +
+                                depense.getProvenance() + " a été ajouté !");
+                notif.sendNotificationOnChannel();
             }
         }
     }
