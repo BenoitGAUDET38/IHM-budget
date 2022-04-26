@@ -106,6 +106,7 @@
             android:id="@+id/ajout_depense_catégorie_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="number"
             android:layout_marginHorizontal="20dp"
             android:textSize="20sp" />
 

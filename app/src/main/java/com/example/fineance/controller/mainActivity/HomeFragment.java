@@ -16,8 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.example.fineance.R;
 import com.example.fineance.controller.optionsActivity.SettingsActivity;
 import com.example.fineance.controller.spendingActivity.AddExpenseActivity;
-import com.example.fineance.model.CalculDepense;
-import com.example.fineance.model.PerformNetworkRequest;
+import com.example.fineance.model.Depense;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,11 +37,14 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
         this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-        return inflater.inflate(R.layout.fragment_home, container, false);
 
+        TextView montant = view.findViewById(R.id.info_total);
+        montant.setText(Depense.getMontantTotal() + this.devise);
+        return view;
     }
 
     @Override
@@ -65,18 +67,5 @@ public class HomeFragment extends Fragment {
         account.setOnClickListener(v -> {
             this.startActivity(new Intent(getActivity(), SettingsActivity.class));
         });
-        setupInfos();
-    }
-
-    private void setupInfos() {
-        TextView infos = this.requireView().findViewById(R.id.info_total);
-        infos.setText(totalDepenses + devise);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        totalDepenses = CalculDepense.getTotalDepenses(PerformNetworkRequest.getDepenses());
-        setupInfos();
     }
 }

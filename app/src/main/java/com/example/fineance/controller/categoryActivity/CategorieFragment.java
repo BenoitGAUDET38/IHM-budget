@@ -64,8 +64,7 @@ public class CategorieFragment extends Fragment {
         listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList));
 
         TextView montant = view.findViewById(R.id.ajout_depense_montant_editText);
-        montant.setText(depenseList.stream().map(Depense::getMontant).reduce(0.0, Double::sum).toString());
-
+        montant.setText(Depense.getMontantTotal() + "");
         return view;
     }
 }

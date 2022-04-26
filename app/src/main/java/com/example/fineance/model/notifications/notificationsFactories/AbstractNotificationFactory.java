@@ -13,5 +13,6 @@ public abstract class AbstractNotificationFactory {
     public static int ALARME_IMG = R.drawable.alarm;
 
     public abstract BasicNotification buildBasicNotification(Context context, String title, String message);
+
     public abstract ImageNotification buildImageNotification(Context context, Resources resources, int idImage, String title, String message);
 }

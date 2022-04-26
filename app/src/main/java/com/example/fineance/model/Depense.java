@@ -1,5 +1,7 @@
 package com.example.fineance.model;
 
+import static com.example.fineance.model.PerformNetworkRequest.depenseList;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
@@ -22,15 +24,16 @@ public class Depense implements Parcelable, Serializable {
             return new Depense[size];
         }
     };
+    private static final int PAS_VALEUR = -1;
     private static int cmp = 0;
-    int id;
     String nom;
-    int categorie;
     String provenance;
     double montant;
     String devise;
     String commentaire;
     Timestamp date = new Timestamp(System.currentTimeMillis());
+    int id = PAS_VALEUR;
+    int categorie = PAS_VALEUR;
 
     public Depense(String nom, int categorie, String provenance, double montant, String devise, String commentaire) {
         this.id = cmp++;
@@ -65,6 +68,10 @@ public class Depense implements Parcelable, Serializable {
         Log.d("DEBUG", "Depense 'vide': " + this);
     }
 
+    public static double getMontantTotal() {
+        return depenseList.stream().map(Depense::getMontant).reduce(0.0, Double::sum);
+    }
+
     private void init() {
         if (nom.equals(""))
             nom = " ";
@@ -78,7 +85,7 @@ public class Depense implements Parcelable, Serializable {
     }
 
     public boolean valid() {
-        return this.montant != 0.0 && !this.nom.equals("");
+        return this.montant != 0.0 && !this.nom.equals("") && this.id != PAS_VALEUR && this.categorie != PAS_VALEUR;
     }
 
     @Override

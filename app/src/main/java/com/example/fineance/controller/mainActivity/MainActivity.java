@@ -1,7 +1,6 @@
 package com.example.fineance.controller.mainActivity;
 
 import static com.example.fineance.model.PerformNetworkRequest.createTransaction;
-import static com.example.fineance.model.PerformNetworkRequest.depenseList;
 import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
 
 import android.annotation.SuppressLint;
@@ -14,7 +13,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
 import com.example.fineance.controller.categoryActivity.CategorieFragment;
-import com.example.fineance.model.CalculDepense;
 import com.example.fineance.model.Depense;
 import com.example.fineance.model.notifications.Notification;
 import com.example.fineance.model.notifications.notificationsFactories.AbstractNotificationFactory;
@@ -29,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("NonConstantResourceId")
     ArrayList<Depense> depenseArrayList;
-    String isOn;
+    String isOn = "home";
     String savedIsOn;
 
     @SuppressLint("NonConstantResourceId")
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     isOn = "home";
                     fragment = new HomeFragment();
                     Bundle args = new Bundle();
-                    args.putDouble(HomeFragment.TOTAL_KEY, CalculDepense.getTotalDepenses(depenseList));
+                    args.putDouble(HomeFragment.TOTAL_KEY, Depense.getMontantTotal());
                     args.putString(HomeFragment.DEVISE_KEY, "€"); // @TODO modifier plus tard en devise dynamique
                     fragment.setArguments(args);
                     break;
