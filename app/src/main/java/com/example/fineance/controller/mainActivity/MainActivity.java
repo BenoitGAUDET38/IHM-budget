@@ -1,6 +1,7 @@
 package com.example.fineance.controller.mainActivity;
 
 import static com.example.fineance.model.PerformNetworkRequest.createTransaction;
+import static com.example.fineance.model.PerformNetworkRequest.depenseList;
 import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
 
 import android.annotation.SuppressLint;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     isOn = "home";
                     fragment = new HomeFragment();
                     Bundle args = new Bundle();
-                    args.putDouble(HomeFragment.TOTAL_KEY, CalculDepense.getTotalDepenses(depenseArrayList));
+                    args.putDouble(HomeFragment.TOTAL_KEY, CalculDepense.getTotalDepenses(depenseList));
                     args.putString(HomeFragment.DEVISE_KEY, "€"); // @TODO modifier plus tard en devise dynamique
                     fragment.setArguments(args);
                     break;
