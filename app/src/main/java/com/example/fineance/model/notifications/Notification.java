@@ -13,20 +13,20 @@ import com.example.fineance.R;
 
 public abstract class Notification {
     protected static int notificationId = 0;
-    protected Context currentContext;
+    protected Context context;
     protected String channelId;
     protected NotificationCompat.Builder notification;
 
-    public Notification(Context applicationContext, Context currentContext, int priority, String title, String message) {
-        this.currentContext = currentContext;
+    public Notification(Context context, int priority, String title, String message) {
+        this.context = context;
         this.channelId = getChannelId(priority);
-        this.notification = buildNotification(applicationContext, title, message, priority);
+        this.notification = buildNotification(context, title, message, priority);
     }
 
-    private NotificationCompat.Builder buildNotification(Context applicationContext, String title, String message, int priority) {
-        NotificationCompat.Builder notification = new NotificationCompat.Builder(applicationContext, channelId)
+    private NotificationCompat.Builder buildNotification(Context context, String title, String message, int priority) {
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(context, channelId)
                 .setContentTitle(title)
-                .setContentText("id = " + notificationId + " - " + message)
+                .setContentText(message)
                 .setPriority(priority);
 
         switch (channelId) {
@@ -42,7 +42,7 @@ public abstract class Notification {
     }
 
     public void sendNotificationOnChannel() {
-        NotificationManagerCompat.from(currentContext).notify(notificationId, notification.build());
+        NotificationManagerCompat.from(context).notify(notificationId, notification.build());
         notificationId++;
     }
 
