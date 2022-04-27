@@ -5,6 +5,7 @@ import static java.util.Objects.isNull;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,12 +34,18 @@ public class CategorieFragment extends Fragment {
         super.onCreate(savedInstanceState);
         this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+        //updateList(depenseList);
+        getDepenses();
+        Log.d("FRAGMENT", "onCreate: ");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+//        getDepenses();
+        Log.d("FRAGMENT","onCreateView");
+        Log.d("FRAGMENT", String.valueOf(depenseList));
         View view = inflater.inflate(R.layout.fragment_categorie, container, false);
         ListView listView = view.findViewById(R.id.categorieListView);
         listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList));
@@ -51,9 +58,14 @@ public class CategorieFragment extends Fragment {
     public void updateList(List<Depense> depenses){
         TextView montant;
         if(!isNull(getActivity())){
+            ListView listView = getActivity().findViewById(R.id.categorieListView);
+            listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList));
+
             montant = getActivity().findViewById(R.id.ajout_depense_montant_editText);
             montant.setText(Depense.getMontantTotal(depenses) + "");
         }
         depenseList = depenses;
+        Log.d("FRAGMENT","Update "+depenses);
+
     }
 }

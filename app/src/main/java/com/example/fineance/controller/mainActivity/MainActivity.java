@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
 
     @SuppressLint("NonConstantResourceId")
-    List<Depense> depenseArrayList;
+    List<Depense> depenseArrayList = new ArrayList<>();
     String isOn = "home";
     String savedIsOn;
 
@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         this.setContentView(R.layout.activity_main);
 
-        depenseArrayList = new ArrayList<>();
         bottomNav = this.findViewById(R.id.bot_nav_bar);
         Log.d("DEBUG", String.valueOf(depenseArrayList));
         this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, home).commit();
@@ -62,10 +61,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 case R.id.nav_home:
                     isOn = "home";
                     fragment = home;
-//                    Bundle args = new Bundle();
-//                    args.putDouble(HomeFragment.TOTAL_KEY, 850);
-//                    args.putString(HomeFragment.DEVISE_KEY, "€"); //TODO modifier plus tard en devise dynamique
-//                    fragment.setArguments(args);
                     break;
                 case R.id.nav_categories:
                     isOn = "categories";
@@ -94,8 +89,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
             fragment = new PrevisionFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
         } else if (isOn.equals("categories")) {
-            fragment = categorie;
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
+//            fragment = categorie;
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, categorie).commit();
         }
     }
 
