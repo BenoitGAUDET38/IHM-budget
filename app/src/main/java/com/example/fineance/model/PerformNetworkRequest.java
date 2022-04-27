@@ -181,25 +181,19 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         try {
             JSONObject object = new JSONObject(s);
             if (!object.getBoolean("error")) {
-                try{
+                try {
                     depenseList = refreshDepenseList(object.getJSONArray("transactions"));
                     depensesObservable.setDepenseList(depenseList);
-                }catch (Exception e){
-                    Log.d("BD","Pas de transactions");
+                } catch (Exception e) {
+                    Log.d("BD", "Pas de transactions");
                 }
 
-                try{
+                try {
                     categoriesList = refreshCategorieList(object.getJSONArray("categories"));
                     categories.setCategorieList(categoriesList);
-                }catch (Exception e){
-                    Log.d("BD","Pas de categories");
+                } catch (Exception e) {
+                    Log.d("BD", "Pas de categories");
                 }
-                //TODO Reporter la notif plus haut
-//                Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
-//                    Log.d("DEBUG", "object JSON categorie"+object.getJSONArray("categories"));
-                Log.d("DEBUG", "object JSON transactions" + object.getJSONArray("transactions"));
-
-                // Observable
 
             }
             Log.d("DEBUG", "onPostExecute: " + depenseList);

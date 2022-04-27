@@ -1,5 +1,8 @@
 package com.example.fineance.controller.mainActivity;
 
+import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
+import static java.util.Objects.isNull;
+
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -31,7 +34,6 @@ public class HomeFragment extends Fragment {
     private String devise = "€";
 
     public HomeFragment() {
-//        this.totalDepenses = total;
     }
 
     @Override
@@ -39,8 +41,6 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
         TextView montant = view.findViewById(R.id.info_total);
         montant.setText(totalDepenses + this.devise);
@@ -51,6 +51,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+        getDepenses();
     }
 
     @Override
@@ -67,8 +70,10 @@ public class HomeFragment extends Fragment {
     }
 
     public void updateTotal(double total){
-        TextView montant = getActivity().findViewById(R.id.info_total);
-        totalDepenses = total;
-        montant.setText(totalDepenses+devise);
+        if(!isNull(getActivity())){
+            TextView montant = getActivity().findViewById(R.id.info_total);
+            totalDepenses = total;
+            montant.setText(totalDepenses+devise);
+        }
     }
 }
