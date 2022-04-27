@@ -1,5 +1,7 @@
 package com.example.fineance.controller.mainActivity;
 
+import static java.util.Objects.isNull;
+
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -31,7 +33,6 @@ public class HomeFragment extends Fragment {
     private String devise = "€";
 
     public HomeFragment() {
-//        this.totalDepenses = total;
     }
 
     @Override
@@ -67,8 +68,10 @@ public class HomeFragment extends Fragment {
     }
 
     public void updateTotal(double total){
-        TextView montant = getActivity().findViewById(R.id.info_total);
-        totalDepenses = total;
-        montant.setText(totalDepenses+devise);
+        if(!isNull(getActivity())){
+            TextView montant = getActivity().findViewById(R.id.info_total);
+            totalDepenses = total;
+            montant.setText(totalDepenses+devise);
+        }
     }
 }
