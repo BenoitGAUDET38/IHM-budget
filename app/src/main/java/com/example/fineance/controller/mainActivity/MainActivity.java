@@ -125,20 +125,21 @@ public class MainActivity extends AppCompatActivity implements Observer {
                                 depense.getMontant() + depense.getDevise() + " à " +
                                 depense.getProvenance() + " a été ajouté !");
                 notif.sendNotificationOnChannel();
+                intent.putExtra("depense", (Bundle) null);
             }
         }
     }
 
     @Override
     public void update(Observable observable, Object o) {
-        Log.d("DEBUG","Recupere "+o);
-        if(o.getClass().equals(o.getClass())){
-            Log.d("DEBUG","Valid");
+        Log.d("DEBUG", "Recupere " + o);
+        if (o.getClass().equals(o.getClass())) {
+            Log.d("DEBUG", "Valid");
             depenseArrayList = (List<Depense>) o;
         }
-        Log.d("DEBUG","list now :"+depenseArrayList);
+        Log.d("DEBUG", "list now :" + depenseArrayList);
         home.updateTotal(Depense.getMontantTotal(depenseArrayList));
         categorie.updateList(depenseArrayList);
-        Toast.makeText(getApplicationContext(),"Operation effectué avec succes",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Operation effectué avec succes", Toast.LENGTH_SHORT).show();
     }
 }

@@ -5,25 +5,17 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.FineAnce.HomeFragment">
-        <item name="android:background">#CED4F3</item>
+    <style name="Theme.FineAnce.Card">
+        <item name="android:src">@drawable/card</item>
     </style>
 
-    <style name="Theme.FineAnce.CategorieFragment">
-        <item name="android:background">#EFCFD9</item>
+    <style name="Theme.FineAnce.Rectangle">
+        <item name="android:src">@drawable/rectangle</item>
     </style>
 
-    <style name="Theme.FineAnce.PrevisionFragment">
-        <item name="android:background">#D1EFCF</item>
+    <style name="Theme.FineAnce.Circle">
+        <item name="android:src">@drawable/circle</item>
     </style>
 
-    <style name="Theme.FineAnce.FragmentTitle">
-        <item name="color">@color/secondary_text</item>
-        <item name="android:textSize">50sp</item>
-        <item name="android:gravity">center</item>
-    </style>
 
-    <style name="Theme.FineAnce.FragmentText">
-        <item name="color">@color/secondary_text</item>
-    </style>
 </resources>
