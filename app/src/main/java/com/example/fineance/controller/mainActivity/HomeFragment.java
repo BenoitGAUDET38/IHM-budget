@@ -1,5 +1,6 @@
 package com.example.fineance.controller.mainActivity;
 
+import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
 import static java.util.Objects.isNull;
 
 import android.content.Intent;
@@ -52,6 +53,7 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+        getDepenses();
     }
 
     @Override
