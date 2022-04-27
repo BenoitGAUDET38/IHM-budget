@@ -1,5 +1,8 @@
 package com.example.fineance.controller.categoryActivity;
 
+import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
+import static java.util.Objects.isNull;
+
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,15 +17,15 @@ import com.example.fineance.R;
 import com.example.fineance.model.Adapter.DepenseListAdapter;
 import com.example.fineance.model.Depense;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategorieFragment extends Fragment {
 
-    private List<Depense> depenseList;
+    private List<Depense> depenseList = new ArrayList<>();
 
-    public CategorieFragment(List<Depense> depenseList ) {
-        // Required empty public constructor
-        this.depenseList=depenseList;
+    public CategorieFragment() {
+        getDepenses();
     }
 
     @Override
@@ -43,5 +46,14 @@ public class CategorieFragment extends Fragment {
         TextView montant = view.findViewById(R.id.ajout_depense_montant_editText);
         montant.setText(Depense.getMontantTotal(depenseList) + "");
         return view;
+    }
+
+    public void updateList(List<Depense> depenses){
+        TextView montant;
+        if(!isNull(getActivity())){
+            montant = getActivity().findViewById(R.id.ajout_depense_montant_editText);
+            montant.setText(Depense.getMontantTotal(depenses) + "");
+        }
+        depenseList = depenses;
     }
 }

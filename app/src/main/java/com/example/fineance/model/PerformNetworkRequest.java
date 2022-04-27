@@ -3,6 +3,9 @@ package com.example.fineance.model;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.fineance.model.observables.CategorieObservable;
+import com.example.fineance.model.observables.DepenseObservable;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,6 +18,7 @@ import java.util.List;
 public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     //TODO Decouper side-functions and execute
     public static final DepenseObservable depensesObservable = new DepenseObservable();
+    public static final CategorieObservable categories = new CategorieObservable();
 
     public static final int CODE_GET_REQUEST = 1024;
     public static final int CODE_POST_REQUEST = 1025;
@@ -30,6 +34,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     public static final String URL_UPDATE_CATEGORIE = ROOT_URL + "updatecategorie";
     public static final String URL_DELETE_CATEGORIE = ROOT_URL + "deletecategorie&id=";
     public static List<Depense> depenseList = new ArrayList<>();
+    public static List<Categorie> categoriesList = new ArrayList<>();
     //the url where we need to send the request
     String url;
     //the parameters
@@ -176,25 +181,26 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         try {
             JSONObject object = new JSONObject(s);
             if (!object.getBoolean("error")) {
-//                if(object.getJSONArray("transactions")){
+                try{
+                    depenseList = refreshDepenseList(object.getJSONArray("transactions"));
+                    depensesObservable.setDepenseList(depenseList);
+                }catch (Exception e){
+                    Log.d("BD","Pas de transactions");
+                }
+
+                try{
+                    categoriesList = refreshCategorieList(object.getJSONArray("categories"));
+                    categories.setCategorieList(categoriesList);
+                }catch (Exception e){
+                    Log.d("BD","Pas de categories");
+                }
                 //TODO Reporter la notif plus haut
 //                Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
 //                    Log.d("DEBUG", "object JSON categorie"+object.getJSONArray("categories"));
                 Log.d("DEBUG", "object JSON transactions" + object.getJSONArray("transactions"));
 
                 // Observable
-                depenseList = refreshDepenseList(object.getJSONArray("transactions"));
-                depensesObservable.setDepenseList(depenseList);
-//                Observable<List<Depense>> depenseObservable = Observable.fromArray(refreshDepenseList(object.getJSONArray("transactions")))
-//                        .subscribeOn(Schedulers.io())
-//                        .filter(depenses -> !depenses.isEmpty())
-//                        .observeOn(AndroidSchedulers.mainThread());
-//
-//                // Observer
-//                depenseObservable.subscribe(depenses -> {
-//                    depenseList = new ArrayList<>(depenses);
-//                    Log.d("OBSERVER", "List de Dépense: " + depenses.size() + " " + depenses);
-//                });
+
             }
             Log.d("DEBUG", "onPostExecute: " + depenseList);
         } catch (JSONException e) {

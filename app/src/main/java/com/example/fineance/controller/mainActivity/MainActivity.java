@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     String isOn = "home";
     String savedIsOn;
 
-    CategorieFragment categorie = new CategorieFragment(new ArrayList<>());
+    CategorieFragment categorie = new CategorieFragment();
     PrevisionFragment previsions = new PrevisionFragment();
     HomeFragment home = new HomeFragment();
 
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
                     break;
                 case R.id.nav_categories:
                     isOn = "categories";
-                    fragment = setCategorie();
+                    fragment = categorie;
                     break;
                 case R.id.nav_prevision:
                     isOn = "prevision";
@@ -93,14 +94,14 @@ public class MainActivity extends AppCompatActivity implements Observer {
             fragment = new PrevisionFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
         } else if (isOn.equals("categories")) {
-            fragment = setCategorie();
+            fragment = categorie;
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
         }
     }
 
     @NonNull
     private Fragment setCategorie() {
-        categorie = new CategorieFragment(depenseArrayList);
+        categorie = new CategorieFragment();
         return categorie;
     }
 
@@ -142,5 +143,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         }
         Log.d("DEBUG","list now :"+depenseArrayList);
         home.updateTotal(Depense.getMontantTotal(depenseArrayList));
+        categorie.updateList(depenseArrayList);
+        Toast.makeText(getApplicationContext(),"Operation effectué avec succes",Toast.LENGTH_SHORT).show();
     }
 }

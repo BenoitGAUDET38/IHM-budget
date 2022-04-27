@@ -1,6 +1,8 @@
-package com.example.fineance.model;
+package com.example.fineance.model.observables;
 
 import android.util.Log;
+
+import com.example.fineance.model.Depense;
 
 import java.util.List;
 import java.util.Observable;
