@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.example.fineance.R;
 import com.example.fineance.model.Adapter.DepenseListAdapter;
 import com.example.fineance.model.Depense;
+import com.example.fineance.model.DepenseUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public class CategorieFragment extends Fragment {
         listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList));
 
         TextView montant = view.findViewById(R.id.ajout_depense_montant_editText);
-        montant.setText(Depense.getMontantTotal(depenseList) + "");
+        montant.setText(DepenseUtilities.getMontantTotal(depenseList) + "");
         return view;
     }
 
@@ -52,7 +53,7 @@ public class CategorieFragment extends Fragment {
         TextView montant;
         if(!isNull(getActivity())){
             montant = getActivity().findViewById(R.id.ajout_depense_montant_editText);
-            montant.setText(Depense.getMontantTotal(depenses) + "");
+            montant.setText(DepenseUtilities.getMontantTotal(depenses) + "");
         }
         depenseList = depenses;
     }

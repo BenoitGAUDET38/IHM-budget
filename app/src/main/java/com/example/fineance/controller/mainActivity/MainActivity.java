@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.example.fineance.R;
 import com.example.fineance.controller.categoryActivity.CategorieFragment;
 import com.example.fineance.model.Depense;
+import com.example.fineance.model.DepenseUtilities;
 import com.example.fineance.model.PerformNetworkRequest;
 import com.example.fineance.model.notifications.Notification;
 import com.example.fineance.model.notifications.notificationsFactories.AbstractNotificationFactory;
@@ -142,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
             depenseArrayList = (List<Depense>) o;
         }
         Log.d("DEBUG","list now :"+depenseArrayList);
-        home.updateTotal(Depense.getMontantTotal(depenseArrayList));
+        home.updateTotal(DepenseUtilities.getMontantTotal(depenseArrayList));
         categorie.updateList(depenseArrayList);
         Toast.makeText(getApplicationContext(),"Operation effectué avec succes",Toast.LENGTH_SHORT).show();
     }

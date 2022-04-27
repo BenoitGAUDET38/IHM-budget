@@ -39,28 +39,19 @@
                 android:text="Montant"
                 android:textSize="20sp" />
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/ajout_depense_montant_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:inputType="number"
+                android:text="0"
                 android:background="@drawable/rectangle"
-                android:gravity="center_horizontal">
-
-                <EditText
-                    android:id="@+id/ajout_depense_montant_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="0" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="$" />
-
-            </LinearLayout>
+                android:padding="5dp"
+                />
 
         </LinearLayout>
+
+
 
     </RelativeLayout>
 
@@ -156,7 +147,8 @@
             android:layout_margin="20dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/rectangle"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:inputType="textMultiLine"/>
 
     </LinearLayout>
 

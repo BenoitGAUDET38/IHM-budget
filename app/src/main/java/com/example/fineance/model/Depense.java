@@ -67,10 +67,6 @@ public class Depense implements Parcelable, Serializable {
         Log.d("DEBUG", "Depense 'vide': " + this);
     }
 
-    public static double getMontantTotal(List<Depense> depenseList) {
-        return depenseList.stream().map(Depense::getMontant).reduce(0.0, Double::sum);
-    }
-
     private void init() {
         if (nom.equals(""))
             nom = " ";
