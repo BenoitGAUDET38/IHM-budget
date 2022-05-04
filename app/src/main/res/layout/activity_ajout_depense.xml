@@ -21,7 +21,8 @@
             android:layout_toStartOf="@+id/sommeLayout"
             android:scaleX="1.5"
             android:scaleY="1.5"
-            android:src="@android:drawable/ic_menu_camera" />
+            android:src="@android:drawable/ic_menu_camera"
+            android:contentDescription="@string/photo" />
 
 
         <LinearLayout
@@ -36,18 +37,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Montant"
+                android:text="@string/amount"
                 android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/ajout_depense_montant_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:text="0"
+                android:hint="@string/default_amount"
                 android:background="@drawable/rectangle"
+                android:inputType="number"
                 android:padding="5dp"
-                />
+                android:autofillHints="0" />
 
         </LinearLayout>
 
@@ -55,132 +56,11 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/rectangle"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="50dp"
-            android:gravity="center_vertical"
-            android:text="Nom:"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/ajout_depense_nom_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="20dp"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rectangle"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="50dp"
-            android:gravity="center_vertical"
-            android:text="Catégorie:"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/ajout_depense_catégorie_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="number"
-            android:layout_marginHorizontal="20dp"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rectangle"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="50dp"
-            android:gravity="center_vertical"
-            android:text="Provenance:"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/ajout_depense_provenance_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="20dp"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rectangle"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:gravity="center_vertical"
-            android:text="Commentaire:"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/ajout_depense_commentaire_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_margin="20dp"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/rectangle"
-            android:textSize="20sp"
-            android:inputType="textMultiLine"/>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/ajout_depense_annuler_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="Annuler"
-            android:textSize="20sp"
-
-            />
-
-        <Button
-            android:id="@+id/ajout_depense_valide_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:text="Valider"
-            android:textSize="20sp"
-
-            />
-
-    </LinearLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/main_container"
+        />
 
 </LinearLayout>

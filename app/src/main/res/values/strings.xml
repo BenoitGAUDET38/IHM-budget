@@ -26,4 +26,9 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="scan_ticket">Scan Ticket</string>
+    <string name="depense_add">Valider</string>
+    <string name="depense_remove">Annuler</string>
+    <string name="amount">Montant</string>
+    <string name="photo">Scanner un ticket</string>
+    <string name="default_amount">0.00</string>
 </resources>

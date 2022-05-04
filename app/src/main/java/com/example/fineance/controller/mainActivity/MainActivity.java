@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
@@ -75,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
             if (fragment != null) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
             }
-
             return true;
         });
     }
@@ -95,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
         }
     }
 
-    @NonNull
     private Fragment setCategorie() {
         categorie = new CategorieFragment();
         return categorie;
@@ -105,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Save the user's current game state
         savedInstanceState.putString(savedIsOn, isOn);
-
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
     }
@@ -118,28 +114,36 @@ public class MainActivity extends AppCompatActivity implements Observer {
             Depense depense = intent.getParcelableExtra("depense");
             if (depense != null && depense.valid()) {
                 createTransaction(depense);
-                AbstractNotificationFactory factory = new HighPriorityNotificationFactory();
-                Notification notif = factory.buildImageNotification(getApplicationContext(),
-                        getResources(),
-                        AbstractNotificationFactory.DEPENSE_IMG,
-                        "Nouvelle dépense", depense.getNom() + " d'une valeur de " +
-                                depense.getMontant() + depense.getDevise() + " à " +
-                                depense.getProvenance() + " a été ajouté !");
-                notif.sendNotificationOnChannel();
+                createNotification(depense);
             }
         }
+    }
+
+    private void createNotification(Depense depense) {
+        AbstractNotificationFactory factory = new HighPriorityNotificationFactory();
+        Notification notif = factory.buildImageNotification(getApplicationContext(),
+                getResources(),
+                AbstractNotificationFactory.DEPENSE_IMG,
+                "Nouvelle dépense", depense.getNom() + " d'une valeur de " +
+                        depense.getMontant() + depense.getDevise() + " à " +
+                        depense.getProvenance() + " a été ajouté !");
+        notif.sendNotificationOnChannel();
     }
 
     @Override
     public void update(Observable observable, Object o) {
         Log.d("DEBUG","Recupere "+o);
-        if(o.getClass().equals(o.getClass())){
-            Log.d("DEBUG","Valid");
+        boolean res=true;
+        try{
             depenseArrayList = (List<Depense>) o;
+            Log.d("DEBUG","list now :"+depenseArrayList);
+            home.updateTotal(DepenseUtilities.getMontantTotal(depenseArrayList));
+            categorie.updateList(depenseArrayList);
+        }catch (Exception e){
+            res=false;
+        }finally {
+                Toast.makeText(getApplicationContext(),res?"Operation effectué avec succes":"Echec de l'operation",Toast.LENGTH_SHORT).show();
         }
-        Log.d("DEBUG","list now :"+depenseArrayList);
-        home.updateTotal(DepenseUtilities.getMontantTotal(depenseArrayList));
-        categorie.updateList(depenseArrayList);
-        Toast.makeText(getApplicationContext(),"Operation effectué avec succes",Toast.LENGTH_SHORT).show();
+
     }
 }
