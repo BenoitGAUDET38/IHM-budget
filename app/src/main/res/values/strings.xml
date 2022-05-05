@@ -31,4 +31,8 @@
     <string name="amount">Montant</string>
     <string name="photo">Scanner un ticket</string>
     <string name="default_amount">0.00</string>
+    <string name="name">Nom:</string>
+    <string name="categorie">Catégorie:</string>
+    <string name="provenance">Provenance:</string>
+    <string name="commentaire">Commentaire:</string>
 </resources>

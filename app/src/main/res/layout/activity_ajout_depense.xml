@@ -8,56 +8,6 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/ticketScannerImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/sommeLayout"
-            android:layout_centerHorizontal="true"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="10dp"
-            android:layout_toStartOf="@+id/sommeLayout"
-            android:scaleX="1.5"
-            android:scaleY="1.5"
-            android:src="@android:drawable/ic_menu_camera"
-            android:contentDescription="@string/photo" />
-
-
-        <LinearLayout
-            android:id="@+id/sommeLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="40dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/amount"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/ajout_depense_montant_editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/default_amount"
-                android:background="@drawable/rectangle"
-                android:inputType="number"
-                android:padding="5dp"
-                android:autofillHints="0" />
-
-        </LinearLayout>
-
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/main_container"
