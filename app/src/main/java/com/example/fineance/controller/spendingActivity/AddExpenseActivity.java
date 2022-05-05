@@ -1,13 +1,13 @@
 package com.example.fineance.controller.spendingActivity;
 
 import static com.example.fineance.controller.spendingActivity.ScanningActivity.CAMERA_REQUEST_CODE;
+import static com.example.fineance.model.PerformNetworkRequest.createTransaction;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -21,7 +21,7 @@ import com.example.fineance.R;
 import com.example.fineance.controller.inputFragment.DepenseFragment;
 import com.example.fineance.model.Depense;
 
-public class AddExpenseActivity extends AppCompatActivity implements DepenseFragment.OnButtonClickedListener, DepenseFragment.OnDataPass {
+public class AddExpenseActivity extends AppCompatActivity{
 
 
     private EditText montantEditText;
@@ -63,19 +63,16 @@ public class AddExpenseActivity extends AppCompatActivity implements DepenseFrag
         });
 
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new DepenseFragment()).commit();
-    }
 
-    private void onClick(View view) {
-        finish();
-    }
+        getSupportFragmentManager().setFragmentResultListener("transaction", this, (requestKey, result) -> {
+            createTransaction((Depense) result.get(requestKey));
+            finish();
+        });
 
-    @Override
-    public void onButtonClicked(View view) {
-        Log.e(getClass().getSimpleName(),"Button clicked !");
-    }
-
-    @Override
-    public void onDataPass(Depense d) {
-        Log.d("DEBUG","Depense"+d.toString());
+        getSupportFragmentManager().setFragmentResultListener("delete", this, (requestKey, result) -> {
+            //createTransaction((Depense) result.get(requestKey));
+            Log.d("DEBUG","Travail Terminé, on plie les gaules");
+            finish();
+        });
     }
 }

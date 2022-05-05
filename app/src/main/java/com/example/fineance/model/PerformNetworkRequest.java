@@ -146,6 +146,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     }
 
     public static void createTransaction(Depense d) {
+        Log.d("DB","Ajout d'une depense :"+d);
         createTransaction(d.getNom(), d.getCategorie(), d.getProvenance(), d.getMontant(), d.getDevise(), d.getCommentaire());
     }
 
