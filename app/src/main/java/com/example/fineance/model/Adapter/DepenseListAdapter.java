@@ -1,5 +1,7 @@
 package com.example.fineance.model.Adapter;
 
+import static com.example.fineance.model.PerformNetworkRequest.findCategorieById;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.fineance.R;
 import com.example.fineance.controller.spendingActivity.AddExpenseActivity;
+import com.example.fineance.model.Categorie;
 import com.example.fineance.model.Depense;
 
 import java.util.List;
@@ -57,7 +60,10 @@ public class DepenseListAdapter extends BaseAdapter {
         }
 
         Depense depense = this.listData.get(position);
-        holder.categorieNameView.setText(depense.getCategorie()+"");
+        Categorie c = findCategorieById(depense.getCategorie());
+        holder.categorieNameView.setText(
+                (c !=null ? c.getNom():"")
+        );
         holder.provenanceView.setText(depense.getProvenance());
         holder.nomEtPrixView.setText(depense.getNom() + "    " + depense.getMontant() + "$");
         view.setOnClickListener(e -> {

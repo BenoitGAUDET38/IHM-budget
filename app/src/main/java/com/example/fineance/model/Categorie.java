@@ -16,29 +16,25 @@ public class Categorie implements Parcelable {
         }
     };
     private static int cmp;
-    int id;
+    private int id;
     String nom;
     Double seuil;
-    String commentaire;
 
     public Categorie(String nom, Double seuil, String commentaire) {
         id = cmp++;
         this.nom = nom;
         this.seuil = seuil;
-        this.commentaire = commentaire;
     }
 
     public Categorie(int id, String nom, Double seuil, String commentaire) {
         this.id=id;
         this.nom = nom;
         this.seuil = seuil;
-        this.commentaire = commentaire;
     }
 
     public Categorie(Parcel in) {
         this.nom = in.readString();
         this.seuil = in.readDouble();
-        commentaire = in.readString();
     }
 
     public String getNom() {
@@ -49,8 +45,8 @@ public class Categorie implements Parcelable {
         return seuil;
     }
 
-    public String getCommentaire() {
-        return commentaire;
+    public int getId() {
+        return id;
     }
 
     @Override
@@ -62,6 +58,5 @@ public class Categorie implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(nom);
         parcel.writeDouble(seuil);
-        parcel.writeString(commentaire);
     }
 }

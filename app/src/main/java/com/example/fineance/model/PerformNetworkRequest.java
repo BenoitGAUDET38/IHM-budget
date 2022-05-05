@@ -220,4 +220,23 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
             return requestHandler.sendGetRequest(url);
         return null;
     }
+
+    public static Categorie findCategorieById(int id){
+        for(Categorie c : categoriesList){
+            if(c.getId() == id)
+                return c;
+        }
+        return null;
+    }
+    /**
+     * 0 par defaut, sinon la valeur trouvée
+     * @param name
+     */
+    public static Categorie findCategorieByName(String name){
+        for(Categorie c : categoriesList){
+            if(c.getNom().equals(name))
+                return c;
+        }
+        return null;
+    }
 }
