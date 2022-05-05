@@ -42,11 +42,10 @@ public class CategorieListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.list_item_layout, null);
+            convertView = layoutInflater.inflate(R.layout.categorie_item_layout, null);
             holder = new ViewHolder();
-            holder.nomView = convertView.findViewById(R.id.ajout_categorie_nom_edit_text);
-            holder.seuilView = convertView.findViewById(R.id.ajout_categorie_seuil_edit_text);
-            holder.commentaireView = convertView.findViewById(R.id.ajout_categorie_commentaire_edit_text);
+            holder.nomView = convertView.findViewById(R.id.categorie_name);
+            holder.seuilView = convertView.findViewById(R.id.categorie_seuil);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -55,7 +54,6 @@ public class CategorieListAdapter extends BaseAdapter {
         Categorie categorie = this.listData.get(position);
         holder.nomView.setText(categorie.getNom());
         holder.seuilView.setText(categorie.getSeuil() + "$");
-        holder.commentaireView.setText(categorie.getNom() + " " + categorie.getCommentaire());
 
         return convertView;
     }
@@ -63,6 +61,5 @@ public class CategorieListAdapter extends BaseAdapter {
     private static class ViewHolder {
         TextView nomView;
         TextView seuilView;
-        TextView commentaireView;
     }
 }

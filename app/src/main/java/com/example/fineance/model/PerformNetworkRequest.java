@@ -30,7 +30,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     public static final String URL_UPDATE_TRANSACTION = ROOT_URL + "updatetransaction";
     public static final String URL_DELETE_TRANSACTION = ROOT_URL + "deletetransaction&id=";
     public static final String URL_CREATE_CATEGORIE = ROOT_URL + "createcategorie";
-    public static final String URL_GET_CATEGORIES = ROOT_URL + "getcategorie";
+    public static final String URL_GET_CATEGORIES = ROOT_URL + "getcategories";
     public static final String URL_UPDATE_CATEGORIE = ROOT_URL + "updatecategorie";
     public static final String URL_DELETE_CATEGORIE = ROOT_URL + "deletecategorie&id=";
     public static List<Depense> depenseList = new ArrayList<>();
@@ -114,6 +114,10 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         request.execute();
     }
 
+    public static void updateTransaction(int id, Depense depense){
+        updateTransaction(id,depense.nom,depense.getMontant(),depense.getDevise(),depense.getCategorie()+"",depense.getCommentaire(),depense.getProvenance());
+    }
+
     public static void updateCategorie(int id, String nom, double seuil) {
         HashMap<String, String> params = new HashMap<>();
         params.put("id", String.valueOf(id));
@@ -167,18 +171,21 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         return depenseList;
     }
 
+    public static List<Categorie> getCategories() {
+        readCategories();
+        return categoriesList;
+    }
+
     //when the task started displaying a progressbar
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        Log.d("DEBUG", "onPreExecute: ");
     }
 
     //this method will give the response from the request
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        Log.d("DEBUG", "onPostExecuteTry");
         try {
             JSONObject object = new JSONObject(s);
             if (!object.getBoolean("error")) {
@@ -192,12 +199,12 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
                 try {
                     categoriesList = refreshCategorieList(object.getJSONArray("categories"));
                     categories.setCategorieList(categoriesList);
+                    Log.d("BD", "Categories");
                 } catch (Exception e) {
                     Log.d("BD", "Pas de categories");
                 }
 
             }
-            Log.d("DEBUG", "onPostExecute: " + depenseList);
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package com.example.fineance.controller.inputFragment;
 
 import static android.app.Activity.RESULT_OK;
 import static com.example.fineance.controller.spendingActivity.ScanningActivity.CAMERA_REQUEST_CODE;
+import static java.util.Objects.isNull;
 
 import android.Manifest;
 import android.content.Intent;
@@ -49,7 +50,13 @@ public class DepenseFragment extends Fragment {
     private Button annulerButton;
     private EditText montantEditText;
 
+    private Depense depense;
+
     public DepenseFragment() {
+    }
+
+    public DepenseFragment(Depense depense) {
+        this.depense=depense;
         // Required empty public constructor
     }
 
@@ -92,7 +99,23 @@ public class DepenseFragment extends Fragment {
             result.putParcelable("transaction", retrieveDepenseFromForm());
             getParentFragmentManager().setFragmentResult("transaction", result);
         });
+
+        setValues();
+
         return view;
+    }
+
+    private void setValues() {
+        if (!isNull(depense)){
+            nomEditText.setText(depense.getNom());
+            montantEditText.setText(String.valueOf(depense.getMontant()));
+            categorieEditText.setText(String.valueOf(depense.getCategorie()));
+            provenanceEditText.setText(depense.getProvenance());
+            commentaireEditText.setText(depense.getCommentaire());
+            annulerButton.setText("Supprimer");
+            validerButton.setText("Mettre a jour");
+
+        }
     }
 
     private Depense retrieveDepenseFromForm() {

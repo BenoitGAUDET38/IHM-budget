@@ -2,11 +2,11 @@ package com.example.fineance.controller.mainActivity;
 
 import static com.example.fineance.model.PerformNetworkRequest.createTransaction;
 import static com.example.fineance.model.PerformNetworkRequest.depensesObservable;
+import static com.example.fineance.model.PerformNetworkRequest.getCategories;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,12 +46,12 @@ public class MainActivity extends AppCompatActivity implements Observer {
     protected void onCreate(Bundle savedInstanceState) {
         depensesObservable.addObserver(this);
         PerformNetworkRequest.getDepenses();
+        getCategories();
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         this.setContentView(R.layout.activity_main);
 
         bottomNav = this.findViewById(R.id.bot_nav_bar);
-        Log.d("DEBUG", String.valueOf(depenseArrayList));
         this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, home).commit();
         bottomNav.setSelectedItemId(R.id.nav_home);
         bottomNav.setOnItemSelectedListener(item -> {
@@ -132,11 +132,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
     @Override
     public void update(Observable observable, Object o) {
-        Log.d("DEBUG","Recupere "+o);
         boolean res=true;
         try{
             depenseArrayList = (List<Depense>) o;
-            Log.d("DEBUG","list now :"+depenseArrayList);
             home.updateTotal(DepenseUtilities.getMontantTotal(depenseArrayList));
             categorie.updateList(depenseArrayList);
         }catch (Exception e){

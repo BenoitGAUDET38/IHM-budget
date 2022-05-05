@@ -35,4 +35,9 @@
     <string name="categorie">Catégorie:</string>
     <string name="provenance">Provenance:</string>
     <string name="commentaire">Commentaire:</string>
+    <string name="default_seuil">X / 100</string>
+    <string name="categorie_name">Categorie</string>
+    <string name="categories_title">Categories</string>
+    <string name="amount_title">Montant</string>
+    <string name="devise">USD</string>
 </resources>
