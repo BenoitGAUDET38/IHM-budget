@@ -66,6 +66,7 @@
         <entry key="app/src/main/res/layout/fragment_categorie.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_categorie2.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/fragment_depense.xml" value="0.3374094202898551" />
+        <entry key="app/src/main/res/layout/fragment_depense_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3374094202898551" />
         <entry key="app/src/main/res/layout/fragment_prevision.xml" value="0.24166666666666667" />
         <entry key="app/src/main/res/layout/fragment_prevision_big_pie.xml" value="0.1" />
