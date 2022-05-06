@@ -62,6 +62,7 @@ public class DepenseFragment extends Fragment {
     private EditText montantEditText;
 
     private Depense depense;
+    /*TODO newInstance CategorieList*/
     private List<Categorie> categorieList = getCategories();
 
     public DepenseFragment() {

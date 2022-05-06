@@ -18,7 +18,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
-import com.example.fineance.controller.spendingActivity.AddExpenseActivity;
+import com.example.fineance.controller.ListFragment.DepenseListFragment;
 import com.example.fineance.model.Adapter.CategorieListAdapter;
 import com.example.fineance.model.Adapter.DepenseListAdapter;
 import com.example.fineance.model.Categorie;
@@ -28,13 +28,13 @@ import com.example.fineance.model.DepenseUtilities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategorieFragment extends Fragment {
+public class CategorieMenuFragment extends Fragment {
 
     private List<Depense> depenseList = new ArrayList<>();
     private List<Categorie> categorieList = new ArrayList<>();
     private SwitchCompat categoriesOn;
 
-    public CategorieFragment() {
+    public CategorieMenuFragment() {
         getDepenses();
     }
 
@@ -72,7 +72,8 @@ public class CategorieFragment extends Fragment {
             if(categoriesOn.isChecked())
                 this.startActivity(new Intent(this.getActivity(), AddCategoryActivity.class));
             else
-                this.startActivity(new Intent(this.getActivity(), AddExpenseActivity.class));
+                getParentFragmentManager().beginTransaction().replace(R.id.list_content, new DepenseListFragment()).commit();
+//                this.startActivity(new Intent(this.getActivity(), AddExpenseActivity.class));
         });
         return view;
     }

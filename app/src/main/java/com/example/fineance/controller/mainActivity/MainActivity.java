@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
-import com.example.fineance.controller.categoryActivity.CategorieFragment;
+import com.example.fineance.controller.categoryActivity.CategorieMenuFragment;
 import com.example.fineance.model.Depense;
 import com.example.fineance.model.DepenseUtilities;
 import com.example.fineance.model.PerformNetworkRequest;
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     String isOn = "home";
     String savedIsOn;
 
-    CategorieFragment categorie = new CategorieFragment();
+    CategorieMenuFragment categorie = new CategorieMenuFragment();
     PrevisionFragment previsions = new PrevisionFragment();
     HomeFragment home = new HomeFragment();
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     }
 
     private Fragment setCategorie() {
-        categorie = new CategorieFragment();
+        categorie = new CategorieMenuFragment();
         return categorie;
     }
 

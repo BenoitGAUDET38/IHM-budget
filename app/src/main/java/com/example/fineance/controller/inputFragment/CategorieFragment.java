@@ -63,6 +63,8 @@ public class CategorieFragment extends Fragment {
             getParentFragmentManager().setFragmentResult("categorie", result);
         });
         setValues();
+
+
         return view;
     }
 
