@@ -18,7 +18,7 @@ import java.util.List;
 public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     //TODO Decouper side-functions and execute
     public static final DepenseObservable depensesObservable = new DepenseObservable();
-    public static final CategorieObservable categories = new CategorieObservable();
+    public static final CategorieObservable categoriesObservable = new CategorieObservable();
 
     public static final int CODE_GET_REQUEST = 1024;
     public static final int CODE_POST_REQUEST = 1025;
@@ -94,8 +94,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
             categories.add(new Categorie(
                     obj.getInt("id"),
                     obj.getString("nom"),
-                    obj.getDouble("seuil"),
-                    ""
+                    obj.getDouble("seuil")
             ));
         }
         return categories;
@@ -116,6 +115,9 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
 
     public static void updateTransaction(int id, Depense depense){
         updateTransaction(id,depense.nom,depense.getMontant(),depense.getDevise(),depense.getCategorie()+"",depense.getCommentaire(),depense.getProvenance());
+    }
+    public static void updateCategorie(int id, Categorie categorie){
+        updateCategorie(id,categorie.nom,categorie.seuil);
     }
 
     public static void updateCategorie(int id, String nom, double seuil) {
@@ -157,7 +159,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     public static void createCategorie(String nom, double seuil) {
         HashMap<String, String> params = new HashMap<>();
         params.put("nom", nom);
-        params.put("montant", String.valueOf(seuil));
+        params.put("seuil", String.valueOf(seuil));
         PerformNetworkRequest request = new PerformNetworkRequest(URL_CREATE_CATEGORIE, params, CODE_POST_REQUEST);
         request.execute();
     }
@@ -198,7 +200,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
 
                 try {
                     categoriesList = refreshCategorieList(object.getJSONArray("categories"));
-                    categories.setCategorieList(categoriesList);
+                    categoriesObservable.setCategorieList(categoriesList);
                     Log.d("BD", "Categories");
                 } catch (Exception e) {
                     Log.d("BD", "Pas de categories");
@@ -221,6 +223,10 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         return null;
     }
 
+    /**
+     * @param id id of the categorie
+     * @return categorie with the id, null if id's categorie doesn't exist
+     */
     public static Categorie findCategorieById(int id){
         for(Categorie c : categoriesList){
             if(c.getId() == id)
@@ -228,9 +234,10 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         }
         return null;
     }
+
     /**
-     * 0 par defaut, sinon la valeur trouvée
-     * @param name
+     * @param name name of the categorie
+     * @return categorie with the name, null if name's categorie doesn't exist
      */
     public static Categorie findCategorieByName(String name){
         for(Categorie c : categoriesList){

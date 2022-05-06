@@ -1,15 +1,16 @@
 package com.example.fineance.controller.categoryActivity;
 
-import static com.example.fineance.model.PerformNetworkRequest.categoriesList;
+import static com.example.fineance.model.PerformNetworkRequest.getCategories;
 import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
-import static java.util.Objects.isNull;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,8 +18,10 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
+import com.example.fineance.controller.spendingActivity.AddExpenseActivity;
 import com.example.fineance.model.Adapter.CategorieListAdapter;
 import com.example.fineance.model.Adapter.DepenseListAdapter;
+import com.example.fineance.model.Categorie;
 import com.example.fineance.model.Depense;
 import com.example.fineance.model.DepenseUtilities;
 
@@ -28,7 +31,7 @@ import java.util.List;
 public class CategorieFragment extends Fragment {
 
     private List<Depense> depenseList = new ArrayList<>();
-    private List<Depense> categorieList = new ArrayList<>();
+    private List<Categorie> categorieList = new ArrayList<>();
     private SwitchCompat categoriesOn;
 
     public CategorieFragment() {
@@ -40,9 +43,8 @@ public class CategorieFragment extends Fragment {
         super.onCreate(savedInstanceState);
         this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-        //updateList(depenseList);
+        getCategories();
         getDepenses();
-        Log.d("FRAGMENT", "onCreate: ");
     }
 
     @Override
@@ -60,24 +62,44 @@ public class CategorieFragment extends Fragment {
         categoriesOn = view.findViewById(R.id.categorieSwitch);
         categoriesOn.setOnClickListener(viewSwitch -> {
             if (categoriesOn.isChecked())
-                listView.setAdapter(new CategorieListAdapter(getActivity(), categoriesList));
+                listView.setAdapter(new CategorieListAdapter(getActivity(), categorieList));
             else
                 listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList));
         });
-        montant.setText(DepenseUtilities.getMontantTotal(depenseList) + "");
+        montant.setText(String.valueOf(DepenseUtilities.getMontantTotal(depenseList)));
+        ImageView addButon = view.findViewById(R.id.addButton);
+        addButon.setOnClickListener(v -> {
+            if(categoriesOn.isChecked())
+                this.startActivity(new Intent(this.getActivity(), AddCategoryActivity.class));
+            else
+                this.startActivity(new Intent(this.getActivity(), AddExpenseActivity.class));
+        });
         return view;
     }
 
-    public void updateList(List<Depense> depenses) {
+    public void updateList(List depenses) {
         TextView montant;
-        if (!isNull(getActivity())) {
+        Log.d("OBS", " " + depenses.get(0).getClass());
+        if (getActivity() != null) {
             ListView listView = getActivity().findViewById(R.id.categorieListView);
-            listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList));
-
-            montant = getActivity().findViewById(R.id.ajout_depense_montant_editText);
-            montant.setText(DepenseUtilities.getMontantTotal(depenses) + "");
+            if(depenses.get(0).getClass().equals(Depense.class)){
+                depenseList = (List<Depense>) depenses;
+                listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList));
+                montant = getActivity().findViewById(R.id.ajout_depense_montant_editText);
+                montant.setText(String.valueOf(DepenseUtilities.getMontantTotal(depenseList)));
+            }else if(depenses.get(0).getClass().equals(Categorie.class)){
+                categorieList = (List<Categorie>) depenses;
+                listView.setAdapter(new CategorieListAdapter(getActivity(), categorieList));
+            }
         }
-        depenseList = depenses;
-        Log.d("FRAGMENT", "Update " + depenses);
     }
+
+//    public void updateList(List<Categorie> categories) {
+//        if (!isNull(getActivity())) {
+//            ListView listView = getActivity().findViewById(R.id.categorieListView);
+//            listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList));
+//        }
+//        categorieList = categories;
+//        Log.d("FRAGMENT", "Update " + categories);
+//    }
 }

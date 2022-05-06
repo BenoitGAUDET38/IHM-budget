@@ -19,7 +19,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FineAnce.NoActionBar">
         <activity
+            android:name=".controller.categoryActivity.DisplayCategorieActivity"
+            android:exported="false" />
+        <activity
             android:name=".controller.spendingActivity.AddExpenseActivity"
+            android:exported="false"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".controller.categoryActivity.AddCategoryActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
         <activity
@@ -35,6 +42,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

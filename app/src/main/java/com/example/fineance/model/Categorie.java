@@ -3,6 +3,8 @@ package com.example.fineance.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 public class Categorie implements Parcelable {
     public static final Parcelable.Creator<Categorie> CREATOR = new Parcelable.Creator<Categorie>() {
         @Override
@@ -20,19 +22,20 @@ public class Categorie implements Parcelable {
     String nom;
     Double seuil;
 
-    public Categorie(String nom, Double seuil, String commentaire) {
+    public Categorie(String nom, Double seuil) {
         id = cmp++;
         this.nom = nom;
         this.seuil = seuil;
     }
 
-    public Categorie(int id, String nom, Double seuil, String commentaire) {
+    public Categorie(int id, String nom, Double seuil) {
         this.id=id;
         this.nom = nom;
         this.seuil = seuil;
     }
 
     public Categorie(Parcel in) {
+        this.id = in.readInt();
         this.nom = in.readString();
         this.seuil = in.readDouble();
     }
@@ -56,7 +59,18 @@ public class Categorie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
         parcel.writeString(nom);
         parcel.writeDouble(seuil);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Categorie{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", seuil=" + seuil +
+                '}';
     }
 }

@@ -15,27 +15,25 @@ import com.example.fineance.R;
 import com.example.fineance.controller.inputFragment.CategorieFragment;
 import com.example.fineance.model.Categorie;
 
-public class AddCategoryActivity extends AppCompatActivity {
-    private Categorie categorie = null;
+public class DisplayCategorieActivity extends AppCompatActivity {
+    private Categorie categorie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ajout_categorie);
+        setContentView(R.layout.activity_display_categorie);
 
         Intent in = getIntent();
         if (!isNull(in)) {
             Bundle bundle = in.getExtras();
-            if (!isNull(bundle)){
-                categorie = (Categorie) bundle.get("depense");
+            if (!isNull(bundle)) {
+                categorie = (Categorie) bundle.get("categorie");
+                Log.d("DEBUG","Bundle "+categorie);
             }
+            }
+        getSupportFragmentManager().beginTransaction().replace(R.id.categorie_edit, new CategorieFragment(categorie)).commit();
+//        getSupportFragmentManager().beginTransaction().replace(R.id.list_depenses, new CategorieFragment(categorie)).commit();
 
-        }
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new CategorieFragment(categorie)).commit();
-        setListeners();
-    }
-
-    private void setListeners() {
         getSupportFragmentManager().setFragmentResultListener("categorie", this, (requestKey, result) -> {
             Categorie d = (Categorie) result.get(requestKey);
             Log.d("DEBUG","result "+d.toString());
@@ -48,9 +46,11 @@ public class AddCategoryActivity extends AppCompatActivity {
             finish();
         });
         getSupportFragmentManager().setFragmentResultListener("delete", this, (requestKey, result) -> {
-            if(!isNull(categorie))
+            Log.d("DEBUG","supprimer "+categorie);
+            if (!isNull(categorie))
                 deleteCategorie(categorie.getId());
             finish();
         });
     }
+
 }

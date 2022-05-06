@@ -8,25 +8,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_gravity="center"
         android:layout_marginTop="40dp"
-        android:layout_gravity="center">
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_gravity="start"
-            >
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/categories_title"/>
+                android:text="@string/categories_title" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/categorieSwitch"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout
@@ -59,22 +59,26 @@
                     android:text="@string/devise" />
 
             </LinearLayout>
-
         </LinearLayout>
 
+        <ImageView
+            android:id="@+id/addButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_baseline_add_circle_outline_24"
+            android:contentDescription="@string/add_expense" />
     </LinearLayout>
 
 
-<!--    <FrameLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_margin="16dp"/>-->
+    <!--    <FrameLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_margin="16dp"/>-->
 
 
     <ListView
         android:id="@+id/categorieListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
-        />
+        android:layout_margin="16dp" />
 </LinearLayout>

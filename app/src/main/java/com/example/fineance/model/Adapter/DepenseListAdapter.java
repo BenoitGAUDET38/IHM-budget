@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +69,6 @@ public class DepenseListAdapter extends BaseAdapter {
             Intent in = new Intent(e.getContext(), AddExpenseActivity.class);
             Bundle bundle = new Bundle();
             bundle.putParcelable("depense",depense);
-            Log.d("DEBUG","Intent "+depense);
             in.putExtras(bundle);
             e.getContext().startActivity(in);
         });

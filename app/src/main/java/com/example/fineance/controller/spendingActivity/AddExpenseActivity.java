@@ -7,7 +7,6 @@ import static java.util.Objects.isNull;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,11 +27,9 @@ public class AddExpenseActivity extends AppCompatActivity {
             Bundle bundle = in.getExtras();
             if (!isNull(bundle)){
                 depense = (Depense) bundle.get("depense");
-                Log.d("DEBUG","Bundle "+bundle.get("depense"));
             }
 
         }
-        Log.d("DEBUG","Construct "+depense);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new DepenseFragment(depense)).commit();
         setListeners();
     }
@@ -49,7 +46,6 @@ public class AddExpenseActivity extends AppCompatActivity {
             finish();
         });
         getSupportFragmentManager().setFragmentResultListener("delete", this, (requestKey, result) -> {
-            Log.d("DEBUG","Delete "+depense);
             if(!isNull(depense))
                 deleteTransaction(depense.getId());
             finish();

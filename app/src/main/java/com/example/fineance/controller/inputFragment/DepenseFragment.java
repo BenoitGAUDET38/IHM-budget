@@ -132,8 +132,8 @@ public class DepenseFragment extends Fragment {
             categorieEditText.setSelection(0);
             provenanceEditText.setText(depense.getProvenance());
             commentaireEditText.setText(depense.getCommentaire());
-            annulerButton.setText("Supprimer");
-            validerButton.setText("Mettre a jour");
+            annulerButton.setText(R.string.delete);
+            validerButton.setText(R.string.update);
         }
     }
 

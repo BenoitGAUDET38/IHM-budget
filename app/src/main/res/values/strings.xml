@@ -40,4 +40,15 @@
     <string name="categories_title">Categories</string>
     <string name="amount_title">Montant</string>
     <string name="devise">USD</string>
+    <string name="annuler_button">Annuler</string>
+    <string name="valid_button">Valider</string>
+    <string name="title_activity_display_categorie">DisplayCategorie</string>
+    <string name="categorie_title">Categorie Name</string>
+    <string name="app_title">Fineance</string>
+    <string name="description_add_circle">Ajouter une depense</string>
+    <string name="settings_circle">Parametres</string>
+    <string name="add_categorie_title">Ajout d\'une catégorie</string>
+    <string name="add_expense">Add Expense</string>
+    <string name="delete">Supprimer</string>
+    <string name="update">Mettre a jour</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.fineance.controller.mainActivity;
 
+import static com.example.fineance.model.PerformNetworkRequest.categoriesObservable;
 import static com.example.fineance.model.PerformNetworkRequest.createTransaction;
 import static com.example.fineance.model.PerformNetworkRequest.depensesObservable;
 import static com.example.fineance.model.PerformNetworkRequest.getCategories;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         depensesObservable.addObserver(this);
+        categoriesObservable.addObserver(this);
         PerformNetworkRequest.getDepenses();
         getCategories();
         super.onCreate(savedInstanceState);
@@ -132,15 +134,15 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
     @Override
     public void update(Observable observable, Object o) {
-        boolean res=true;
-        try{
+        boolean res = true;
+        try {
+            categorie.updateList((List) o);
             depenseArrayList = (List<Depense>) o;
             home.updateTotal(DepenseUtilities.getMontantTotal(depenseArrayList));
-            categorie.updateList(depenseArrayList);
-        }catch (Exception e){
-            res=false;
-        }finally {
-                Toast.makeText(getApplicationContext(),res?"Operation effectué avec succes":"Echec de l'operation",Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            res = false;
+        } finally {
+            Toast.makeText(getApplicationContext(), res ? "Operation effectué avec succes" : "Echec de l'operation", Toast.LENGTH_SHORT).show();
         }
 
     }

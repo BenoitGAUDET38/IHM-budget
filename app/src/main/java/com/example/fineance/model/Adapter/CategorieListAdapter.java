@@ -2,6 +2,9 @@ package com.example.fineance.model.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.fineance.R;
+import com.example.fineance.controller.categoryActivity.DisplayCategorieActivity;
 import com.example.fineance.model.Categorie;
 
 import java.util.List;
@@ -54,7 +58,15 @@ public class CategorieListAdapter extends BaseAdapter {
         Categorie categorie = this.listData.get(position);
         holder.nomView.setText(categorie.getNom());
         holder.seuilView.setText(categorie.getSeuil() + "$");
-
+        convertView.setOnLongClickListener(e -> {
+            Intent in = new Intent(e.getContext(), DisplayCategorieActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("categorie",categorie);
+            Log.d("DEBUG","Intent "+categorie);
+            in.putExtras(bundle);
+            e.getContext().startActivity(in);
+            return true;
+        });
         return convertView;
     }
 
