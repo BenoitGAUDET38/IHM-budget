@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
-        android:text="Fineance\nBonjour Matis!"
+        android:text="@string/app_title"
         android:textSize="30sp" />
 
     <ImageView
@@ -24,15 +24,16 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:src="@drawable/ic_baseline_account_circle_24" />
+        android:src="@drawable/ic_baseline_account_circle_24"
+        android:contentDescription="@string/settings_circle" />
 
     <ImageView
         android:id="@+id/moneyCircleButton"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/circle" />
+        android:layout_centerInParent="true"
+        android:src="@drawable/circle"
+        android:contentDescription="@string/description_add_circle" />
 
     <TextView
         android:id="@+id/info_total"

@@ -18,7 +18,7 @@ import java.util.List;
 public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     //TODO Decouper side-functions and execute
     public static final DepenseObservable depensesObservable = new DepenseObservable();
-    public static final CategorieObservable categories = new CategorieObservable();
+    public static final CategorieObservable categoriesObservable = new CategorieObservable();
 
     public static final int CODE_GET_REQUEST = 1024;
     public static final int CODE_POST_REQUEST = 1025;
@@ -30,7 +30,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     public static final String URL_UPDATE_TRANSACTION = ROOT_URL + "updatetransaction";
     public static final String URL_DELETE_TRANSACTION = ROOT_URL + "deletetransaction&id=";
     public static final String URL_CREATE_CATEGORIE = ROOT_URL + "createcategorie";
-    public static final String URL_GET_CATEGORIES = ROOT_URL + "getcategorie";
+    public static final String URL_GET_CATEGORIES = ROOT_URL + "getcategories";
     public static final String URL_UPDATE_CATEGORIE = ROOT_URL + "updatecategorie";
     public static final String URL_DELETE_CATEGORIE = ROOT_URL + "deletecategorie&id=";
     public static List<Depense> depenseList = new ArrayList<>();
@@ -94,8 +94,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
             categories.add(new Categorie(
                     obj.getInt("id"),
                     obj.getString("nom"),
-                    obj.getDouble("seuil"),
-                    ""
+                    obj.getDouble("seuil")
             ));
         }
         return categories;
@@ -112,6 +111,13 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         params.put("provenance", provenance);
         PerformNetworkRequest request = new PerformNetworkRequest(URL_UPDATE_TRANSACTION, params, CODE_POST_REQUEST);
         request.execute();
+    }
+
+    public static void updateTransaction(int id, Depense depense){
+        updateTransaction(id,depense.nom,depense.getMontant(),depense.getDevise(),depense.getCategorie()+"",depense.getCommentaire(),depense.getProvenance());
+    }
+    public static void updateCategorie(int id, Categorie categorie){
+        updateCategorie(id,categorie.nom,categorie.seuil);
     }
 
     public static void updateCategorie(int id, String nom, double seuil) {
@@ -146,13 +152,14 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     }
 
     public static void createTransaction(Depense d) {
+        Log.d("DB","Ajout d'une depense :"+d);
         createTransaction(d.getNom(), d.getCategorie(), d.getProvenance(), d.getMontant(), d.getDevise(), d.getCommentaire());
     }
 
     public static void createCategorie(String nom, double seuil) {
         HashMap<String, String> params = new HashMap<>();
         params.put("nom", nom);
-        params.put("montant", String.valueOf(seuil));
+        params.put("seuil", String.valueOf(seuil));
         PerformNetworkRequest request = new PerformNetworkRequest(URL_CREATE_CATEGORIE, params, CODE_POST_REQUEST);
         request.execute();
     }
@@ -166,43 +173,40 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         return depenseList;
     }
 
+    public static List<Categorie> getCategories() {
+        readCategories();
+        return categoriesList;
+    }
+
     //when the task started displaying a progressbar
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        Log.d("DEBUG", "onPreExecute: ");
     }
 
     //this method will give the response from the request
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        Log.d("DEBUG", "onPostExecuteTry");
         try {
             JSONObject object = new JSONObject(s);
             if (!object.getBoolean("error")) {
-//                try{
+                try {
                     depenseList = refreshDepenseList(object.getJSONArray("transactions"));
                     depensesObservable.setDepenseList(depenseList);
-//                }catch (Exception e){
-//                    Log.d("BD","Pas de transactions");
-//                }
+                } catch (Exception e) {
+                    Log.d("BD", "Pas de transactions");
+                }
 
-//                try{
-//                    categoriesList = refreshCategorieList(object.getJSONArray("categories"));
-//                    categories.setCategorieList(categoriesList);
-//                }catch (Exception e){
-//                    Log.d("BD","Pas de categories");
-//                }
-                //TODO Reporter la notif plus haut
-//                Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
-//                    Log.d("DEBUG", "object JSON categorie"+object.getJSONArray("categories"));
-                Log.d("DEBUG", "object JSON transactions" + object.getJSONArray("transactions"));
-
-                // Observable
+                try {
+                    categoriesList = refreshCategorieList(object.getJSONArray("categories"));
+                    categoriesObservable.setCategorieList(categoriesList);
+                    Log.d("BD", "Categories");
+                } catch (Exception e) {
+                    Log.d("BD", "Pas de categories");
+                }
 
             }
-            Log.d("DEBUG", "onPostExecute: " + depenseList);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -216,6 +220,30 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
             return requestHandler.sendPostRequest(url, params);
         if (requestCode == CODE_GET_REQUEST)
             return requestHandler.sendGetRequest(url);
+        return null;
+    }
+
+    /**
+     * @param id id of the categorie
+     * @return categorie with the id, null if id's categorie doesn't exist
+     */
+    public static Categorie findCategorieById(int id){
+        for(Categorie c : categoriesList){
+            if(c.getId() == id)
+                return c;
+        }
+        return null;
+    }
+
+    /**
+     * @param name name of the categorie
+     * @return categorie with the name, null if name's categorie doesn't exist
+     */
+    public static Categorie findCategorieByName(String name){
+        for(Categorie c : categoriesList){
+            if(c.getNom().equals(name))
+                return c;
+        }
         return null;
     }
 }
