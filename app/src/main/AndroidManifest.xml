@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FineAnce.NoActionBar">
         <activity
+            android:name=".controller.categoryActivity.DisplayDepenseActivity"
+            android:exported="false" />
+        <activity
             android:name=".controller.categoryActivity.DisplayCategorieActivity"
             android:exported="false" />
         <activity

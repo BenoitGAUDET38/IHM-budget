@@ -1,6 +1,7 @@
 package com.example.fineance.controller.ListFragment;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,17 +22,13 @@ public class DepenseListFragment extends Fragment {
 
    private List<Depense> depenses= new ArrayList<>();
 
-    public DepenseListFragment(List<Depense> depenses) {
-        this.depenses = depenses;
-    }
-
     public DepenseListFragment() {
     }
 
-    public static DepenseListFragment newDepenseList(ArrayList<Depense> depenseList) {
+    public static DepenseListFragment newDepenseList(List<Depense> depenseList) {
         DepenseListFragment fragment = new DepenseListFragment();
         Bundle args = new Bundle();
-        args.putParcelableArrayList("depenses", depenseList);
+        args.putParcelableArrayList("depenses", (ArrayList<? extends Parcelable>) depenseList);
         fragment.setArguments(args);
         return fragment;
     }

@@ -4,17 +4,22 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.fineance.R;
 import com.example.fineance.controller.categoryActivity.DisplayCategorieActivity;
+import com.example.fineance.controller.categoryActivity.DisplayDepenseActivity;
 import com.example.fineance.model.Categorie;
+import com.example.fineance.model.PerformNetworkRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategorieListAdapter extends BaseAdapter {
@@ -50,6 +55,7 @@ public class CategorieListAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.nomView = convertView.findViewById(R.id.categorie_name);
             holder.seuilView = convertView.findViewById(R.id.categorie_seuil);
+            holder.progressBarSeuil = convertView.findViewById(R.id.progress_seuil);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -57,7 +63,9 @@ public class CategorieListAdapter extends BaseAdapter {
 
         Categorie categorie = this.listData.get(position);
         holder.nomView.setText(categorie.getNom());
-        holder.seuilView.setText(categorie.getSeuil() + "$");
+        holder.seuilView.setText("Max :"+categorie.getSeuil() + "$");
+        holder.progressBarSeuil.setMax((int) categorie.getSeuil());
+        holder.progressBarSeuil.setProgress((int) PerformNetworkRequest.sumCategorie(categorie.getId()));
         convertView.setOnLongClickListener(e -> {
             Intent in = new Intent(e.getContext(), DisplayCategorieActivity.class);
             Bundle bundle = new Bundle();
@@ -67,11 +75,29 @@ public class CategorieListAdapter extends BaseAdapter {
             e.getContext().startActivity(in);
             return true;
         });
+        convertView.setOnClickListener(e -> {
+            Intent in = new Intent(e.getContext(), DisplayDepenseActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList("depenses", (ArrayList<? extends Parcelable>) PerformNetworkRequest.depensesByCategorie(categorie.getId()));
+            bundle.putString("categorie", categorie.getNom());
+            in.putExtras(bundle);
+            e.getContext().startActivity(in);
+//            opened=!opened;
+//            if(opened){
+//                DepenseListFragment f = DepenseListFragment.newDepenseList(depensesByCategorie(categorie.getId()));
+//                fgm.beginTransaction().replace(R.id.list_depenses, f).commit();
+//            }else{
+//                DepenseListFragment f = DepenseListFragment.newDepenseList(depensesByCategorie(categorie.getId()));
+//                fgm.beginTransaction().replace(R.id.list_depenses, f).commit();
+//            }
+        });
         return convertView;
     }
 
     private static class ViewHolder {
         TextView nomView;
         TextView seuilView;
+        ProgressBar progressBarSeuil;
+//        DepenseListFragment fragment;
     }
 }

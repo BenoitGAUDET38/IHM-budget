@@ -44,7 +44,7 @@ public class Categorie implements Parcelable {
         return nom;
     }
 
-    public Double getSeuil() {
+    public double getSeuil() {
         return seuil;
     }
 

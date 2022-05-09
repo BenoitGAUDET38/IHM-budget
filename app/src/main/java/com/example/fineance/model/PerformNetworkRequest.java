@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     //TODO Decouper side-functions and execute
@@ -237,6 +238,15 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         return null;
     }
 
+    public static double sumCategorie(int id){
+        double res =0;
+        for (Depense d: depenseList) {
+            if(d.getCategorie() == id)
+                res+=d.getMontant();
+        }
+        return res;
+    }
+
     /**
      * @param name name of the categorie
      * @return categorie with the name, null if name's categorie doesn't exist
@@ -247,5 +257,9 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
                 return c;
         }
         return null;
+    }
+
+    public static List<Depense> depensesByCategorie(int id){
+        return depenseList.stream().filter(e -> e.getCategorie() == id).collect(Collectors.toList());
     }
 }
