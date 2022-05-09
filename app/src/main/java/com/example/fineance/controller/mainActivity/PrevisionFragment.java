@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
+import com.example.fineance.model.DepenseUtilities;
+import com.example.fineance.model.PerformNetworkRequest;
 import com.example.fineance.model.notifications.Notification;
 import com.example.fineance.model.notifications.notificationsFactories.AbstractNotificationFactory;
 import com.example.fineance.model.notifications.notificationsFactories.LowPriorityNotificationFactory;
@@ -25,6 +27,7 @@ import com.razerdp.widget.animatedpieview.AnimatedPieView;
 import com.razerdp.widget.animatedpieview.AnimatedPieViewConfig;
 import com.razerdp.widget.animatedpieview.data.SimplePieInfo;
 
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -127,10 +130,8 @@ public class PrevisionFragment extends Fragment {
     }
 
     void drawPieChart() {
-        int sizeList = 3;
-        String[] cat = {"Course", "Sport", "Liquide"};
-        double[] value = {304.91, 267.56, 25.01};
-        String[] rgb = {"#07108c", "#661600", "#348f94"};
+        String[] rgb = {"#07108c", "#661600", "#348f94", "BB0306", "#308958", "#6E125C"};
+        Map<String, Double> mapInfo = DepenseUtilities.getDepenseParCategorie(PerformNetworkRequest.getDepenses());
 
         Random rnd = new Random();
 
@@ -138,18 +139,23 @@ public class PrevisionFragment extends Fragment {
         config.duration(2000)
                 .startAngle(-90f)
                 .drawText(true)
-                .textSize(50)
+                .textSize(40)
                 .canTouch(true)
                 .focusAlpha(150)
                 .selectListener((pieInfo, isFloatUp) -> Toast.makeText(getActivity(), pieInfo.getDesc(), Toast.LENGTH_SHORT).show());
 
-
-        // injection des données
-        for (int i = 0; i < sizeList; i++) {
-            config.addData(new SimplePieInfo(value[i],
-                    //Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)),
-                    Color.parseColor(rgb[i]),
-                    cat[i] + " : " + value[i] + "€"));
+        int i = 0;
+        for (Map.Entry<String, Double> entry : mapInfo.entrySet()) {
+            int color;
+            if (i < rgb.length) {
+                color = Color.parseColor(rgb[i]);
+            } else {
+                color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+            }
+            config.addData(new SimplePieInfo(entry.getValue(),
+                    color,
+                    entry.getKey() + " : " + entry.getValue() + "€"));
+            i++;
         }
 
         pieChart.applyConfig(config);
