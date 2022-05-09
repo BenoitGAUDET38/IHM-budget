@@ -182,12 +182,14 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        Log.d("BD","Requete demarrée");
     }
 
     //this method will give the response from the request
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        Log.d("BD","Requete executée");
         try {
             JSONObject object = new JSONObject(s);
             if (!object.getBoolean("error")) {

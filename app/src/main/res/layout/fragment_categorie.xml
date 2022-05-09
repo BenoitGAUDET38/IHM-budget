@@ -69,12 +69,10 @@
             android:contentDescription="@string/add_expense" />
     </LinearLayout>
 
-
     <FrameLayout
+        android:id="@+id/list_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/list_content"/>
-
+        android:layout_height="wrap_content" />
 
     <ListView
         android:id="@+id/categorieListView"
