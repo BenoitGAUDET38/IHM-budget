@@ -2,6 +2,9 @@ package com.example.fineance.model.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.fineance.R;
+import com.example.fineance.controller.categoryActivity.DisplayCategorieActivity;
 import com.example.fineance.model.Categorie;
 
 import java.util.List;
@@ -48,11 +52,10 @@ public class CategorieListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.list_item_layout, null);
+            convertView = layoutInflater.inflate(R.layout.categorie_item_layout, null);
             holder = new ViewHolder();
-            holder.nomView = convertView.findViewById(R.id.ajout_categorie_nom_edit_text);
-            holder.seuilView = convertView.findViewById(R.id.ajout_categorie_seuil_edit_text);
-            holder.commentaireView = convertView.findViewById(R.id.ajout_categorie_commentaire_edit_text);
+            holder.nomView = convertView.findViewById(R.id.categorie_name);
+            holder.seuilView = convertView.findViewById(R.id.categorie_seuil);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -61,14 +64,20 @@ public class CategorieListAdapter extends BaseAdapter {
         Categorie categorie = this.listData.get(position);
         holder.nomView.setText(categorie.getNom());
         holder.seuilView.setText(categorie.getSeuil() + "$");
-        holder.commentaireView.setText(categorie.getNom() + " " + categorie.getCommentaire());
-
+        convertView.setOnLongClickListener(e -> {
+            Intent in = new Intent(e.getContext(), DisplayCategorieActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("categorie",categorie);
+            Log.d("DEBUG","Intent "+categorie);
+            in.putExtras(bundle);
+            e.getContext().startActivity(in);
+            return true;
+        });
         return convertView;
     }
 
     private static class ViewHolder {
         TextView nomView;
         TextView seuilView;
-        TextView commentaireView;
     }
 }

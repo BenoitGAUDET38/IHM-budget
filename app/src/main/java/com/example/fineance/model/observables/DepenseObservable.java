@@ -1,7 +1,5 @@
 package com.example.fineance.model.observables;
 
-import android.util.Log;
-
 import com.example.fineance.model.Depense;
 
 import java.util.List;
@@ -29,7 +27,6 @@ public class DepenseObservable extends Observable {
 
     private void update(){
         setChanged();
-        Log.d("DEBUG","Send la list");
         notifyObservers(depenseList);
     }
 }

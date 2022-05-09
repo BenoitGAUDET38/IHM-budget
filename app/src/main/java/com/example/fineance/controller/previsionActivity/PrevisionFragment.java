@@ -1,21 +1,28 @@
 package com.example.fineance.controller.previsionActivity;
 
+import static java.lang.Integer.getInteger;
+
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.camera.core.impl.ImageOutputConfig;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
+import com.example.fineance.model.Depense;
+import com.example.fineance.model.DepenseUtilities;
+import com.example.fineance.model.PerformNetworkRequest;
 import com.example.fineance.model.notifications.Notification;
 import com.example.fineance.model.notifications.notificationsFactories.AbstractNotificationFactory;
 import com.example.fineance.model.notifications.notificationsFactories.LowPriorityNotificationFactory;
@@ -26,6 +33,14 @@ import com.razerdp.widget.animatedpieview.AnimatedPieView;
 import com.razerdp.widget.animatedpieview.AnimatedPieViewConfig;
 import com.razerdp.widget.animatedpieview.data.SimplePieInfo;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -36,8 +51,13 @@ import java.util.Random;
 public class PrevisionFragment extends Fragment {
     GraphView graphView;
     AnimatedPieView pieChart;
-    Spinner spinner;
-    String[] duration = new String[]{"Hebdomadaire", "Mensuel", "Annuel"};
+    Spinner spinnerMois;
+    Spinner spinnerAnnee;
+    String[] mois = new String[]{"1","2","3","4","5","6","7","8","9","10","11", "12"};
+    String[] annee = new String[]{"2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012", "2011","2010"};
+    int moisActuel=4;
+    int anneeActuel=2022;
+    String currentDuration="Annuel";
     int spinnerPosition = 1;
     Button btn_swap;
     int mode = 0;
@@ -83,12 +103,44 @@ public class PrevisionFragment extends Fragment {
 
         graphView = view.findViewById(R.id.graphView);
         pieChart = view.findViewById(R.id.pie_chart);
-        spinner = view.findViewById(R.id.spinner_prevision);
+        spinnerMois = view.findViewById(R.id.spinner_prevision_mois);
+        spinnerAnnee=view.findViewById(R.id.spinner_prevision_année);
         btn_swap = view.findViewById(R.id.btn_swap);
 
         setupSwapBtn();
 
-        setupSpinner();
+        setupSpinner(spinnerMois,mois);
+        setupSpinner(spinnerAnnee,annee);
+        spinnerMois.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                Adapter adapter = adapterView.getAdapter();
+                if (adapter.getItem(position)!=null)
+                {
+                    setMoisActuel(Integer.parseInt((String)adapter.getItem(position)));
+                drawLineGraph();}
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spinnerAnnee.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                Adapter adapter = adapterView.getAdapter();
+                if (adapter.getItem(position)!=null)
+                {
+                    setAnneeActuel(Integer.parseInt((String)adapter.getItem(position)));
+                    drawLineGraph();}
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         drawLineGraph();
         drawPieChart();
 
@@ -110,8 +162,8 @@ public class PrevisionFragment extends Fragment {
         });
     }
 
-    void setupSpinner() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, duration);
+    void setupSpinner(Spinner spinner,String[] values) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, values);
         spinner.setAdapter(adapter);
         spinner.setSelection(spinnerPosition);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -127,10 +179,8 @@ public class PrevisionFragment extends Fragment {
     }
 
     void drawPieChart() {
-        int sizeList = 3;
-        String[] cat = {"Course", "Sport", "Liquide"};
-        double[] value = {304.91, 267.56, 25.01};
-        String[] rgb = {"#07108c", "#661600", "#348f94"};
+        String[] rgb = {"#07108c", "#661600", "#348f94", "BB0306", "#308958", "#6E125C"};
+        Map<String, Double> mapInfo = DepenseUtilities.getDepenseParCategorie(PerformNetworkRequest.getDepenses());
 
         Random rnd = new Random();
 
@@ -138,18 +188,23 @@ public class PrevisionFragment extends Fragment {
         config.duration(2000)
                 .startAngle(-90f)
                 .drawText(true)
-                .textSize(50)
+                .textSize(40)
                 .canTouch(true)
                 .focusAlpha(150)
                 .selectListener((pieInfo, isFloatUp) -> Toast.makeText(getActivity(), pieInfo.getDesc(), Toast.LENGTH_SHORT).show());
 
-
-        // injection des données
-        for (int i = 0; i < sizeList; i++) {
-            config.addData(new SimplePieInfo(value[i],
-                    //Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)),
-                    Color.parseColor(rgb[i]),
-                    cat[i] + " : " + value[i] + "€"));
+        int i = 0;
+        for (Map.Entry<String, Double> entry : mapInfo.entrySet()) {
+            int color;
+            if (i < rgb.length) {
+                color = Color.parseColor(rgb[i]);
+            } else {
+                color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+            }
+            config.addData(new SimplePieInfo(entry.getValue(),
+                    color,
+                    entry.getKey() + " : " + entry.getValue() + "€"));
+            i++;
         }
 
         pieChart.applyConfig(config);
@@ -157,17 +212,24 @@ public class PrevisionFragment extends Fragment {
     }
 
     void drawLineGraph() {
+        Timestamp start=new Timestamp(anneeActuel-1900,moisActuel-1,1,0,0,0,0);
+        Timestamp end=new Timestamp(anneeActuel-1900,moisActuel-1,31,0,0,0,0);
+        List<Depense> depenseList=DepenseUtilities.getDepenseParDuree(PerformNetworkRequest.getDepenses(),start,end);
+        System.out.println(depenseList);
+        List<DataPoint> dataPointList=new ArrayList<>();
+        double montant=0;
+        dataPointList.add(new DataPoint(0,0));
+        for(Depense depense:depenseList){
+            montant+=depense.getMontant();
+            dataPointList.add(new DataPoint(depense.getDate().getDate(),montant));
+        }
+        if (depenseList.size()==0)
+            dataPointList.add(new DataPoint(31,0));
+
         // on below line we are adding data to our graph view.
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
-                // on below line we are adding
-                // each point on our x and y axis.
-                new DataPoint(1, 12.68),
-                new DataPoint(2, 56.4),
-                new DataPoint(3, 681.2),
-                new DataPoint(4, 681.2),
-                new DataPoint(5, 900.00),
-                new DataPoint(6, 960.00),
-        });
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPointList.toArray(new DataPoint[0]));
+
+
         // set manual X bounds
         graphView.getViewport().setYAxisBoundsManual(true);
         graphView.getViewport().setMinY(0);
@@ -181,5 +243,21 @@ public class PrevisionFragment extends Fragment {
         graphView.getViewport().setScalable(true);
         graphView.getViewport().setScalableY(true);
         graphView.addSeries(series);
+        System.out.println("bla");
     }
+
+    public void setMoisActuel(int moisActuel) {
+        this.moisActuel = moisActuel;
+    }
+
+    public void setAnneeActuel(int anneeActuel) {
+        this.anneeActuel = anneeActuel;
+    }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt("mois",moisActuel);
+        outState.putInt("annee",anneeActuel);
+        super.onSaveInstanceState(outState);
+    }
+
 }

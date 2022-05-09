@@ -1,14 +1,16 @@
 package com.example.fineance.controller.mainActivity;
 
+import static com.example.fineance.model.PerformNetworkRequest.categoriesObservable;
 import static com.example.fineance.model.PerformNetworkRequest.createTransaction;
 import static com.example.fineance.model.PerformNetworkRequest.depensesObservable;
+import static com.example.fineance.model.PerformNetworkRequest.getCategories;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
@@ -17,7 +19,9 @@ import androidx.fragment.app.Fragment;
 import com.example.fineance.R;
 import com.example.fineance.controller.categoryActivity.CategorieFragment;
 import com.example.fineance.controller.previsionActivity.PrevisionFragment;
+import com.example.fineance.controller.categoryActivity.CategorieMenuFragment;
 import com.example.fineance.model.Depense;
+import com.example.fineance.model.DepenseUtilities;
 import com.example.fineance.model.PerformNetworkRequest;
 import com.example.fineance.model.notifications.Notification;
 import com.example.fineance.model.notifications.notificationsFactories.AbstractNotificationFactory;
@@ -30,6 +34,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class MainActivity extends AppCompatActivity implements Observer {
+    private static final String PREVISION_FRAGMENT_TAG = "prevision";
     BottomNavigationView bottomNav;
 
 
@@ -38,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     String isOn = "home";
     String savedIsOn;
 
-    CategorieFragment categorie = new CategorieFragment();
+    CategorieMenuFragment categorie = new CategorieMenuFragment();
     PrevisionFragment previsions = new PrevisionFragment();
     HomeFragment home = new HomeFragment();
 
@@ -46,15 +51,23 @@ public class MainActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         depensesObservable.addObserver(this);
+        categoriesObservable.addObserver(this);
         PerformNetworkRequest.getDepenses();
+        getCategories();
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         this.setContentView(R.layout.activity_main);
 
         bottomNav = this.findViewById(R.id.bot_nav_bar);
-        Log.d("DEBUG", String.valueOf(depenseArrayList));
         this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, home).commit();
         bottomNav.setSelectedItemId(R.id.nav_home);
+
+        if (savedInstanceState != null) {
+            previsions = (PrevisionFragment)
+                    getSupportFragmentManager().findFragmentByTag(PREVISION_FRAGMENT_TAG);
+        }
+
+
         bottomNav.setOnItemSelectedListener(item -> {
 
             Fragment fragment = null;
@@ -70,12 +83,18 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 case R.id.nav_prevision:
                     isOn = "prevision";
                     fragment = previsions;
+                    if (!fragment.isInLayout()) {
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_container, previsions, PREVISION_FRAGMENT_TAG)
+                                .commit();
+                    }
+                    System.out.println(previsions.moisActuel);
                     break;
             }
-            if (fragment != null) {
+            if (fragment != null&&!(fragment instanceof  PrevisionFragment)) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
             }
-
             return true;
         });
     }
@@ -84,21 +103,25 @@ public class MainActivity extends AppCompatActivity implements Observer {
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         // Always call the superclass so it can restore the view hierarchy
         super.onRestoreInstanceState(savedInstanceState);
-        Fragment fragment;
+        //previsions = (PrevisionFragment) getSupportFragmentManager().getFragment(savedInstanceState, "previsionfragment");
         isOn = savedInstanceState.getString(savedIsOn);
         if (isOn.equals("prevision")) {
-            fragment = new PrevisionFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, previsions,PREVISION_FRAGMENT_TAG).commit();
         } else if (isOn.equals("categories")) {
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, categorie).commit();
         }
+    }
+
+    private Fragment setCategorie() {
+        categorie = new CategorieMenuFragment();
+        return categorie;
     }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Save the user's current game state
         savedInstanceState.putString(savedIsOn, isOn);
-
+        //getSupportFragmentManager().putFragment(savedInstanceState, "previsionfragment", previsions);
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
     }
@@ -111,28 +134,33 @@ public class MainActivity extends AppCompatActivity implements Observer {
             Depense depense = intent.getParcelableExtra("depense");
             if (depense != null && depense.valid()) {
                 createTransaction(depense);
-                AbstractNotificationFactory factory = new HighPriorityNotificationFactory();
-                Notification notif = factory.buildImageNotification(getApplicationContext(),
-                        getResources(),
-                        AbstractNotificationFactory.DEPENSE_IMG,
-                        "Nouvelle dépense", depense.getNom() + " d'une valeur de " +
-                                depense.getMontant() + depense.getDevise() + " à " +
-                                depense.getProvenance() + " a été ajouté !");
-                notif.sendNotificationOnChannel();
-                intent.putExtra("depense", (Bundle) null);
+                createNotification(depense);
             }
         }
     }
 
+    private void createNotification(Depense depense) {
+        AbstractNotificationFactory factory = new HighPriorityNotificationFactory();
+        Notification notif = factory.buildImageNotification(getApplicationContext(),
+                getResources(),
+                AbstractNotificationFactory.DEPENSE_IMG,
+                "Nouvelle dépense", depense.getNom() + " d'une valeur de " +
+                        depense.getMontant() + depense.getDevise() + " à " +
+                        depense.getProvenance() + " a été ajouté !");
+        notif.sendNotificationOnChannel();
+    }
+
     @Override
     public void update(Observable observable, Object o) {
-        Log.d("DEBUG", "Recupere " + o);
-        if (o.getClass().equals(o.getClass())) {
-            Log.d("DEBUG", "Valid");
+        boolean res = true;
+        try {
+            categorie.updateList((List) o);
             depenseArrayList = (List<Depense>) o;
+            home.updateTotal(DepenseUtilities.getMontantTotal(depenseArrayList));
+        } catch (Exception e) {
+            res = false;
+        } finally {
+            Toast.makeText(getApplicationContext(), res ? "Operation effectué avec succes" : "Echec de l'operation", Toast.LENGTH_SHORT).show();
         }
-        Log.d("DEBUG", "list now :" + depenseArrayList);
-        home.updateTotal(Depense.getMontantTotal(depenseArrayList));
-        categorie.updateList(depenseArrayList);
     }
 }

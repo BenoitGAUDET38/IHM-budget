@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="30dp"
             android:gravity="center"
-            android:text="Fineance!"
+            android:text="@string/app_title"
             android:textSize="30sp" />
 
         <ImageView
@@ -28,11 +28,12 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="30dp"
             android:src="@drawable/ic_baseline_account_circle_24"
-            app:tint="@color/primary_text" />
+            app:tint="@color/primary_text"
+            android:contentDescription="@string/settings_circle" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/center_money"
+        android:id="@+id/moneyCircleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/home_fragment_header"
@@ -41,7 +42,8 @@
         android:background="@drawable/card"
         android:backgroundTint="@color/secondary_blue"
         android:minWidth="250dp"
-        android:minHeight="100dp">
+        android:minHeight="100dp"
+        android:contentDescription="@string/description_add_circle">
 
         <TextView
             android:id="@+id/info_total"

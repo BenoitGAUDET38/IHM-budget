@@ -21,6 +21,7 @@ public class CategorieObservable extends Observable {
 
     public void setCategorieList(List<Categorie> categorieList) {
         this.categorieList = categorieList;
+        update();
     }
 
     public void update(){

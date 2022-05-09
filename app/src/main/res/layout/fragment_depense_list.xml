@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".controller.spendingActivity.AddExpenseActivity">
+    tools:context=".controller.ListFragment.DepenseListFragment">
 
-    <RelativeLayout
+    <ListView
+        android:id="@+id/list_depenses"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/main_container"
-        />
+        android:layout_height="match_parent"
+        android:layout_margin="16dp" />
+
 
 </LinearLayout>

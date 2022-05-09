@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 
 public class Depense implements Parcelable, Serializable {
 
@@ -56,7 +55,7 @@ public class Depense implements Parcelable, Serializable {
     }
 
     public Depense(Parcel in) {
-        id = cmp++;
+        id = in.readInt();
         nom = in.readString();
         categorie = in.readInt();
         provenance = in.readString();
@@ -64,11 +63,6 @@ public class Depense implements Parcelable, Serializable {
         devise = in.readString();
         commentaire = in.readString();
         init();
-        Log.d("DEBUG", "Depense 'vide': " + this);
-    }
-
-    public static double getMontantTotal(List<Depense> depenseList) {
-        return depenseList.stream().map(Depense::getMontant).reduce(0.0, Double::sum);
     }
 
     private void init() {
@@ -94,12 +88,14 @@ public class Depense implements Parcelable, Serializable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
         parcel.writeString(nom);
         parcel.writeInt(categorie);
         parcel.writeString(provenance);
         parcel.writeDouble(montant);
         parcel.writeString(devise);
         parcel.writeString(commentaire);
+        Log.d("DEBUG","Parcel "+id);
 //        parcel.writeLong(date.getTime());
     }
 
@@ -144,5 +140,9 @@ public class Depense implements Parcelable, Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public Timestamp getDate() {
+        return date;
     }
 }

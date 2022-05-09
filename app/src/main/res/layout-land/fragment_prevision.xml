@@ -22,13 +22,37 @@
             android:text="Analyse : "
             android:textSize="30sp" />
 
-        <Spinner
-            android:id="@+id/spinner_prevision"
-            style="#FFFFFF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
             android:gravity="center"
-            android:textSize="30sp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Date(mois/année) : "
+                android:textSize="30sp" />
+
+            <Spinner
+                android:id="@+id/spinner_prevision_mois"
+                style="#FFFFFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="30sp" />
+
+            <Spinner
+                android:id="@+id/spinner_prevision_année"
+                style="#FFFFFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="30sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -38,14 +62,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:background="#000000" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="0"
-        android:text="Seuils de dépense"
-        android:textSize="20dp" />
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graphView"
