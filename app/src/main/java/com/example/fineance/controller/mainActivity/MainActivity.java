@@ -30,6 +30,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class MainActivity extends AppCompatActivity implements Observer {
+    private static final String PREVISION_FRAGMENT_TAG = "prevision";
     BottomNavigationView bottomNav;
 
 
@@ -56,6 +57,13 @@ public class MainActivity extends AppCompatActivity implements Observer {
         bottomNav = this.findViewById(R.id.bot_nav_bar);
         this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, home).commit();
         bottomNav.setSelectedItemId(R.id.nav_home);
+
+        if (savedInstanceState != null) {
+            previsions = (PrevisionFragment)
+                    getSupportFragmentManager().findFragmentByTag(PREVISION_FRAGMENT_TAG);
+        }
+
+
         bottomNav.setOnItemSelectedListener(item -> {
 
             Fragment fragment = null;
@@ -71,9 +79,16 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 case R.id.nav_prevision:
                     isOn = "prevision";
                     fragment = previsions;
+                    if (!fragment.isInLayout()) {
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_container, previsions, PREVISION_FRAGMENT_TAG)
+                                .commit();
+                    }
+                    System.out.println(previsions.moisActuel);
                     break;
             }
-            if (fragment != null) {
+            if (fragment != null&&!(fragment instanceof  PrevisionFragment)) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
             }
             return true;
@@ -84,11 +99,10 @@ public class MainActivity extends AppCompatActivity implements Observer {
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         // Always call the superclass so it can restore the view hierarchy
         super.onRestoreInstanceState(savedInstanceState);
-        Fragment fragment;
+        //previsions = (PrevisionFragment) getSupportFragmentManager().getFragment(savedInstanceState, "previsionfragment");
         isOn = savedInstanceState.getString(savedIsOn);
         if (isOn.equals("prevision")) {
-            fragment = new PrevisionFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, previsions,PREVISION_FRAGMENT_TAG).commit();
         } else if (isOn.equals("categories")) {
 //            fragment = categorie;
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, categorie).commit();
@@ -104,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Save the user's current game state
         savedInstanceState.putString(savedIsOn, isOn);
+        //getSupportFragmentManager().putFragment(savedInstanceState, "previsionfragment", previsions);
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
     }

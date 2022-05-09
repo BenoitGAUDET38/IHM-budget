@@ -141,4 +141,8 @@ public class Depense implements Parcelable, Serializable {
     public int getId() {
         return id;
     }
+
+    public Timestamp getDate() {
+        return date;
+    }
 }

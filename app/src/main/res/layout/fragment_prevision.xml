@@ -19,11 +19,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Analyse : "
+            android:text="Date(mois/année) : "
             android:textSize="30sp" />
 
         <Spinner
-            android:id="@+id/spinner_prevision"
+            android:id="@+id/spinner_prevision_mois"
+            style="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="30sp" />
+
+        <Spinner
+            android:id="@+id/spinner_prevision_année"
             style="#FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
