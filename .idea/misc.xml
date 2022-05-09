@@ -28,8 +28,8 @@
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/activity_scanning.xml" value="0.10326086956521739" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/activity_settings.xml" value="0.18819655521783182" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/card.xml" value="0.3729166666666667" />
-        <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/fragment_categorie.xml" value="0.1" />
-        <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/fragment_home.xml" value="0.17708333333333334" />
+        <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/fragment_categorie.xml" value="0.33" />
+        <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/fragment_prevision.xml" value="0.10326086956521739" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/fragment_prevision_big_pie.xml" value="0.2015625" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/list_item_layout.xml" value="0.20208333333333334" />
@@ -65,5 +65,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.33" />
+      </ProjectState>
+    </option>
   </component>
 </project>
