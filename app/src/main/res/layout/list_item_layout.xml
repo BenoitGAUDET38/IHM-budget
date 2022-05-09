@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="8dp">
 
     <TextView
         android:id="@+id/item_layout_textView_nomprix"
@@ -13,7 +14,7 @@
         android:layout_toStartOf="@id/category_and_place"
         android:gravity="center_vertical"
         android:text="Nom+Prix"
-        android:textSize="30sp" />
+        android:textSize="22sp" />
 
     <RelativeLayout
         android:id="@+id/category_and_place"
@@ -29,7 +30,6 @@
             android:layout_alignEnd="@id/item_layout_textView_provenance"
             android:layout_marginTop="8dp"
             android:maxLines="1"
-            android:text=""
             android:textSize="20sp" />
 
         <TextView
@@ -39,7 +39,6 @@
             android:layout_below="@+id/item_layout_textView_categorie"
             android:layout_marginBottom="8dp"
             android:maxLines="1"
-            android:text=""
             android:textSize="18sp" />
 
     </RelativeLayout>
