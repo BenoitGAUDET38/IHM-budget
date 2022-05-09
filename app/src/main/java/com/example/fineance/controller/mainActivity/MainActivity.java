@@ -11,10 +11,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
 import com.example.fineance.controller.categoryActivity.CategorieFragment;
+import com.example.fineance.controller.previsionActivity.PrevisionFragment;
 import com.example.fineance.model.Depense;
 import com.example.fineance.model.PerformNetworkRequest;
 import com.example.fineance.model.notifications.Notification;
@@ -88,15 +90,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
             fragment = new PrevisionFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
         } else if (isOn.equals("categories")) {
-//            fragment = categorie;
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, categorie).commit();
         }
-    }
-
-    @NonNull
-    private Fragment setCategorie() {
-        categorie = new CategorieFragment();
-        return categorie;
     }
 
     @Override

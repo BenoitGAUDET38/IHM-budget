@@ -4,18 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_blue"
     tools:context=".controller.mainActivity.HomeFragment">
 
     <RelativeLayout
         android:id="@+id/home_fragment_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
 
         <TextView
             android:id="@+id/welcome_message"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="30dp"
+            android:gravity="center"
             android:text="Fineance!"
             android:textSize="30sp" />
 
@@ -37,7 +39,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"
         android:background="@drawable/card"
-        android:backgroundTint="@color/primary_blue"
+        android:backgroundTint="@color/secondary_blue"
         android:minWidth="250dp"
         android:minHeight="100dp">
 
@@ -48,7 +50,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="@string/MoneyLeft"
-            android:textSize="40sp" />
+            android:textSize="50sp" />
     </RelativeLayout>
 
     <LinearLayout
@@ -58,6 +60,7 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/rectangle"
         android:gravity="center"
         android:orientation="vertical">
@@ -70,6 +73,7 @@
             android:textAlignment="center" />
 
         <ListView
+            android:id="@+id/recent_transactions"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

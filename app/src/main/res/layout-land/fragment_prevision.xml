@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_green"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".controller.mainActivity.PrevisionFragment">
+    tools:context=".controller.previsionActivity.PrevisionFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

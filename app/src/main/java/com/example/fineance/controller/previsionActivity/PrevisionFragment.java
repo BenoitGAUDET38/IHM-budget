@@ -1,4 +1,4 @@
-package com.example.fineance.controller.mainActivity;
+package com.example.fineance.controller.previsionActivity;
 
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
@@ -72,9 +73,9 @@ public class PrevisionFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        this.requireActivity().getWindow().setStatusBarColor(ContextCompat.getColor(this.requireActivity(), R.color.primary_green));
         View view = inflater.inflate(R.layout.fragment_prevision, container, false);
         if (mode != 0)
             view = inflater.inflate(R.layout.fragment_prevision_big_pie, container, false);

@@ -1,7 +1,6 @@
 package com.example.fineance.controller.categoryActivity;
 
 import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
-import static java.util.Objects.isNull;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -12,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
@@ -43,8 +43,10 @@ public class CategorieFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//        getDepenses();
-        Log.d("FRAGMENT","onCreateView");
+        this.requireActivity().getWindow().setStatusBarColor(ContextCompat.getColor(this.requireActivity(), R.color.primary_red));
+
+
+        Log.d("FRAGMENT", "onCreateView");
         Log.d("FRAGMENT", String.valueOf(depenseList));
         View view = inflater.inflate(R.layout.fragment_categorie, container, false);
         ListView listView = view.findViewById(R.id.categorieListView);
@@ -55,9 +57,9 @@ public class CategorieFragment extends Fragment {
         return view;
     }
 
-    public void updateList(List<Depense> depenses){
+    public void updateList(List<Depense> depenses) {
         TextView montant;
-        if(!isNull(getActivity())){
+        if (getActivity() != null) {
             ListView listView = getActivity().findViewById(R.id.categorieListView);
             listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList));
 
@@ -65,7 +67,6 @@ public class CategorieFragment extends Fragment {
             montant.setText(Depense.getMontantTotal(depenses) + "");
         }
         depenseList = depenses;
-        Log.d("FRAGMENT","Update "+depenses);
-
+        Log.d("FRAGMENT", "Update " + depenses);
     }
 }

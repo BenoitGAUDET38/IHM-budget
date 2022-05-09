@@ -2,18 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_red"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/card"
+        android:backgroundTint="@color/secondary_red"
         android:gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
             android:layout_marginBottom="5dp"
             android:text="Historique des Transactions"
             android:textSize="20sp" />
@@ -22,9 +29,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:minWidth="100dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/rectangle"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:minWidth="100dp">
 
             <TextView
                 android:id="@+id/ajout_depense_montant_editText"
@@ -48,10 +56,10 @@
         android:id="@+id/categorieListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp" />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/rectangle" />
 
 </LinearLayout>
