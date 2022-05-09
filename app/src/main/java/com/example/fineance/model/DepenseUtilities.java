@@ -22,7 +22,12 @@ public class DepenseUtilities {
         Map<String, Double> map = new ArrayMap<>();
 
         for (Depense d : depenseList) {
-            String categorie = Objects.requireNonNull(PerformNetworkRequest.findCategorieById(d.getCategorie())).getNom();
+            String categorie;
+            if (PerformNetworkRequest.findCategorieById(d.getCategorie()) == null) {
+                categorie = "Défaut";
+            } else {
+                categorie = PerformNetworkRequest.findCategorieById(d.getCategorie()).getNom();
+            }
             if (map.containsKey(categorie)) {
                 map.replace(categorie, map.get(categorie), map.get(categorie) + d.getMontant());
             } else {
