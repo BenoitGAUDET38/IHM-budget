@@ -67,8 +67,8 @@ public class PrevisionFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         super.onCreate(savedInstanceState);
+        this.requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class PrevisionFragment extends Fragment {
             view = inflater.inflate(R.layout.fragment_prevision_big_pie, container, false);
 
 
-        graphView = (GraphView) view.findViewById(R.id.graphView);
+        graphView = view.findViewById(R.id.graphView);
         pieChart = view.findViewById(R.id.pie_chart);
         spinner = view.findViewById(R.id.spinner_prevision);
         btn_swap = view.findViewById(R.id.btn_swap);
@@ -98,7 +98,7 @@ public class PrevisionFragment extends Fragment {
         btn_swap.setOnClickListener(view -> {
             int argMode = 0;
             if (mode == 0) argMode = 1;
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new PrevisionFragment(argMode)).commit();
+            this.requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new PrevisionFragment(argMode)).commit();
             AbstractNotificationFactory factory = new LowPriorityNotificationFactory();
             Notification notification;
             if (argMode != 0)
@@ -116,7 +116,6 @@ public class PrevisionFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                Toast.makeText(getActivity(), "Changer to : " + adapterView.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
                 spinnerPosition = position;
             }
 

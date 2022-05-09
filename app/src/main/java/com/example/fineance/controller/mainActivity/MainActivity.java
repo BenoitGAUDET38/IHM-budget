@@ -7,7 +7,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -140,6 +139,5 @@ public class MainActivity extends AppCompatActivity implements Observer {
         Log.d("DEBUG", "list now :" + depenseArrayList);
         home.updateTotal(Depense.getMontantTotal(depenseArrayList));
         categorie.updateList(depenseArrayList);
-        Toast.makeText(getApplicationContext(), "Operation effectué avec succes", Toast.LENGTH_SHORT).show();
     }
 }

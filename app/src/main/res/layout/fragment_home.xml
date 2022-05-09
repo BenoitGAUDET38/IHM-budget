@@ -30,7 +30,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/moneyCircleButton"
+        android:id="@+id/center_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/home_fragment_header"
@@ -52,9 +52,9 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/moneyCircleButton"
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/center_money"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"
@@ -63,8 +63,9 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/rectangle"
             android:text="Dernière Transactions"
             android:textAlignment="center" />
 
