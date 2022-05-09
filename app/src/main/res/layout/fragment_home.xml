@@ -40,6 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:text="@string/MoneyLeft"
         android:textSize="40sp" />
 </RelativeLayout>
