@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class DepenseListAdapter extends BaseAdapter {
     public DepenseListAdapter(Context aContext, List<Depense> listData) {
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
+        Log.d("DEBUG","Test : "+aContext+"\n"+listData);
     }
 
     @Override

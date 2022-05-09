@@ -32,7 +32,6 @@ public class DisplayCategorieActivity extends AppCompatActivity {
             }
             }
         getSupportFragmentManager().beginTransaction().replace(R.id.categorie_edit, new CategorieFragment(categorie)).commit();
-//        getSupportFragmentManager().beginTransaction().replace(R.id.list_depenses, new CategorieFragment(categorie)).commit();
 
         getSupportFragmentManager().setFragmentResultListener("categorie", this, (requestKey, result) -> {
             Categorie d = (Categorie) result.get(requestKey);
