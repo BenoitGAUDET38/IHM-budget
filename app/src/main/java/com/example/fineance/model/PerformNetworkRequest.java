@@ -113,11 +113,12 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         request.execute();
     }
 
-    public static void updateTransaction(int id, Depense depense){
-        updateTransaction(id,depense.nom,depense.getMontant(),depense.getDevise(),depense.getCategorie()+"",depense.getCommentaire(),depense.getProvenance());
+    public static void updateTransaction(int id, Depense depense) {
+        updateTransaction(id, depense.nom, depense.getMontant(), depense.getDevise(), depense.getCategorie() + "", depense.getCommentaire(), depense.getProvenance());
     }
-    public static void updateCategorie(int id, Categorie categorie){
-        updateCategorie(id,categorie.nom,categorie.seuil);
+
+    public static void updateCategorie(int id, Categorie categorie) {
+        updateCategorie(id, categorie.nom, categorie.seuil);
     }
 
     public static void updateCategorie(int id, String nom, double seuil) {
@@ -152,7 +153,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     }
 
     public static void createTransaction(Depense d) {
-        Log.d("DB","Ajout d'une depense :"+d);
+        Log.d("DB", "Ajout d'une depense :" + d);
         createTransaction(d.getNom(), d.getCategorie(), d.getProvenance(), d.getMontant(), d.getDevise(), d.getCommentaire());
     }
 
@@ -178,18 +179,42 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         return categoriesList;
     }
 
+    /**
+     * @param id id of the categorie
+     * @return categorie with the id, null if id's categorie doesn't exist
+     */
+    public static Categorie findCategorieById(int id) {
+        for (Categorie c : categoriesList) {
+            if (c.getId() == id)
+                return c;
+        }
+        return null;
+    }
+
+    /**
+     * @param name name of the categorie
+     * @return categorie with the name, null if name's categorie doesn't exist
+     */
+    public static Categorie findCategorieByName(String name) {
+        for (Categorie c : categoriesList) {
+            if (c.getNom().equals(name))
+                return c;
+        }
+        return null;
+    }
+
     //when the task started displaying a progressbar
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        Log.d("BD","Requete demarrée");
+        Log.d("BD", "Requete demarrée");
     }
 
     //this method will give the response from the request
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        Log.d("BD","Requete executée");
+        Log.d("BD", "Requete executée");
         try {
             JSONObject object = new JSONObject(s);
             if (!object.getBoolean("error")) {
@@ -222,30 +247,6 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
             return requestHandler.sendPostRequest(url, params);
         if (requestCode == CODE_GET_REQUEST)
             return requestHandler.sendGetRequest(url);
-        return null;
-    }
-
-    /**
-     * @param id id of the categorie
-     * @return categorie with the id, null if id's categorie doesn't exist
-     */
-    public static Categorie findCategorieById(int id){
-        for(Categorie c : categoriesList){
-            if(c.getId() == id)
-                return c;
-        }
-        return null;
-    }
-
-    /**
-     * @param name name of the categorie
-     * @return categorie with the name, null if name's categorie doesn't exist
-     */
-    public static Categorie findCategorieByName(String name){
-        for(Categorie c : categoriesList){
-            if(c.getNom().equals(name))
-                return c;
-        }
         return null;
     }
 }

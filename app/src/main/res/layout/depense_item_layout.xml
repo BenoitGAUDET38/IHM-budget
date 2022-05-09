@@ -20,7 +20,8 @@
         android:id="@+id/category_and_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="8dp"
         android:orientation="vertical">
 
         <TextView
@@ -40,14 +41,5 @@
             android:layout_marginBottom="8dp"
             android:maxLines="1"
             android:textSize="18sp" />
-
     </RelativeLayout>
-
-
 </RelativeLayout>
-
-
-    </LinearLayout>
-
-
-</LinearLayout>

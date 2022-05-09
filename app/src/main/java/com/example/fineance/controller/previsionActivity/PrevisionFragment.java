@@ -1,7 +1,5 @@
 package com.example.fineance.controller.previsionActivity;
 
-import static java.lang.Integer.getInteger;
-
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,7 +13,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.camera.core.impl.ImageOutputConfig;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -35,10 +32,6 @@ import com.razerdp.widget.animatedpieview.data.SimplePieInfo;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -53,11 +46,11 @@ public class PrevisionFragment extends Fragment {
     AnimatedPieView pieChart;
     Spinner spinnerMois;
     Spinner spinnerAnnee;
-    String[] mois = new String[]{"1","2","3","4","5","6","7","8","9","10","11", "12"};
-    String[] annee = new String[]{"2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012", "2011","2010"};
-    int moisActuel=4;
-    int anneeActuel=2022;
-    String currentDuration="Annuel";
+    String[] mois = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+    String[] annee = new String[]{"2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010"};
+    int moisActuel = 4;
+    int anneeActuel = 2022;
+    String currentDuration = "Annuel";
     int spinnerPosition = 1;
     Button btn_swap;
     int mode = 0;
@@ -104,21 +97,21 @@ public class PrevisionFragment extends Fragment {
         graphView = view.findViewById(R.id.graphView);
         pieChart = view.findViewById(R.id.pie_chart);
         spinnerMois = view.findViewById(R.id.spinner_prevision_mois);
-        spinnerAnnee=view.findViewById(R.id.spinner_prevision_année);
+        spinnerAnnee = view.findViewById(R.id.spinner_prevision_année);
         btn_swap = view.findViewById(R.id.btn_swap);
 
         setupSwapBtn();
 
-        setupSpinner(spinnerMois,mois);
-        setupSpinner(spinnerAnnee,annee);
+        setupSpinner(spinnerMois, mois);
+        setupSpinner(spinnerAnnee, annee);
         spinnerMois.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 Adapter adapter = adapterView.getAdapter();
-                if (adapter.getItem(position)!=null)
-                {
-                    setMoisActuel(Integer.parseInt((String)adapter.getItem(position)));
-                drawLineGraph();}
+                if (adapter.getItem(position) != null) {
+                    setMoisActuel(Integer.parseInt((String) adapter.getItem(position)));
+                    drawLineGraph();
+                }
             }
 
             @Override
@@ -130,10 +123,10 @@ public class PrevisionFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 Adapter adapter = adapterView.getAdapter();
-                if (adapter.getItem(position)!=null)
-                {
-                    setAnneeActuel(Integer.parseInt((String)adapter.getItem(position)));
-                    drawLineGraph();}
+                if (adapter.getItem(position) != null) {
+                    setAnneeActuel(Integer.parseInt((String) adapter.getItem(position)));
+                    drawLineGraph();
+                }
             }
 
             @Override
@@ -162,7 +155,7 @@ public class PrevisionFragment extends Fragment {
         });
     }
 
-    void setupSpinner(Spinner spinner,String[] values) {
+    void setupSpinner(Spinner spinner, String[] values) {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, values);
         spinner.setAdapter(adapter);
         spinner.setSelection(spinnerPosition);
@@ -212,19 +205,19 @@ public class PrevisionFragment extends Fragment {
     }
 
     void drawLineGraph() {
-        Timestamp start=new Timestamp(anneeActuel-1900,moisActuel-1,1,0,0,0,0);
-        Timestamp end=new Timestamp(anneeActuel-1900,moisActuel-1,31,0,0,0,0);
-        List<Depense> depenseList=DepenseUtilities.getDepenseParDuree(PerformNetworkRequest.getDepenses(),start,end);
+        Timestamp start = new Timestamp(anneeActuel - 1900, moisActuel - 1, 1, 0, 0, 0, 0);
+        Timestamp end = new Timestamp(anneeActuel - 1900, moisActuel - 1, 31, 0, 0, 0, 0);
+        List<Depense> depenseList = DepenseUtilities.getDepenseParDuree(PerformNetworkRequest.getDepenses(), start, end);
         System.out.println(depenseList);
-        List<DataPoint> dataPointList=new ArrayList<>();
-        double montant=0;
-        dataPointList.add(new DataPoint(0,0));
-        for(Depense depense:depenseList){
-            montant+=depense.getMontant();
-            dataPointList.add(new DataPoint(depense.getDate().getDate(),montant));
+        List<DataPoint> dataPointList = new ArrayList<>();
+        double montant = 0;
+        dataPointList.add(new DataPoint(0, 0));
+        for (Depense depense : depenseList) {
+            montant += depense.getMontant();
+            dataPointList.add(new DataPoint(depense.getDate().getDate(), montant));
         }
-        if (depenseList.size()==0)
-            dataPointList.add(new DataPoint(31,0));
+        if (depenseList.size() == 0)
+            dataPointList.add(new DataPoint(31, 0));
 
         // on below line we are adding data to our graph view.
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPointList.toArray(new DataPoint[0]));
@@ -253,10 +246,15 @@ public class PrevisionFragment extends Fragment {
     public void setAnneeActuel(int anneeActuel) {
         this.anneeActuel = anneeActuel;
     }
+
+    public int getMoisActuel() {
+        return moisActuel;
+    }
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putInt("mois",moisActuel);
-        outState.putInt("annee",anneeActuel);
+        outState.putInt("mois", moisActuel);
+        outState.putInt("annee", anneeActuel);
         super.onSaveInstanceState(outState);
     }
 

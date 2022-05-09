@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        View moneyCircle = view.findViewById(R.id.center_money);
+        View moneyCircle = view.findViewById(R.id.moneyCircleButton);
         moneyCircle.setOnClickListener(v -> this.startActivity(new Intent(this.getActivity(), AddExpenseActivity.class)));
 
         ImageView account = view.findViewById(R.id.accountOptionImageView);

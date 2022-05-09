@@ -8,18 +8,14 @@ import static com.example.fineance.model.PerformNetworkRequest.getCategories;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
-import com.example.fineance.controller.categoryActivity.CategorieFragment;
-import com.example.fineance.controller.previsionActivity.PrevisionFragment;
 import com.example.fineance.controller.categoryActivity.CategorieMenuFragment;
+import com.example.fineance.controller.previsionActivity.PrevisionFragment;
 import com.example.fineance.model.Depense;
 import com.example.fineance.model.DepenseUtilities;
 import com.example.fineance.model.PerformNetworkRequest;
@@ -89,10 +85,10 @@ public class MainActivity extends AppCompatActivity implements Observer {
                                 .replace(R.id.main_container, previsions, PREVISION_FRAGMENT_TAG)
                                 .commit();
                     }
-                    System.out.println(previsions.moisActuel);
+                    System.out.println(previsions.getMoisActuel());
                     break;
             }
-            if (fragment != null&&!(fragment instanceof  PrevisionFragment)) {
+            if (fragment != null && !(fragment instanceof PrevisionFragment)) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
             }
             return true;
@@ -106,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         //previsions = (PrevisionFragment) getSupportFragmentManager().getFragment(savedInstanceState, "previsionfragment");
         isOn = savedInstanceState.getString(savedIsOn);
         if (isOn.equals("prevision")) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, previsions,PREVISION_FRAGMENT_TAG).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, previsions, PREVISION_FRAGMENT_TAG).commit();
         } else if (isOn.equals("categories")) {
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, categorie).commit();
         }
@@ -159,8 +155,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
             home.updateTotal(DepenseUtilities.getMontantTotal(depenseArrayList));
         } catch (Exception e) {
             res = false;
-        } finally {
-            Toast.makeText(getApplicationContext(), res ? "Operation effectué avec succes" : "Echec de l'operation", Toast.LENGTH_SHORT).show();
         }
     }
 }

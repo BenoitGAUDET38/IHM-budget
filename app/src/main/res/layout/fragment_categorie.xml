@@ -5,17 +5,19 @@
     android:background="@color/primary_red"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="5dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
+            android:layout_alignTop="@+id/category_montant"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@+id/category_montant"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <TextView
@@ -25,73 +27,87 @@
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/categorieSwitch"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/category_montant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/card"
+            android:backgroundTint="@color/secondary_red"
             android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="5dp"
-            android:text="@string/amount_title"
-            android:textSize="20sp" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/rectangle"
-            android:gravity="center_horizontal"
-            android:minWidth="100dp">
-
-            <TextView
-                android:id="@+id/ajout_depense_montant_editText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:maxLines="1"
-                android:text="0" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:text="@string/devise" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/amount_title"
+                android:textSize="20sp" />
 
+            <LinearLayout
+                android:id="@+id/somme_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/rectangle"
+                android:gravity="center_horizontal"
+                android:minWidth="100dp">
+
+                <TextView
+                    android:id="@+id/ajout_depense_montant_editText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:maxLines="1"
+                    android:text="0" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:text="@string/devise" />
             </LinearLayout>
+
         </LinearLayout>
 
         <ImageView
             android:id="@+id/addButton"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_baseline_add_circle_outline_24"
-            android:contentDescription="@string/add_expense" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/category_montant"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="15dp"
+            android:layout_toEndOf="@+id/category_montant"
+            android:contentDescription="@string/add_expense"
+            android:src="@drawable/ic_baseline_add_circle_outline_24" />
+    </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/list_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <ListView
-        android:id="@+id/categorieListView"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/rectangle" />
+        android:background="@drawable/rectangle">
+
+        <ListView
+            android:id="@+id/categorieListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 
 </LinearLayout>

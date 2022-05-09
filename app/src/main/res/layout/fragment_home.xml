@@ -27,9 +27,9 @@
             android:layout_height="60dp"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="30dp"
+            android:contentDescription="@string/settings_circle"
             android:src="@drawable/ic_baseline_account_circle_24"
-            app:tint="@color/primary_text"
-            android:contentDescription="@string/settings_circle" />
+            app:tint="@color/primary_text" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -41,9 +41,9 @@
         android:layout_marginTop="150dp"
         android:background="@drawable/card"
         android:backgroundTint="@color/secondary_blue"
+        android:contentDescription="@string/description_add_circle"
         android:minWidth="250dp"
-        android:minHeight="100dp"
-        android:contentDescription="@string/description_add_circle">
+        android:minHeight="100dp">
 
         <TextView
             android:id="@+id/info_total"
@@ -58,7 +58,7 @@
     <LinearLayout
         android:layout_width="350dp"
         android:layout_height="match_parent"
-        android:layout_below="@+id/center_money"
+        android:layout_below="@+id/moneyCircleButton"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"

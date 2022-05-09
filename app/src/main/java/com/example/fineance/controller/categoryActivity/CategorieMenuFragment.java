@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
@@ -52,29 +53,28 @@ public class CategorieMenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//        getDepenses();
+        this.requireActivity().getWindow().setStatusBarColor(ContextCompat.getColor(this.requireActivity(), R.color.primary_red));
         Log.d("FRAGMENT", "onCreateView");
         Log.d("FRAGMENT", String.valueOf(depenseList));
         View view = inflater.inflate(R.layout.fragment_categorie, container, false);
-        ListView listView = view.findViewById(R.id.categorieListView);
 
+        ListView listView = view.findViewById(R.id.categorieListView);
         TextView montant = view.findViewById(R.id.ajout_depense_montant_editText);
         categoriesOn = view.findViewById(R.id.categorieSwitch);
         categoriesOn.setOnClickListener(viewSwitch -> {
-            if (categoriesOn.isChecked()){
+            if (categoriesOn.isChecked()) {
                 setCategories(listView);
-            }
-            else{
-                Log.d("DEBUG","affiche");
+            } else {
+                Log.d("DEBUG", "affiche");
                 setDepenses(listView);
-//                listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList));
+                listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList));
 
             }
         });
         montant.setText(String.valueOf(DepenseUtilities.getMontantTotal(depenseList)));
         ImageView addButon = view.findViewById(R.id.addButton);
         addButon.setOnClickListener(v -> {
-            if(categoriesOn.isChecked())
+            if (categoriesOn.isChecked())
                 this.startActivity(new Intent(this.getActivity(), AddCategoryActivity.class));
             else
                 this.startActivity(new Intent(this.getActivity(), AddExpenseActivity.class));
@@ -84,12 +84,12 @@ public class CategorieMenuFragment extends Fragment {
 
     private void setCategories(ListView listView) {
         listView.setAdapter(new CategorieListAdapter(getActivity(), categorieList));
-        if(getParentFragmentManager().findFragmentById(R.id.list_content) != null)
+        if (getParentFragmentManager().findFragmentById(R.id.list_content) != null)
             getParentFragmentManager().beginTransaction().remove(getParentFragmentManager().findFragmentById(R.id.list_content)).commit();
     }
 
     private void setDepenses(ListView listView) {
-        listView.setAdapter(new DepenseListAdapter(getActivity(),new ArrayList<>()));
+        listView.setAdapter(new DepenseListAdapter(getActivity(), new ArrayList<>()));
         DepenseListFragment f = DepenseListFragment.newDepenseList(depenseList);
         getParentFragmentManager().beginTransaction().replace(R.id.list_content, f).commit();
     }
@@ -99,17 +99,15 @@ public class CategorieMenuFragment extends Fragment {
         Log.d("OBS", " " + depenses.get(0).getClass());
         if (getActivity() != null) {
             ListView listView = getActivity().findViewById(R.id.categorieListView);
-            if(depenses.get(0).getClass().equals(Depense.class)){
+            if (depenses.get(0).getClass().equals(Depense.class)) {
                 depenseList = (ArrayList<Depense>) depenses;
                 setDepenses(listView);
                 montant = getActivity().findViewById(R.id.ajout_depense_montant_editText);
                 montant.setText(String.valueOf(DepenseUtilities.getMontantTotal(depenseList)));
-            }else if(depenses.get(0).getClass().equals(Categorie.class)){
+            } else if (depenses.get(0).getClass().equals(Categorie.class)) {
                 categorieList = (List<Categorie>) depenses;
                 setCategories(listView);
             }
         }
     }
-
-
 }
