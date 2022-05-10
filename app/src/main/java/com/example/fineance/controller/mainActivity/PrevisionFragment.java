@@ -55,10 +55,11 @@ public class PrevisionFragment extends Fragment {
     Spinner spinnerAnnee;
     String[] mois = new String[]{"1","2","3","4","5","6","7","8","9","10","11", "12"};
     String[] annee = new String[]{"2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012", "2011","2010"};
-    int moisActuel=4;
+    int moisActuel=5;
     int anneeActuel=2022;
+    int indexMois = 4;
+    int indexAnnee = 0;
     String currentDuration="Annuel";
-    int spinnerPosition = 1;
     Button btn_swap;
     int mode = 0;
 
@@ -109,8 +110,8 @@ public class PrevisionFragment extends Fragment {
 
         setupSwapBtn();
 
-        setupSpinner(spinnerMois,mois);
-        setupSpinner(spinnerAnnee,annee);
+        setupSpinner(spinnerMois,mois, indexMois);
+        setupSpinner(spinnerAnnee,annee, indexAnnee);
         spinnerMois.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
@@ -162,7 +163,7 @@ public class PrevisionFragment extends Fragment {
         });
     }
 
-    void setupSpinner(Spinner spinner,String[] values) {
+    void setupSpinner(Spinner spinner,String[] values, int spinnerPosition) {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, values);
         spinner.setAdapter(adapter);
         spinner.setSelection(spinnerPosition);
@@ -170,7 +171,7 @@ public class PrevisionFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 Toast.makeText(getActivity(), "Changer to : " + adapterView.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
-                spinnerPosition = position;
+                //spinnerPosition = position;
             }
 
             @Override
@@ -226,7 +227,7 @@ public class PrevisionFragment extends Fragment {
         Log.d("DEBUG", "Depense size : " + depenseList.size());
 
         for(Depense depense:depenseList){
-            montant+=depense.getMontant();
+            montant+=DepenseUtilities.getDepenseConvertion(depense);
             dataPointList.add(new DataPoint(depense.getDate().getDate(),montant));
             Log.d("DEBUG", "drawLineGraph: ");
         }
