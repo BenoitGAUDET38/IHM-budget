@@ -3,10 +3,10 @@ package com.example.fineance.controller.mainActivity;
 import static com.example.fineance.model.PerformNetworkRequest.categoriesObservable;
 import static com.example.fineance.model.PerformNetworkRequest.depensesObservable;
 import static com.example.fineance.model.PerformNetworkRequest.getCategories;
+import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -16,7 +16,6 @@ import com.example.fineance.R;
 import com.example.fineance.controller.categoryActivity.CategorieMenuFragment;
 import com.example.fineance.model.Depense;
 import com.example.fineance.model.DepenseUtilities;
-import com.example.fineance.model.PerformNetworkRequest;
 import com.example.fineance.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     protected void onCreate(Bundle savedInstanceState) {
         depensesObservable.addObserver(this);
         categoriesObservable.addObserver(this);
-        PerformNetworkRequest.getDepenses();
+        getDepenses();
         getCategories();
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);

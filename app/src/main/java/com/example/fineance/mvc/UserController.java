@@ -22,6 +22,8 @@ public class UserController {
     public void setListenersView(){
         layout.findViewById(R.id.leave_button).setOnClickListener(e -> {
             Log.d("MVC","button back l");
+//            activity.setUser();
+            activity.finish();
         });
 
         layout.findViewById(R.id.settings_reset).setOnClickListener(e -> {
@@ -35,6 +37,5 @@ public class UserController {
         EditText seuil = layout.findViewById(R.id.user_seuil);
         name.setText(u.getName());
         seuil.setText(u.getSeuil()+"");
-//        currency.setText(user.getCurrency());
     }
 }
