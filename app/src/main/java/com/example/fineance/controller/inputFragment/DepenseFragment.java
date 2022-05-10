@@ -69,7 +69,7 @@ public class DepenseFragment extends Fragment {
 
     private Depense depense;
     private List<Categorie> categorieList = getCategories();
-    private String devise = "EUR";
+    private String deviseCode = "EUR";
     private List<String> deviseCodeList = Devise.getCodeValues();
 
     public DepenseFragment() {
@@ -144,6 +144,8 @@ public class DepenseFragment extends Fragment {
             categorieEditText.setSelection(0);
             provenanceEditText.setText(depense.getProvenance());
             commentaireEditText.setText(depense.getCommentaire());
+            currencySpinner.setSelection(deviseCodeList.indexOf(depense.getDevise()));
+
             annulerButton.setText(R.string.delete);
             validerButton.setText(R.string.update);
         }
@@ -155,7 +157,7 @@ public class DepenseFragment extends Fragment {
         int categorie = (c != null ? c.getId() : 0);
         String provenance = String.valueOf(provenanceEditText.getText());
         double montant = Double.parseDouble(String.valueOf(montantEditText.getText()));
-        String devise = "USD";
+        String devise = deviseCode;
         String commentaire = String.valueOf(commentaireEditText.getText());
         return new Depense(name, categorie, provenance, montant, devise, commentaire);
     }
@@ -164,7 +166,7 @@ public class DepenseFragment extends Fragment {
         currencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                devise = deviseCodeList.get(position);
+                deviseCode = deviseCodeList.get(position);
             }
 
             @Override
