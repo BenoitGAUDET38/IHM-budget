@@ -110,6 +110,4 @@ public class CategorieMenuFragment extends Fragment {
             }
         }
     }
-
-
 }

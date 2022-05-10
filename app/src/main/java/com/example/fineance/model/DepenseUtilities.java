@@ -11,11 +11,15 @@ import java.util.Objects;
 public class DepenseUtilities {
 
     public static double getMontantTotal(List<Depense> depenseList) {
-        return Math.round(depenseList.stream().map(d -> d.getMontant() / getEuroConvertion(d)).reduce(0.0, Double::sum)*100.)/100.;
+        return Math.round(depenseList.stream().map(d -> getDepenseConvertion(d)).reduce(0.0, Double::sum)*100.)/100.;
     }
 
     public static double getEuroConvertion(Depense depense) {
         return Devise.valueOf(depense.getDevise()).getValue();
+    }
+
+    public static double getDepenseConvertion(Depense depense) {
+        return depense.getMontant() / getEuroConvertion(depense);
     }
 
     public static Map<String, Double> getDepenseParCategorie(List<Depense> depenseList) {
@@ -32,6 +36,26 @@ public class DepenseUtilities {
                 map.replace(categorie, map.get(categorie), map.get(categorie) + d.getMontant());
             } else {
                 map.put(categorie, d.getMontant());
+            }
+        }
+
+        return map;
+    }
+
+    public static Map<String, Double> getDepenseConvertionParCategorie(List<Depense> depenseList) {
+        Map<String, Double> map = new ArrayMap<>();
+
+        for (Depense d : depenseList) {
+            String categorie;
+            if (PerformNetworkRequest.findCategorieById(d.getCategorie()) == null) {
+                categorie = "Défaut";
+            } else {
+                categorie = PerformNetworkRequest.findCategorieById(d.getCategorie()).getNom();
+            }
+            if (map.containsKey(categorie)) {
+                map.replace(categorie, map.get(categorie), map.get(categorie) + getDepenseConvertion(d));
+            } else {
+                map.put(categorie, getDepenseConvertion(d));
             }
         }
 

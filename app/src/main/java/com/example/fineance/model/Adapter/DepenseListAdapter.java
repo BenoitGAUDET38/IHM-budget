@@ -66,7 +66,7 @@ public class DepenseListAdapter extends BaseAdapter {
                 (c !=null ? c.getNom():"")
         );
         holder.provenanceView.setText(depense.getProvenance());
-        holder.nomEtPrixView.setText(depense.getNom() + "    " + depense.getMontant() + "$");
+        holder.nomEtPrixView.setText(depense.getNom() + "    " + depense.getMontant() + " " + depense.getDevise());
         view.setOnClickListener(e -> {
             Intent in = new Intent(e.getContext(), AddExpenseActivity.class);
             Bundle bundle = new Bundle();

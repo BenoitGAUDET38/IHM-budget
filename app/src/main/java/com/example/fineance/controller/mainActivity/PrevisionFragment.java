@@ -181,7 +181,7 @@ public class PrevisionFragment extends Fragment {
 
     void drawPieChart() {
         String[] rgb = {"#07108c", "#661600", "#348f94", "BB0306", "#308958", "#6E125C"};
-        Map<String, Double> mapInfo = DepenseUtilities.getDepenseParCategorie(PerformNetworkRequest.getDepenses());
+        Map<String, Double> mapInfo = DepenseUtilities.getDepenseConvertionParCategorie(PerformNetworkRequest.getDepenses());
 
         Random rnd = new Random();
 
@@ -204,7 +204,7 @@ public class PrevisionFragment extends Fragment {
             }
             config.addData(new SimplePieInfo(entry.getValue(),
                     color,
-                    entry.getKey() + " : " + entry.getValue() + "€"));
+                    entry.getKey() + " : " + Math.round(entry.getValue() * 100) / 100.0 + "€"));
             i++;
         }
 
