@@ -14,7 +14,7 @@
         android:layout_toStartOf="@id/category_and_place"
         android:gravity="center_vertical"
         android:text="Nom+Prix"
-        android:textSize="22sp" />
+        android:textSize="20sp" />
 
     <RelativeLayout
         android:id="@+id/category_and_place"

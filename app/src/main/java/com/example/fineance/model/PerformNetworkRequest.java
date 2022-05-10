@@ -1,5 +1,7 @@
 package com.example.fineance.model;
 
+import static com.example.fineance.model.DepenseUtilities.getDepenseConvertion;
+
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -243,7 +245,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         double res =0;
         for (Depense d: depenseList) {
             if(d.getCategorie() == id)
-                res+=d.getMontant();
+                res+=getDepenseConvertion(d);
         }
         return res;
     }
