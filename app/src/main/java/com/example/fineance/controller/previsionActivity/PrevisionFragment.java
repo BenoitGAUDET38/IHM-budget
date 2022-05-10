@@ -53,6 +53,7 @@ public class PrevisionFragment extends Fragment {
     int anneeActuel=2022;
     int indexMois = 4;
     int indexAnnee = 0;
+    int spinnerPosition=1;
     String currentDuration="Annuel";
     Button btn_swap;
     int mode = 0;
@@ -157,7 +158,7 @@ public class PrevisionFragment extends Fragment {
         });
     }
 
-    void setupSpinner(Spinner spinner, String[] values) {
+    void setupSpinner(Spinner spinner, String[] values, int spinnerPosition) {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, values);
         spinner.setAdapter(adapter);
         spinner.setSelection(spinnerPosition);

@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         try {
             categorie.updateList((List) o);
             depenseArrayList = (List<Depense>) o;
-            home.updateTotal(DepenseUtilities.getMontantTotal(depenseArrayList));
+            home.updateTotal(depenseArrayList);
         } catch (Exception e) {
            e.printStackTrace();
         }

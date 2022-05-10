@@ -67,7 +67,7 @@ public class CategorieMenuFragment extends Fragment {
             } else {
                 Log.d("DEBUG", "affiche");
                 setDepenses(listView);
-                listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList));
+//                listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList));
 
             }
         });

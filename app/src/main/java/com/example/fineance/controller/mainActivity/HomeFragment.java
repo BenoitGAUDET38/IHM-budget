@@ -1,6 +1,5 @@
 package com.example.fineance.controller.mainActivity;
 
-import static com.example.fineance.model.PerformNetworkRequest.depenseList;
 import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
 
 import android.annotation.SuppressLint;
@@ -23,6 +22,11 @@ import com.example.fineance.R;
 import com.example.fineance.controller.optionsActivity.SettingsActivity;
 import com.example.fineance.controller.spendingActivity.AddExpenseActivity;
 import com.example.fineance.model.Adapter.DepenseListAdapter;
+import com.example.fineance.model.Depense;
+import com.example.fineance.model.DepenseUtilities;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,12 +34,13 @@ import com.example.fineance.model.Adapter.DepenseListAdapter;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
-    public static String TOTAL_KEY = "total";
-    public static String DEVISE_KEY = "devise";
+    private List<Depense> depenseList;
     private final String devise = "€";
     private double totalDepenses = 0;
+    ListView listView;
 
     public HomeFragment() {
+        depenseList = new ArrayList<>();
     }
 
     @Override
@@ -64,15 +69,17 @@ public class HomeFragment extends Fragment {
         ImageView account = view.findViewById(R.id.accountOptionImageView);
         account.setOnClickListener(v -> this.startActivity(new Intent(getActivity(), SettingsActivity.class)));
 
-        ListView listView = view.findViewById(R.id.recent_transactions);
+        listView = view.findViewById(R.id.recent_transactions);
         listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList, true));
     }
 
-    public void updateTotal(double total) {
+    public void updateTotal(List<Depense> depenseArrayList) {
         if (this.getActivity() != null) {
+            totalDepenses = DepenseUtilities.getMontantTotal(depenseArrayList);
             TextView montant = this.requireActivity().findViewById(R.id.info_total);
-            totalDepenses = total;
-            montant.setText(totalDepenses + devise);
+            montant.setText(totalDepenses +" "+ devise);
+            depenseList = depenseArrayList;
+            listView.setAdapter(new DepenseListAdapter(getActivity(),depenseArrayList,true));
         }
     }
 }

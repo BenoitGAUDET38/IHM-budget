@@ -22,8 +22,7 @@
             android:contentDescription="@string/photo"
             android:scaleX="1.5"
             android:scaleY="1.5"
-            android:src="@android:drawable/ic_menu_camera"
-            android:contentDescription="@string/photo" />
+            android:src="@android:drawable/ic_menu_camera" />
 
 
         <LinearLayout
@@ -47,7 +46,6 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/default_amount"
                 android:background="@drawable/rectangle"
-                android:hint="@string/default_amount"
                 android:inputType="numberDecimal"
                 android:padding="5dp"
                 android:textAlignment="center"
