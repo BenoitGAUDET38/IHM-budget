@@ -114,11 +114,12 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         request.execute();
     }
 
-    public static void updateTransaction(int id, Depense depense){
-        updateTransaction(id,depense.nom,depense.getMontant(),depense.getDevise(),depense.getCategorie()+"",depense.getCommentaire(),depense.getProvenance());
+    public static void updateTransaction(int id, Depense depense) {
+        updateTransaction(id, depense.nom, depense.getMontant(), depense.getDevise(), depense.getCategorie() + "", depense.getCommentaire(), depense.getProvenance());
     }
-    public static void updateCategorie(int id, Categorie categorie){
-        updateCategorie(id,categorie.nom,categorie.seuil);
+
+    public static void updateCategorie(int id, Categorie categorie) {
+        updateCategorie(id, categorie.nom, categorie.seuil);
     }
 
     public static void updateCategorie(int id, String nom, double seuil) {
@@ -153,7 +154,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     }
 
     public static void createTransaction(Depense d) {
-        Log.d("DB","Ajout d'une depense :"+d);
+        Log.d("DB", "Ajout d'une depense :" + d);
         createTransaction(d.getNom(), d.getCategorie(), d.getProvenance(), d.getMontant(), d.getDevise(), d.getCommentaire());
     }
 
@@ -183,14 +184,14 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        Log.d("BD","Requete demarrée");
+        Log.d("BD", "Requete demarrée");
     }
 
     //this method will give the response from the request
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        Log.d("BD","Requete executée");
+        Log.d("BD", "Requete executée");
         try {
             JSONObject object = new JSONObject(s);
             if (!object.getBoolean("error")) {

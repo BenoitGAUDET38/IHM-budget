@@ -1,46 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Theme.FineAnce.HomeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_blue"
     tools:context=".controller.mainActivity.HomeFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/app_title"
-        android:textSize="30sp" />
+    <RelativeLayout
+        android:id="@+id/home_fragment_header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
 
-    <ImageView
-        android:id="@+id/accountOptionImageView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/ic_baseline_account_circle_24"
-        android:contentDescription="@string/settings_circle" />
+        <TextView
+            android:id="@+id/welcome_message"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:gravity="center"
+            android:text="@string/app_title"
+            android:textSize="30sp" />
 
-    <ImageView
+        <ImageView
+            android:id="@+id/accountOptionImageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="30dp"
+            android:contentDescription="@string/settings_circle"
+            android:src="@drawable/ic_baseline_account_circle_24"
+            app:tint="@color/primary_text" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/moneyCircleButton"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/circle"
-        android:contentDescription="@string/description_add_circle" />
-
-    <TextView
-        android:id="@+id/info_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/home_fragment_header"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/MoneyLeft"
-        android:textSize="40sp" />
+        android:layout_marginTop="150dp"
+        android:background="@drawable/card"
+        android:backgroundTint="@color/secondary_blue"
+        android:contentDescription="@string/description_add_circle"
+        android:minWidth="250dp"
+        android:minHeight="100dp">
+
+        <TextView
+            android:id="@+id/info_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/MoneyLeft"
+            android:textSize="50sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/moneyCircleButton"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle"
+            android:text="Dernière Transactions"
+            android:textAlignment="center" />
+
+        <ListView
+            android:id="@+id/recent_transactions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 </RelativeLayout>

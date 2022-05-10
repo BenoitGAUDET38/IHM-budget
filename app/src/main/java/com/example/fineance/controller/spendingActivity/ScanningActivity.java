@@ -98,6 +98,7 @@ public class ScanningActivity extends AppCompatActivity {
     }
 
     private void analyseDetectedText(Text result) {
+        double montantTmp = 0;
         String resultText = result.getText();
         for (Text.TextBlock block : result.getTextBlocks()) {
             String blockText = block.getText();
@@ -109,14 +110,16 @@ public class ScanningActivity extends AppCompatActivity {
                 Rect lineFrame = line.getBoundingBox();
                 for (Text.Element element : line.getElements()) {
                     String elementText = element.getText();
-                    Point[] elementCornerPoints = element.getCornerPoints();
-                    Rect elementFrame = element.getBoundingBox();
+                    try {
+                        montantTmp = Math.max(montantTmp, Double.parseDouble(elementText.replaceAll("[^0-9]", "")));
+                    } catch (Exception ignored) {
+                    }
                 }
             }
         }
         synchronized (this.intentResult) {
-            this.intentResult.putExtra("montant", "1000");
-            this.intentResult.putExtra("commentaire", resultText);
+            this.intentResult.putExtra("montant", montantTmp);
+            this.intentResult.putExtra("commentaire", "Text détecté dans la Photo:\n" + resultText);
             this.intentResult.notify();
         }
     }

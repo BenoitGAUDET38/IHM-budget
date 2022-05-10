@@ -19,6 +19,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
             android:layout_toStartOf="@+id/sommeLayout"
+            android:contentDescription="@string/photo"
             android:scaleX="1.5"
             android:scaleY="1.5"
             android:src="@android:drawable/ic_menu_camera"
@@ -46,8 +47,10 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/default_amount"
                 android:background="@drawable/rectangle"
+                android:hint="@string/default_amount"
                 android:inputType="numberDecimal"
                 android:padding="5dp"
+                android:textAlignment="center"
                 android:text="0.00"
                 android:autofillHints="0" />
 
@@ -107,8 +110,8 @@
             android:id="@+id/ajout_depense_catégorie_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="number"
             android:layout_marginHorizontal="20dp"
+            android:inputType="number"
             android:textSize="20sp" />
 
     </LinearLayout>

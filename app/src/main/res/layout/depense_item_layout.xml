@@ -1,52 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:layout_marginBottom="8dp">
 
     <TextView
         android:id="@+id/item_layout_textView_nomprix"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@id/category_and_place"
+        android:layout_alignBottom="@id/category_and_place"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_weight="5"
+        android:layout_toStartOf="@id/category_and_place"
+        android:gravity="center_vertical"
         android:text="Nom+Prix"
         android:textSize="22sp" />
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/category_and_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="8dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/item_layout_textView_categorie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity=""
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:text="Categorie"
-            android:textSize="22sp" />
+            android:layout_alignEnd="@id/item_layout_textView_provenance"
+            android:layout_marginTop="8dp"
+            android:maxLines="1"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/item_layout_textView_provenance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:text="Provenance" />
-
-
-    </LinearLayout>
-
-
-</LinearLayout>
+            android:layout_below="@+id/item_layout_textView_categorie"
+            android:layout_marginBottom="8dp"
+            android:maxLines="1"
+            android:textSize="18sp" />
+    </RelativeLayout>
+</RelativeLayout>

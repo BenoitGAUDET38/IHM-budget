@@ -26,10 +26,16 @@ public class CategorieListAdapter extends BaseAdapter {
 
     private final List<Categorie> listData;
     private final LayoutInflater layoutInflater;
+    private boolean shorten = false;
 
     public CategorieListAdapter(Context aContext, List<Categorie> listData) {
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
+    }
+
+    public CategorieListAdapter(Context aContext, List<Categorie> listData, boolean shorten) {
+        this(aContext, listData);
+        this.shorten = shorten;
     }
 
     @Override

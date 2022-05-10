@@ -1,6 +1,4 @@
-package com.example.fineance.controller.mainActivity;
-
-import static java.lang.Integer.getInteger;
+package com.example.fineance.controller.previsionActivity;
 
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -16,7 +14,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.camera.core.impl.ImageOutputConfig;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
@@ -35,10 +33,6 @@ import com.razerdp.widget.animatedpieview.data.SimplePieInfo;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -89,23 +83,23 @@ public class PrevisionFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         super.onCreate(savedInstanceState);
+        this.requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        this.requireActivity().getWindow().setStatusBarColor(ContextCompat.getColor(this.requireActivity(), R.color.primary_green));
         View view = inflater.inflate(R.layout.fragment_prevision, container, false);
         if (mode != 0)
             view = inflater.inflate(R.layout.fragment_prevision_big_pie, container, false);
 
 
-        graphView = (GraphView) view.findViewById(R.id.graphView);
+        graphView = view.findViewById(R.id.graphView);
         pieChart = view.findViewById(R.id.pie_chart);
         spinnerMois = view.findViewById(R.id.spinner_prevision_mois);
-        spinnerAnnee=view.findViewById(R.id.spinner_prevision_année);
+        spinnerAnnee = view.findViewById(R.id.spinner_prevision_année);
         btn_swap = view.findViewById(R.id.btn_swap);
 
         setupSwapBtn();
@@ -116,10 +110,10 @@ public class PrevisionFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 Adapter adapter = adapterView.getAdapter();
-                if (adapter.getItem(position)!=null)
-                {
-                    setMoisActuel(Integer.parseInt((String)adapter.getItem(position)));
-                drawLineGraph();}
+                if (adapter.getItem(position) != null) {
+                    setMoisActuel(Integer.parseInt((String) adapter.getItem(position)));
+                    drawLineGraph();
+                }
             }
 
             @Override
@@ -131,10 +125,10 @@ public class PrevisionFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 Adapter adapter = adapterView.getAdapter();
-                if (adapter.getItem(position)!=null)
-                {
-                    setAnneeActuel(Integer.parseInt((String)adapter.getItem(position)));
-                    drawLineGraph();}
+                if (adapter.getItem(position) != null) {
+                    setAnneeActuel(Integer.parseInt((String) adapter.getItem(position)));
+                    drawLineGraph();
+                }
             }
 
             @Override
@@ -152,7 +146,7 @@ public class PrevisionFragment extends Fragment {
         btn_swap.setOnClickListener(view -> {
             int argMode = 0;
             if (mode == 0) argMode = 1;
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new PrevisionFragment(argMode)).commit();
+            this.requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new PrevisionFragment(argMode)).commit();
             AbstractNotificationFactory factory = new LowPriorityNotificationFactory();
             Notification notification;
             if (argMode != 0)
@@ -163,7 +157,7 @@ public class PrevisionFragment extends Fragment {
         });
     }
 
-    void setupSpinner(Spinner spinner,String[] values, int spinnerPosition) {
+    void setupSpinner(Spinner spinner, String[] values) {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, values);
         spinner.setAdapter(adapter);
         spinner.setSelection(spinnerPosition);
@@ -171,7 +165,6 @@ public class PrevisionFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 Toast.makeText(getActivity(), "Changer to : " + adapterView.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
-                //spinnerPosition = position;
             }
 
             @Override
@@ -214,9 +207,9 @@ public class PrevisionFragment extends Fragment {
     }
 
     void drawLineGraph() {
-        Timestamp start=new Timestamp(anneeActuel-1900,moisActuel-1,1,0,0,0,0);
-        Timestamp end=new Timestamp(anneeActuel-1900,moisActuel-1,31,0,0,0,0);
-        List<Depense> depenseList=DepenseUtilities.getDepenseParDuree(PerformNetworkRequest.getDepenses(),start,end);
+        Timestamp start = new Timestamp(anneeActuel - 1900, moisActuel - 1, 1, 0, 0, 0, 0);
+        Timestamp end = new Timestamp(anneeActuel - 1900, moisActuel - 1, 31, 0, 0, 0, 0);
+        List<Depense> depenseList = DepenseUtilities.getDepenseParDuree(PerformNetworkRequest.getDepenses(), start, end);
         System.out.println(depenseList);
         List<DataPoint> dataPointList=new ArrayList<>();
         double montant=0;
@@ -259,10 +252,15 @@ public class PrevisionFragment extends Fragment {
     public void setAnneeActuel(int anneeActuel) {
         this.anneeActuel = anneeActuel;
     }
+
+    public int getMoisActuel() {
+        return moisActuel;
+    }
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putInt("mois",moisActuel);
-        outState.putInt("annee",anneeActuel);
+        outState.putInt("mois", moisActuel);
+        outState.putInt("annee", anneeActuel);
         super.onSaveInstanceState(outState);
     }
 
