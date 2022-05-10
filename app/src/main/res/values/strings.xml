@@ -53,4 +53,5 @@
     <string name="update">Mettre a jour</string>
     <string name="title_categorie">"Categorie : "</string>
     <string name="settings_logs">Voir les logs</string>
+    <string name="settings_user">Parametre Utilisateur</string>
 </resources>
