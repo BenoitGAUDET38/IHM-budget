@@ -5,9 +5,7 @@ import static com.example.fineance.model.PerformNetworkRequest.depensesObservabl
 import static com.example.fineance.model.PerformNetworkRequest.getCategories;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -20,8 +18,6 @@ import com.example.fineance.model.DepenseUtilities;
 import com.example.fineance.model.PerformNetworkRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -96,29 +92,14 @@ public class MainActivity extends AppCompatActivity implements Observer {
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         // Always call the superclass so it can restore the view hierarchy
         super.onRestoreInstanceState(savedInstanceState);
-        //previsions = (PrevisionFragment) getSupportFragmentManager().getFragment(savedInstanceState, "previsionfragment");
         isOn = savedInstanceState.getString(savedIsOn);
         if (isOn.equals("prevision")) {
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, previsions,PREVISION_FRAGMENT_TAG).commit();
         } else if (isOn.equals("categories")) {
-//            fragment = categorie;
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, categorie).commit();
         }
     }
 
-    private Fragment setCategorie() {
-        categorie = new CategorieMenuFragment();
-        return categorie;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        // Save the user's current game state
-        savedInstanceState.putString(savedIsOn, isOn);
-        //getSupportFragmentManager().putFragment(savedInstanceState, "previsionfragment", previsions);
-        // Always call the superclass so it can save the view hierarchy state
-        super.onSaveInstanceState(savedInstanceState);
-    }
 
     @Override
     public void update(Observable observable, Object o) {
@@ -131,18 +112,5 @@ public class MainActivity extends AppCompatActivity implements Observer {
         }
 
     }
-
-    public void saveData(String s) {
-        FileOutputStream fos;
-        try {
-            fos = openFileOutput("Test", Context.MODE_APPEND);
-            fos.write(s.getBytes());
-            fos.close();
-            Log.d("DEBUG","Ecriture finie");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 
 }

@@ -9,7 +9,9 @@ import static java.util.Objects.isNull;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +22,8 @@ import com.example.fineance.model.notifications.Notification;
 import com.example.fineance.model.notifications.notificationsFactories.AbstractNotificationFactory;
 import com.example.fineance.model.notifications.notificationsFactories.HighPriorityNotificationFactory;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -84,12 +88,21 @@ public class AddExpenseActivity extends AppCompatActivity {
         FileOutputStream fos;
         s+="\n";
         try {
-            fos = openFileOutput("Test", Context.MODE_APPEND);
+            fos = openFileOutput("Logs", Context.MODE_APPEND);
             fos.write(s.getBytes());
             fos.close();
             Log.d("DEBUG","Ecriture finie");
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean isExternalStorageWritable() {
+        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+    }
+
+    public boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        return isExternalStorageWritable() || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
     }
 }

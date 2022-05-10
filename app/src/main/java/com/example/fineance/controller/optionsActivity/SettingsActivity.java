@@ -50,7 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void showLogs(View view) {
         try {
-            InputStream fis = openFileInput("Test");
+            InputStream fis = openFileInput("Logs");
             BufferedReader r = new BufferedReader(new InputStreamReader(fis));
 
             String line;
