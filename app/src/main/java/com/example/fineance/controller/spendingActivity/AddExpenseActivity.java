@@ -61,7 +61,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                 updateTransaction(depense.getId(), d);
                 res=" modifiée";
             }
-            saveData(depense.getNom() +res);
+            saveData(d.getNom() +res);
             finish();
         });
         getSupportFragmentManager().setFragmentResultListener("delete", this, (requestKey, result) -> {

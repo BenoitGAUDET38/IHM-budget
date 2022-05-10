@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="20dp"
+            android:text="Default"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -49,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="number"
+            android:text="100"
             android:layout_marginHorizontal="20dp"
             android:textSize="20sp"
             android:autofillHints="100" />

@@ -17,6 +17,7 @@ import com.example.fineance.controller.categoryActivity.CategorieMenuFragment;
 import com.example.fineance.model.Depense;
 import com.example.fineance.model.DepenseUtilities;
 import com.example.fineance.model.PerformNetworkRequest;
+import com.example.fineance.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ import java.util.Observer;
 public class MainActivity extends AppCompatActivity implements Observer {
     private static final String PREVISION_FRAGMENT_TAG = "prevision";
     BottomNavigationView bottomNav;
+
+    private User user = new User();
 
     @SuppressLint("NonConstantResourceId")
     List<Depense> depenseArrayList = new ArrayList<>();
@@ -114,4 +117,11 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

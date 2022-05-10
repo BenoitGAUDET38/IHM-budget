@@ -48,6 +48,7 @@
                 android:background="@drawable/rectangle"
                 android:inputType="numberDecimal"
                 android:padding="5dp"
+                android:text="0.00"
                 android:autofillHints="0" />
 
         </LinearLayout>
@@ -82,6 +83,7 @@
             android:id="@+id/ajout_depense_nom_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:text="Default"
             android:layout_marginHorizontal="20dp"
             android:textSize="20sp" />
 
@@ -130,6 +132,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="20dp"
+            android:text="Default"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -156,6 +159,7 @@
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/rectangle"
             android:textSize="20sp"
+            android:text="Default"
             android:inputType="textMultiLine"/>
 
     </LinearLayout>

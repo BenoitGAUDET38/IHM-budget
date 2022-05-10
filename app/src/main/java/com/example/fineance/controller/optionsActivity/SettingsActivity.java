@@ -14,6 +14,7 @@ import com.example.fineance.controller.categoryActivity.AddCategoryActivity;
 import com.example.fineance.controller.spendingActivity.AddExpenseActivity;
 import com.example.fineance.model.Adapter.OptionListAdapter;
 import com.example.fineance.model.settings.Option;
+import com.example.fineance.mvc.UserActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,7 +38,6 @@ public class SettingsActivity extends AppCompatActivity {
         addCategory.setId(R.id.option_item_value_textView);
         addExpense.setId(R.id.option_item_value_textView);
         log = findViewById(R.id.last_log);
-        // TODO ICI ça crash quand clické dessus.
         addCategory.setOnClickListener(v -> this.startActivity(new Intent(this, AddCategoryActivity.class)));
         addExpense.setOnClickListener(v -> this.startActivity(new Intent(this, AddExpenseActivity.class)));
         optionList = new ArrayList<>();
@@ -63,5 +63,10 @@ public class SettingsActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void modifUser(View view) {
+        startActivity(new Intent(this, UserActivity.class));
+        //        registerForActivityResult(new Intent(this, UserActivity.class),0);
     }
 }
