@@ -1,5 +1,10 @@
 package com.example.fineance.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
 public enum Devise {
     EUR("EUR", "Euro", 1, "€"),
     USD("USD", "Dollars", 1.0584, "$"),
@@ -34,5 +39,13 @@ public enum Devise {
 
     public String getSymbole() {
         return symbole;
+    }
+
+    public static List<String> getCodeValues() {
+        List<String> codes = new ArrayList<>();
+        for (Devise d : Devise.values()) {
+            codes.add(d.getCode());
+        }
+        return codes;
     }
 }

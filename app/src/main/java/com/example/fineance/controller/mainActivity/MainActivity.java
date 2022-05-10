@@ -6,6 +6,7 @@ import static com.example.fineance.model.PerformNetworkRequest.getCategories;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;

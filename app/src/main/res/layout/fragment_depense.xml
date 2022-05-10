@@ -52,7 +52,14 @@
 
         </LinearLayout>
 
-
+        <Spinner
+            android:id="@+id/ajout_depense_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/sommeLayout"
+            android:layout_alignBottom="@+id/sommeLayout"
+            android:layout_marginStart="20dp"
+            />
 
     </RelativeLayout>
 

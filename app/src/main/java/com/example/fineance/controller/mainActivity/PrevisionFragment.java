@@ -5,6 +5,7 @@ import static java.lang.Integer.getInteger;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -219,12 +220,16 @@ public class PrevisionFragment extends Fragment {
         List<DataPoint> dataPointList=new ArrayList<>();
         double montant=0;
         dataPointList.add(new DataPoint(0,0));
+
+        if (depenseList.size()==0)
+            dataPointList.add(new DataPoint(31,0));
+        Log.d("DEBUG", "Depense size : " + depenseList.size());
+
         for(Depense depense:depenseList){
             montant+=depense.getMontant();
             dataPointList.add(new DataPoint(depense.getDate().getDate(),montant));
+            Log.d("DEBUG", "drawLineGraph: ");
         }
-        if (depenseList.size()==0)
-            dataPointList.add(new DataPoint(31,0));
 
         // on below line we are adding data to our graph view.
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPointList.toArray(new DataPoint[0]));

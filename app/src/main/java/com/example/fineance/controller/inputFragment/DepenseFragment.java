@@ -9,16 +9,19 @@ import static java.util.Objects.isNull;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.DataSetObserver;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -31,7 +34,9 @@ import com.example.fineance.R;
 import com.example.fineance.controller.spendingActivity.ScanningActivity;
 import com.example.fineance.model.Categorie;
 import com.example.fineance.model.Depense;
+import com.example.fineance.model.Devise;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,9 +65,12 @@ public class DepenseFragment extends Fragment {
     private Button validerButton;
     private Button annulerButton;
     private EditText montantEditText;
+    private Spinner currencySpinner;
 
     private Depense depense;
     private List<Categorie> categorieList = getCategories();
+    private String devise = "EUR";
+    private List<String> deviseCodeList = Devise.getCodeValues();
 
     public DepenseFragment() {
         // Required empty public constructor
@@ -90,6 +98,7 @@ public class DepenseFragment extends Fragment {
         annulerButton = view.findViewById(R.id.ajout_depense_annuler_button);
         montantEditText = view.findViewById(R.id.ajout_depense_montant_editText);
         nomEditText = view.findViewById(R.id.ajout_depense_nom_edit_text);
+        currencySpinner = view.findViewById(R.id.ajout_depense_spinner);
 
         categorieEditText = view.findViewById(R.id.ajout_depense_catégorie_edit_text);
         List<String> categories = categorieList.stream().map(Categorie::getNom).collect(Collectors.toList());
@@ -123,6 +132,7 @@ public class DepenseFragment extends Fragment {
         });
 
         setValues();
+        setupCurrencySpinner();
 
         return view;
     }
@@ -148,6 +158,26 @@ public class DepenseFragment extends Fragment {
         String devise = "USD";
         String commentaire = String.valueOf(commentaireEditText.getText());
         return new Depense(name, categorie, provenance, montant, devise, commentaire);
+    }
+
+    private void setupCurrencySpinner() {
+        currencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                devise = deviseCodeList.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, deviseCodeList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
+        currencySpinner.setAdapter(adapter);
     }
 
 }
