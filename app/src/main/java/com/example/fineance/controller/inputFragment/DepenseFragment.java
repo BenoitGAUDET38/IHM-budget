@@ -2,6 +2,7 @@ package com.example.fineance.controller.inputFragment;
 
 import static android.app.Activity.RESULT_OK;
 import static com.example.fineance.controller.spendingActivity.ScanningActivity.CAMERA_REQUEST_CODE;
+import static com.example.fineance.model.PerformNetworkRequest.findCategorieById;
 import static com.example.fineance.model.PerformNetworkRequest.findCategorieByName;
 import static com.example.fineance.model.PerformNetworkRequest.getCategories;
 import static java.util.Objects.isNull;
@@ -12,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.database.DataSetObserver;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -131,8 +133,8 @@ public class DepenseFragment extends Fragment {
             getParentFragmentManager().setFragmentResult("transaction", result);
         });
 
-        setValues();
         setupCurrencySpinner();
+        setValues();
 
         return view;
     }
@@ -141,10 +143,11 @@ public class DepenseFragment extends Fragment {
         if (!isNull(depense)) {
             nomEditText.setText(depense.getNom());
             montantEditText.setText(String.valueOf(depense.getMontant()));
-            categorieEditText.setSelection(0);
+            categorieEditText.setSelection(categorieList.indexOf(findCategorieById(depense.getCategorie())));
             provenanceEditText.setText(depense.getProvenance());
             commentaireEditText.setText(depense.getCommentaire());
             currencySpinner.setSelection(deviseCodeList.indexOf(depense.getDevise()));
+            Log.d("DEBUG", "devise code index : " + deviseCodeList.indexOf(depense.getDevise()));
 
             annulerButton.setText(R.string.delete);
             validerButton.setText(R.string.update);
