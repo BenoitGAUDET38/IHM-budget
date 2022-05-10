@@ -1,14 +1,13 @@
 package com.example.fineance.controller.mainActivity;
 
 import static com.example.fineance.model.PerformNetworkRequest.categoriesObservable;
-import static com.example.fineance.model.PerformNetworkRequest.createTransaction;
 import static com.example.fineance.model.PerformNetworkRequest.depensesObservable;
 import static com.example.fineance.model.PerformNetworkRequest.getCategories;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -19,11 +18,10 @@ import com.example.fineance.controller.categoryActivity.CategorieMenuFragment;
 import com.example.fineance.model.Depense;
 import com.example.fineance.model.DepenseUtilities;
 import com.example.fineance.model.PerformNetworkRequest;
-import com.example.fineance.model.notifications.Notification;
-import com.example.fineance.model.notifications.notificationsFactories.AbstractNotificationFactory;
-import com.example.fineance.model.notifications.notificationsFactories.HighPriorityNotificationFactory;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -32,7 +30,6 @@ import java.util.Observer;
 public class MainActivity extends AppCompatActivity implements Observer {
     private static final String PREVISION_FRAGMENT_TAG = "prevision";
     BottomNavigationView bottomNav;
-
 
     @SuppressLint("NonConstantResourceId")
     List<Depense> depenseArrayList = new ArrayList<>();
@@ -124,41 +121,28 @@ public class MainActivity extends AppCompatActivity implements Observer {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        Intent intent = getIntent();
-        if (intent != null) {
-            Depense depense = intent.getParcelableExtra("depense");
-            if (depense != null && depense.valid()) {
-                createTransaction(depense);
-                createNotification(depense);
-            }
-        }
-    }
-
-    private void createNotification(Depense depense) {
-        AbstractNotificationFactory factory = new HighPriorityNotificationFactory();
-        Notification notif = factory.buildImageNotification(getApplicationContext(),
-                getResources(),
-                AbstractNotificationFactory.DEPENSE_IMG,
-                "Nouvelle dépense", depense.getNom() + " d'une valeur de " +
-                        depense.getMontant() + depense.getDevise() + " à " +
-                        depense.getProvenance() + " a été ajouté !");
-        notif.sendNotificationOnChannel();
-    }
-
-    @Override
     public void update(Observable observable, Object o) {
-        boolean res = true;
         try {
             categorie.updateList((List) o);
             depenseArrayList = (List<Depense>) o;
             home.updateTotal(DepenseUtilities.getMontantTotal(depenseArrayList));
         } catch (Exception e) {
-            res = false;
-        } finally {
-            Toast.makeText(getApplicationContext(), res ? "Operation effectué avec succes" : "Echec de l'operation", Toast.LENGTH_SHORT).show();
+           e.printStackTrace();
         }
 
     }
+
+    public void saveData(String s) {
+        FileOutputStream fos;
+        try {
+            fos = openFileOutput("Test", Context.MODE_APPEND);
+            fos.write(s.getBytes());
+            fos.close();
+            Log.d("DEBUG","Ecriture finie");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

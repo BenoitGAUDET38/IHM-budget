@@ -62,23 +62,24 @@ public class DepenseFragment extends Fragment {
     private EditText montantEditText;
 
     private Depense depense;
-    /*TODO newInstance CategorieList*/
     private List<Categorie> categorieList = getCategories();
 
     public DepenseFragment() {
         // Required empty public constructor
     }
 
-    public DepenseFragment(Depense depense) {
-        this.depense = depense;
+    public static DepenseFragment newDepenseFragment(Depense d) {
+        DepenseFragment fragment = new DepenseFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("depense", d);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            validerButton.setText(getArguments().getString("ADD"));
-            annulerButton.setText(getArguments().getString("REMOVE"));
-            categorieList = (List<Categorie>) getArguments().get("categories");
+            depense = getArguments().getParcelable("depense");
         }
     }
 

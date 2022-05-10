@@ -3,11 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".controller.optionsActivity.SettingsActivity">
 
     <ListView
         android:id="@+id/optionListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="181dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:layout_margin="16dp"
+            android:text="@string/settings_logs"
+            android:id="@+id/settings_log"
+            android:onClick="showLogs"
+            android:clickable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text=""
+            android:textSize="20sp"
+            android:id="@+id/last_log"/>
+
+    </LinearLayout>
 
 </LinearLayout>

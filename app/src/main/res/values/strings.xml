@@ -52,4 +52,5 @@
     <string name="delete">Supprimer</string>
     <string name="update">Mettre a jour</string>
     <string name="title_categorie">"Categorie : "</string>
+    <string name="settings_logs">Voir les logs</string>
 </resources>
