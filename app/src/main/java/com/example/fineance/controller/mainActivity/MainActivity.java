@@ -93,6 +93,15 @@ public class MainActivity extends AppCompatActivity implements Observer {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current game state
+        savedInstanceState.putString(savedIsOn, isOn);
+        //getSupportFragmentManager().putFragment(savedInstanceState, "previsionfragment", previsions);
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         // Always call the superclass so it can restore the view hierarchy
         super.onRestoreInstanceState(savedInstanceState);
@@ -102,8 +111,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
         } else if (isOn.equals("categories")) {
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, categorie).commit();
         }
-        Log.d("MVC","Test");
-        home.userUpdate();
     }
 
     @Override
