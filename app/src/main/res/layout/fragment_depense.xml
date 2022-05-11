@@ -44,13 +44,13 @@
                 android:id="@+id/ajout_depense_montant_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/default_amount"
+                android:autofillHints="0"
                 android:background="@drawable/rectangle"
+                android:hint="@string/default_amount"
                 android:inputType="numberDecimal"
                 android:padding="5dp"
-                android:textAlignment="center"
                 android:text="0.00"
-                android:autofillHints="0" />
+                android:textAlignment="center" />
 
         </LinearLayout>
 
@@ -58,10 +58,9 @@
             android:id="@+id/ajout_depense_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/sommeLayout"
             android:layout_alignBottom="@+id/sommeLayout"
             android:layout_marginStart="20dp"
-            />
+            android:layout_toEndOf="@+id/sommeLayout" />
 
     </RelativeLayout>
 
@@ -84,8 +83,8 @@
             android:id="@+id/ajout_depense_nom_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Default"
             android:layout_marginHorizontal="20dp"
+            android:text="Default"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -152,16 +151,22 @@
             android:text="@string/commentaire"
             android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/ajout_depense_commentaire_edit_text"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_margin="20dp"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/rectangle"
-            android:textSize="20sp"
-            android:text="Default"
-            android:inputType="textMultiLine"/>
+            android:background="@drawable/rectangle">
+
+            <EditText
+                android:id="@+id/ajout_depense_commentaire_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:backgroundTint="@color/white_background"
+                android:gravity="top"
+                android:textSize="20sp" />
+        </RelativeLayout>
 
     </LinearLayout>
 
