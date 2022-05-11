@@ -1,11 +1,13 @@
 package com.example.fineance.controller.mainActivity;
 
 import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
+import static com.example.fineance.model.User.holder;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,7 @@ import com.example.fineance.controller.spendingActivity.AddExpenseActivity;
 import com.example.fineance.model.Adapter.DepenseListAdapter;
 import com.example.fineance.model.Depense;
 import com.example.fineance.model.DepenseUtilities;
+import com.example.fineance.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +40,9 @@ public class HomeFragment extends Fragment {
     private List<Depense> depenseList;
     private final String devise = "€";
     private double totalDepenses = 0;
+    User u ;
     ListView listView;
+    TextView welcome;
 
     public HomeFragment() {
         depenseList = new ArrayList<>();
@@ -69,8 +74,17 @@ public class HomeFragment extends Fragment {
         ImageView account = view.findViewById(R.id.accountOptionImageView);
         account.setOnClickListener(v -> this.startActivity(new Intent(getActivity(), SettingsActivity.class)));
 
+        welcome  = view.findViewById(R.id.welcome_message);
+        Log.d("DEBUG", String.valueOf(holder));
+
         listView = view.findViewById(R.id.recent_transactions);
         listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList, true));
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     public void updateTotal(List<Depense> depenseArrayList) {
@@ -80,6 +94,16 @@ public class HomeFragment extends Fragment {
             montant.setText(totalDepenses +" "+ devise);
             depenseList = depenseArrayList;
             listView.setAdapter(new DepenseListAdapter(getActivity(),depenseArrayList,true));
+        }
+    }
+
+    public void userUpdate(){
+        Log.d("MVC","User I "+holder);
+        if(u == null)
+            u = new User();
+        u.setUser(holder);
+        if(!holder.getName().equals(" ") && !holder.getName().equals("Default")){
+            welcome.setText("Fineance\nBienvenue "+holder.getName());
         }
     }
 }

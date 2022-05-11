@@ -10,7 +10,6 @@ import static java.util.Objects.isNull;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.DataSetObserver;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +22,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -38,7 +36,6 @@ import com.example.fineance.model.Categorie;
 import com.example.fineance.model.Depense;
 import com.example.fineance.model.Devise;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -180,8 +177,6 @@ public class DepenseFragment extends Fragment {
 
         ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, deviseCodeList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
         currencySpinner.setAdapter(adapter);
     }
 

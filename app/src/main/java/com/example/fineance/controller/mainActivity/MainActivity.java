@@ -7,6 +7,7 @@ import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -16,7 +17,6 @@ import com.example.fineance.R;
 import com.example.fineance.controller.categoryActivity.CategorieMenuFragment;
 import com.example.fineance.controller.previsionActivity.PrevisionFragment;
 import com.example.fineance.model.Depense;
-import com.example.fineance.model.DepenseUtilities;
 import com.example.fineance.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -102,8 +102,16 @@ public class MainActivity extends AppCompatActivity implements Observer {
         } else if (isOn.equals("categories")) {
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, categorie).commit();
         }
+        Log.d("MVC","Test");
+        home.userUpdate();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("MVC","Test");
+        home.userUpdate();
+    }
 
     @Override
     public void update(Observable observable, Object o) {

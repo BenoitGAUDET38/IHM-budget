@@ -1,5 +1,7 @@
 package com.example.fineance.mvc;
 
+import android.util.Log;
+
 import com.example.fineance.model.User;
 
 import java.util.Observable;
@@ -32,8 +34,21 @@ public class ModelUser extends Observable {
         this.controller = controller;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public void resetUser() {
         user = new User();
         updateData();
+    }
+
+    public void deviseUser(String d) {
+        Log.d("DEBUG","Model " +d);
+        user.setCurrency(d);
+    }
+
+    public User getUser() {
+        return user;
     }
 }

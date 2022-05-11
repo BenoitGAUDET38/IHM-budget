@@ -5,6 +5,11 @@ public class User {
     private String name;
     private int seuil;
     private String currency;
+    public static final User holder = new User();
+
+    public static User getInstance(){
+        return holder;
+    }
 
     public User() {
         name="";
@@ -40,6 +45,12 @@ public class User {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public void setUser(User u){
+        holder.setCurrency(u.getCurrency());
+        holder.setName(u.getName());
+        holder.setSeuil(u.getSeuil());
     }
 
     @Override

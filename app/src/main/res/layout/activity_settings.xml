@@ -6,40 +6,76 @@
     android:orientation="vertical"
     tools:context=".controller.optionsActivity.SettingsActivity">
 
-    <ListView
-        android:id="@+id/optionListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:text="@string/settings_user"
-        android:id="@+id/user_settings"
-        android:onClick="modifUser"
-        android:clickable="true"/>
+        android:layout_marginBottom="40dp">
+
+        <ImageView
+            android:id="@+id/leave_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            android:contentDescription="Retour" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Paramètres"
+            android:textSize="35sp"
+            android:layout_margin="20dp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:text="@string/settings_user"
+            android:id="@+id/user_settings"
+            android:onClick="modifUser"
+            android:clickable="true"/>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:layout_marginTop="10dp"
+            android:text="Ajouter une categorie"
+            android:id="@+id/ajout_categorie"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:layout_marginTop="10dp"
+            android:text="Ajouter une depense"
+            android:id="@+id/ajout_depense"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="22sp"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
             android:text="@string/settings_logs"
             android:id="@+id/settings_log"
             android:onClick="showLogs"
             android:clickable="true"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:layout_marginStart="10dp"
+            android:layout_gravity="center"
             android:text=""
             android:textSize="20sp"
             android:id="@+id/last_log"/>

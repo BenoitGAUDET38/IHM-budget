@@ -3,8 +3,6 @@ package com.example.fineance.controller.optionsActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.fineance.R;
 import com.example.fineance.controller.categoryActivity.AddCategoryActivity;
 import com.example.fineance.controller.spendingActivity.AddExpenseActivity;
-import com.example.fineance.model.Adapter.OptionListAdapter;
 import com.example.fineance.model.settings.Option;
 import com.example.fineance.mvc.UserActivity;
 
@@ -33,19 +30,10 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_settings);
 
-        Button addCategory = new Button(this);
-        Button addExpense = new Button(this);
-        addCategory.setId(R.id.option_item_value_textView);
-        addExpense.setId(R.id.option_item_value_textView);
         log = findViewById(R.id.last_log);
-        addCategory.setOnClickListener(v -> this.startActivity(new Intent(this, AddCategoryActivity.class)));
-        addExpense.setOnClickListener(v -> this.startActivity(new Intent(this, AddExpenseActivity.class)));
-        optionList = new ArrayList<>();
-        optionList.add(new Option("Ajout Catégorie", addCategory));
-        optionList.add(new Option("Ajout Dépense", addExpense));
-
-        ListView optionListView = this.findViewById(R.id.optionListView);
-        optionListView.setAdapter(new OptionListAdapter(this, optionList));
+        findViewById(R.id.ajout_categorie).setOnClickListener(v -> this.startActivity(new Intent(this, AddCategoryActivity.class)));
+        findViewById(R.id.ajout_depense).setOnClickListener(v -> this.startActivity(new Intent(this, AddExpenseActivity.class)));
+        findViewById(R.id.leave_button).setOnClickListener(v -> finish());
     }
 
     public void showLogs(View view) {
