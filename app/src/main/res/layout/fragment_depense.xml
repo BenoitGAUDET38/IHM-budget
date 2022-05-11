@@ -47,7 +47,6 @@
                 android:autofillHints="0"
                 android:background="@drawable/rectangle"
                 android:hint="@string/default_amount"
-                android:inputType="numberDecimal"
                 android:padding="5dp"
                 android:text="0.00"
                 android:textAlignment="center" />
