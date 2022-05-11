@@ -29,15 +29,6 @@ public class ScanningActivity extends AppCompatActivity {
 
     public static final int CAMERA_REQUEST_CODE = 1;
 
-    private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
-
-    static {
-        ORIENTATIONS.append(Surface.ROTATION_0, 0);
-        ORIENTATIONS.append(Surface.ROTATION_90, 90);
-        ORIENTATIONS.append(Surface.ROTATION_180, 180);
-        ORIENTATIONS.append(Surface.ROTATION_270, 270);
-    }
-
     private final TextRecognizer recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
     private final Intent intentResult = new Intent();
     private final ActivityResultLauncher<Intent> activityResultLaunch = registerForActivityResult(
