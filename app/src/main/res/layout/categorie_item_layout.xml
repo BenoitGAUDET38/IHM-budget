@@ -2,41 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin= "16dp">
-
+    >
         <TextView
             android:id="@+id/categorie_name"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_weight="5"
             android:text="@string/categorie_name"
+            android:layout_margin="10dp"
             android:textSize="22sp" />
 
         <ProgressBar
             android:id="@+id/progress_seuil"
             style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            />
 
         <TextView
             android:id="@+id/categorie_seuil"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
             android:text="@string/default_seuil"
+            android:layout_margin="10dp"
             android:textSize="22sp" />
-
-    </LinearLayout>
-
-<!--    <FrameLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:id="@+id/list_depenses"/>-->
 
 </LinearLayout>
