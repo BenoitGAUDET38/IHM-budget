@@ -211,8 +211,8 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
                 } catch (Exception e) {
                     Log.d("BD", "Pas de categories");
                 }
-
-            }
+            }else
+                Log.d("RUSH","error");
         } catch (JSONException e) {
             e.printStackTrace();
         }

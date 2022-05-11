@@ -53,8 +53,9 @@ public class AddExpenseActivity extends AppCompatActivity {
         getSupportFragmentManager().setFragmentResultListener("transaction", this, (requestKey, result) -> {
             Depense d = (Depense) result.get(requestKey);
             String res;
+            Log.d("RUSH","Listenr ?");
             if (isNull(depense)){
-                createNotification(d);
+//                createNotification(d);
                 createTransaction(d);
                 res=" ajoutée";
             }

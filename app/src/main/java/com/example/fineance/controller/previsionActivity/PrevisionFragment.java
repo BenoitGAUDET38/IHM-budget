@@ -244,7 +244,6 @@ public class PrevisionFragment extends Fragment {
         graphView.getViewport().setScalable(true);
         graphView.getViewport().setScalableY(true);
         graphView.addSeries(series);
-        System.out.println("bla");
     }
 
     public void setMoisActuel(int moisActuel) {
