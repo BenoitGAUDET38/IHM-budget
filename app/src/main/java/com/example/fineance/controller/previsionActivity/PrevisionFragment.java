@@ -176,7 +176,7 @@ public class PrevisionFragment extends Fragment {
     }
 
     void drawPieChart() {
-        String[] rgb = {"#07108c", "#661600", "#348f94"/**//*, "#BB0306", "#308958", "#6E125C"*/};
+        String[] rgb = {"#07108c", "#661600", "#348f94", "#BB0306", "#308958", "#6E125C"};
         Map<String, Double> mapInfo = DepenseUtilities.getDepenseConvertionParCategorie(PerformNetworkRequest.getDepenses());
 
         Random rnd = new Random();
