@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Polytech/ihm/IHM-budget/app/src/main/res/layout/depense_item_layout.xml" value="0.1111111111111111" />
         <entry key="..\:/Polytech/ihm/IHM-budget/app/src/main/res/layout/fragment_home.xml" value="0.1762917933130699" />
         <entry key="..\:/Polytech/ihm/IHM-budget/app/src/main/res/layout/fragment_prevision.xml" value="0.1762917933130699" />
         <entry key="..\:/Polytech/ihm/IHM-budget/app/src/main/res/layout/fragment_prevision_big_pie.xml" value="0.18541666666666667" />
