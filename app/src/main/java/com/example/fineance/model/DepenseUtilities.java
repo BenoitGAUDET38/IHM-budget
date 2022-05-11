@@ -13,6 +13,12 @@ public class DepenseUtilities {
         return Math.round(depenseList.stream().map(d -> getDepenseConvertion(d)).reduce(0.0, Double::sum)*100.)/100.;
     }
 
+    public static double getMontantTotalParCategorie(List<Depense> depenseList, int categorie) {
+        return Math.round(depenseList.stream().filter(d -> d.getCategorie() == categorie)
+                .map(d -> getDepenseConvertion(d))
+                .reduce(0.0, Double::sum)*100.)/100.;
+    }
+
     public static double getEuroConvertion(Depense depense) {
         return Devise.valueOf(depense.getDevise()).getValue();
     }
