@@ -43,6 +43,7 @@ import java.util.Random;
  * create an instance of this fragment.
  */
 public class PrevisionFragment extends Fragment {
+    private static final String PREVISION_FRAGMENT_TAG = "prevision";
     GraphView graphView;
     AnimatedPieView pieChart;
     Spinner spinnerMois;
@@ -147,7 +148,7 @@ public class PrevisionFragment extends Fragment {
         btn_swap.setOnClickListener(view -> {
             int argMode = 0;
             if (mode == 0) argMode = 1;
-            this.requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new PrevisionFragment(argMode)).commit();
+            this.requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new PrevisionFragment(argMode),PREVISION_FRAGMENT_TAG).commit();
             AbstractNotificationFactory factory = new LowPriorityNotificationFactory();
             Notification notification;
             if (argMode != 0)
@@ -175,7 +176,7 @@ public class PrevisionFragment extends Fragment {
     }
 
     void drawPieChart() {
-        String[] rgb = {"#07108c", "#661600", "#348f94", "BB0306", "#308958", "#6E125C"};
+        String[] rgb = {"#07108c", "#661600", "#348f94"/**//*, "#BB0306", "#308958", "#6E125C"*/};
         Map<String, Double> mapInfo = DepenseUtilities.getDepenseConvertionParCategorie(PerformNetworkRequest.getDepenses());
 
         Random rnd = new Random();

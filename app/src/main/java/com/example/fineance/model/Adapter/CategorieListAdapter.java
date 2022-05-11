@@ -27,6 +27,7 @@ public class CategorieListAdapter extends BaseAdapter {
     private final List<Categorie> listData;
     private final LayoutInflater layoutInflater;
     private boolean shorten = false;
+    private String devise = " EUR";
 
     public CategorieListAdapter(Context aContext, List<Categorie> listData) {
         this.listData = listData;
@@ -69,7 +70,7 @@ public class CategorieListAdapter extends BaseAdapter {
 
         Categorie categorie = this.listData.get(position);
         holder.nomView.setText(categorie.getNom());
-        holder.seuilView.setText("Max :"+categorie.getSeuil() + "$");
+        holder.seuilView.setText("Max :"+categorie.getSeuil() + " "+devise);
         holder.progressBarSeuil.setMax((int) categorie.getSeuil());
         holder.progressBarSeuil.setProgress((int) PerformNetworkRequest.sumCategorie(categorie.getId()));
         convertView.setOnLongClickListener(e -> {
