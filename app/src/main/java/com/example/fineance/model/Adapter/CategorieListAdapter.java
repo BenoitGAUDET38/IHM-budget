@@ -3,6 +3,8 @@ package com.example.fineance.model.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -17,6 +19,7 @@ import com.example.fineance.R;
 import com.example.fineance.controller.categoryActivity.DisplayCategorieActivity;
 import com.example.fineance.controller.categoryActivity.DisplayDepenseActivity;
 import com.example.fineance.model.Categorie;
+import com.example.fineance.model.DepenseUtilities;
 import com.example.fineance.model.PerformNetworkRequest;
 
 import java.util.ArrayList;
@@ -26,17 +29,11 @@ public class CategorieListAdapter extends BaseAdapter {
 
     private final List<Categorie> listData;
     private final LayoutInflater layoutInflater;
-    private boolean shorten = false;
-    private String devise = " EUR";
+    private final String devise = " EUR";
 
     public CategorieListAdapter(Context aContext, List<Categorie> listData) {
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
-    }
-
-    public CategorieListAdapter(Context aContext, List<Categorie> listData, boolean shorten) {
-        this(aContext, listData);
-        this.shorten = shorten;
     }
 
     @Override
@@ -54,7 +51,7 @@ public class CategorieListAdapter extends BaseAdapter {
         return position;
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n"})
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
@@ -69,15 +66,19 @@ public class CategorieListAdapter extends BaseAdapter {
         }
 
         Categorie categorie = this.listData.get(position);
+        double montant = DepenseUtilities.getMontantTotalParCategorie(PerformNetworkRequest.depenseList, categorie.getId());
+
         holder.nomView.setText(categorie.getNom());
-        holder.seuilView.setText("Max :"+categorie.getSeuil() + " "+devise);
+        holder.seuilView.setText(montant + "/" + categorie.getSeuil() + " " + devise);
+
         holder.progressBarSeuil.setMax((int) categorie.getSeuil());
         holder.progressBarSeuil.setProgress((int) PerformNetworkRequest.sumCategorie(categorie.getId()));
+        holder.progressBarSeuil.setProgressTintList(ColorStateList.valueOf(Color.parseColor(this.getColour(parent, montant / categorie.getSeuil()))));
         convertView.setOnLongClickListener(e -> {
             Intent in = new Intent(e.getContext(), DisplayCategorieActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putParcelable("categorie",categorie);
-            Log.d("DEBUG","Intent "+categorie);
+            bundle.putParcelable("categorie", categorie);
+            Log.d("DEBUG", "Intent " + categorie);
             in.putExtras(bundle);
             e.getContext().startActivity(in);
             return true;
@@ -89,22 +90,20 @@ public class CategorieListAdapter extends BaseAdapter {
             bundle.putString("categorie", categorie.getNom());
             in.putExtras(bundle);
             e.getContext().startActivity(in);
-//            opened=!opened;
-//            if(opened){
-//                DepenseListFragment f = DepenseListFragment.newDepenseList(depensesByCategorie(categorie.getId()));
-//                fgm.beginTransaction().replace(R.id.list_depenses, f).commit();
-//            }else{
-//                DepenseListFragment f = DepenseListFragment.newDepenseList(depensesByCategorie(categorie.getId()));
-//                fgm.beginTransaction().replace(R.id.list_depenses, f).commit();
-//            }
         });
         return convertView;
+    }
+
+    @SuppressLint("ResourceType")
+    private String getColour(ViewGroup view, double percentage) {
+        if (percentage <= 1 / 3.) return view.getResources().getString(R.color.secondary_green);
+        if (percentage >= 2 / 3.) return view.getResources().getString(R.color.tertiary_red);
+        return "#ffae00";
     }
 
     private static class ViewHolder {
         TextView nomView;
         TextView seuilView;
         ProgressBar progressBarSeuil;
-//        DepenseListFragment fragment;
     }
 }

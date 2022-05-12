@@ -25,12 +25,16 @@
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout-land/fragment_prevision.xml" value="0.32760141093474426" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/activity_ajout_categorie.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/activity_ajout_depense.xml" value="0.18819655521783182" />
+        <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/activity_display_categorie.xml" value="0.25104166666666666" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/activity_display_depense.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/activity_main.xml" value="0.2015625" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/activity_scanning.xml" value="0.10326086956521739" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/activity_settings.xml" value="0.18819655521783182" />
+        <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/activity_user.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/card.xml" value="0.3729166666666667" />
+        <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/categorie_item_layout.xml" value="0.25104166666666666" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/fragment_categorie.xml" value="0.33" />
+        <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/fragment_categorie2.xml" value="0.25104166666666666" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/fragment_depense.xml" value="0.33" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/fragment_depense_list.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/matis/AndroidStudioProjects/IHM-budget/app/src/main/res/layout/fragment_home.xml" value="0.33" />

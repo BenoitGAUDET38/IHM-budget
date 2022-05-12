@@ -90,13 +90,7 @@ public class ScanningActivity extends AppCompatActivity {
         double montantTmp = 0;
         String resultText = result.getText();
         for (Text.TextBlock block : result.getTextBlocks()) {
-            String blockText = block.getText();
-            Point[] blockCornerPoints = block.getCornerPoints();
-            Rect blockFrame = block.getBoundingBox();
             for (Text.Line line : block.getLines()) {
-                String lineText = line.getText();
-                Point[] lineCornerPoints = line.getCornerPoints();
-                Rect lineFrame = line.getBoundingBox();
                 for (Text.Element element : line.getElements()) {
                     String elementText = element.getText();
                     try {

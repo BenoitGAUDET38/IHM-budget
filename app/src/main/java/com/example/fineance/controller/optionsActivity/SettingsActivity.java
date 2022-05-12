@@ -6,29 +6,27 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.fineance.R;
 import com.example.fineance.controller.categoryActivity.AddCategoryActivity;
 import com.example.fineance.controller.spendingActivity.AddExpenseActivity;
-import com.example.fineance.model.settings.Option;
 import com.example.fineance.mvc.UserActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private static List<Option> optionList = new ArrayList<>();
     public TextView log;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_settings);
+        this.getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.primary_blue));
 
         log = findViewById(R.id.last_log);
         findViewById(R.id.ajout_categorie).setOnClickListener(v -> this.startActivity(new Intent(this, AddCategoryActivity.class)));
@@ -55,6 +53,5 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void modifUser(View view) {
         startActivity(new Intent(this, UserActivity.class));
-        //        registerForActivityResult(new Intent(this, UserActivity.class),0);
     }
 }
