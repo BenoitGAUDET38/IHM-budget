@@ -27,18 +27,12 @@ import java.util.Observer;
 
 public class MainActivity extends AppCompatActivity implements Observer {
     private static final String PREVISION_FRAGMENT_TAG = "prevision";
-    BottomNavigationView bottomNav;
-
+    private String isOn = "home";
+    private String savedIsOn;
+    private final CategorieMenuFragment categorie = new CategorieMenuFragment();
+    private PrevisionFragment previsions = new PrevisionFragment();
+    private final HomeFragment home = new HomeFragment();
     private User user = new User();
-
-    @SuppressLint("NonConstantResourceId")
-    List<Depense> depenseArrayList = new ArrayList<>();
-    String isOn = "home";
-    String savedIsOn;
-
-    CategorieMenuFragment categorie = new CategorieMenuFragment();
-    PrevisionFragment previsions = new PrevisionFragment();
-    HomeFragment home = new HomeFragment();
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -51,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         this.setContentView(R.layout.activity_main);
 
-        bottomNav = this.findViewById(R.id.bot_nav_bar);
+        BottomNavigationView bottomNav = this.findViewById(R.id.bot_nav_bar);
         this.getSupportFragmentManager().beginTransaction().replace(R.id.main_container, home).commit();
         bottomNav.setSelectedItemId(R.id.nav_home);
 
@@ -96,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Save the user's current game state
         savedInstanceState.putString(savedIsOn, isOn);
-        //getSupportFragmentManager().putFragment(savedInstanceState, "previsionfragment", previsions);
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
     }
@@ -116,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("MVC","Test");
+        Log.d("MVC", "Test");
         home.userUpdate();
     }
 
@@ -124,12 +117,11 @@ public class MainActivity extends AppCompatActivity implements Observer {
     public void update(Observable observable, Object o) {
         try {
             categorie.updateList((List) o);
-            depenseArrayList = (List<Depense>) o;
+            List<Depense> depenseArrayList = (List<Depense>) o;
             home.updateTotal(depenseArrayList);
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
-
     }
 
     public User getUser() {

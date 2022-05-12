@@ -33,6 +33,7 @@ import com.razerdp.widget.animatedpieview.data.SimplePieInfo;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -44,20 +45,27 @@ import java.util.Random;
  */
 public class PrevisionFragment extends Fragment {
     private static final String PREVISION_FRAGMENT_TAG = "prevision";
-    GraphView graphView;
-    AnimatedPieView pieChart;
-    Spinner spinnerMois;
-    Spinner spinnerAnnee;
-    String[] mois = new String[]{"1","2","3","4","5","6","7","8","9","10","11", "12"};
-    String[] annee = new String[]{"2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012", "2011","2010"};
-    int moisActuel=5;
-    int anneeActuel=2022;
-    int indexMois = 4;
-    int indexAnnee = 0;
-    int spinnerPosition=1;
-    String currentDuration="Annuel";
-    Button btn_swap;
-    int mode = 0;
+    private static final String[] mois = new String[]{"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"};
+    private static final String[] annee;
+
+    static {
+        annee = new String[10]; // 10 years before current year and 10 years after current year
+        int current_year = Calendar.getInstance().get(Calendar.YEAR);
+        for (int i = 0; i < annee.length; i++) {
+            annee[i] = String.valueOf(current_year - annee.length / 2 + i);
+        }
+    }
+
+    private final String currentDuration = "Annuel";
+    private GraphView graphView;
+    private AnimatedPieView pieChart;
+    private int moisActuel;
+    private int anneeActuel;
+    private int indexMois;
+    private int indexAnnee;
+    private int spinnerPosition;
+    private Button btn_swap;
+    private int mode = 0;
 
     public PrevisionFragment() {
         // Required empty public constructor
@@ -100,20 +108,21 @@ public class PrevisionFragment extends Fragment {
 
         graphView = view.findViewById(R.id.graphView);
         pieChart = view.findViewById(R.id.pie_chart);
-        spinnerMois = view.findViewById(R.id.spinner_prevision_mois);
-        spinnerAnnee = view.findViewById(R.id.spinner_prevision_année);
+        Spinner spinnerMois = view.findViewById(R.id.spinner_prevision_mois);
+        Spinner spinnerAnnee = view.findViewById(R.id.spinner_prevision_année);
         btn_swap = view.findViewById(R.id.btn_swap);
 
         setupSwapBtn();
+        this.setToToday();
 
-        setupSpinner(spinnerMois,mois, indexMois);
-        setupSpinner(spinnerAnnee,annee, indexAnnee);
+        setupSpinner(spinnerMois, mois, indexMois);
+        setupSpinner(spinnerAnnee, annee, indexAnnee);
         spinnerMois.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 Adapter adapter = adapterView.getAdapter();
                 if (adapter.getItem(position) != null) {
-                    setMoisActuel(Integer.parseInt((String) adapter.getItem(position)));
+                    setMoisActuel((String) adapter.getItem(position));
                     drawLineGraph();
                 }
             }
@@ -128,7 +137,7 @@ public class PrevisionFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 Adapter adapter = adapterView.getAdapter();
                 if (adapter.getItem(position) != null) {
-                    setAnneeActuel(Integer.parseInt((String) adapter.getItem(position)));
+                    setAnneeActuel(Integer.parseInt(annee[position]));
                     drawLineGraph();
                 }
             }
@@ -140,7 +149,6 @@ public class PrevisionFragment extends Fragment {
         });
         drawLineGraph();
         drawPieChart();
-
         return view;
     }
 
@@ -148,7 +156,7 @@ public class PrevisionFragment extends Fragment {
         btn_swap.setOnClickListener(view -> {
             int argMode = 0;
             if (mode == 0) argMode = 1;
-            this.requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new PrevisionFragment(argMode),PREVISION_FRAGMENT_TAG).commit();
+            this.requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new PrevisionFragment(argMode), PREVISION_FRAGMENT_TAG).commit();
             AbstractNotificationFactory factory = new LowPriorityNotificationFactory();
             Notification notification;
             if (argMode != 0)
@@ -213,23 +221,22 @@ public class PrevisionFragment extends Fragment {
         Timestamp end = new Timestamp(anneeActuel - 1900, moisActuel - 1, 31, 0, 0, 0, 0);
         List<Depense> depenseList = DepenseUtilities.getDepenseParDuree(PerformNetworkRequest.getDepenses(), start, end);
         System.out.println(depenseList);
-        List<DataPoint> dataPointList=new ArrayList<>();
-        double montant=0;
-        dataPointList.add(new DataPoint(0,0));
+        List<DataPoint> dataPointList = new ArrayList<>();
+        double montant = 0;
+        dataPointList.add(new DataPoint(0, 0));
 
-        if (depenseList.size()==0)
-            dataPointList.add(new DataPoint(31,0));
+        if (depenseList.size() == 0)
+            dataPointList.add(new DataPoint(31, 0));
         Log.d("DEBUG", "Depense size : " + depenseList.size());
 
-        for(Depense depense:depenseList){
-            montant+=DepenseUtilities.getDepenseConvertion(depense);
-            dataPointList.add(new DataPoint(depense.getDate().getDate(),montant));
+        for (Depense depense : depenseList) {
+            montant += DepenseUtilities.getDepenseConvertion(depense);
+            dataPointList.add(new DataPoint(depense.getDate().getDate(), montant));
             Log.d("DEBUG", "drawLineGraph: ");
         }
 
         // on below line we are adding data to our graph view.
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPointList.toArray(new DataPoint[0]));
-
 
         // set manual X bounds
         graphView.getViewport().setYAxisBoundsManual(true);
@@ -246,10 +253,6 @@ public class PrevisionFragment extends Fragment {
         graphView.addSeries(series);
     }
 
-    public void setMoisActuel(int moisActuel) {
-        this.moisActuel = moisActuel;
-    }
-
     public void setAnneeActuel(int anneeActuel) {
         this.anneeActuel = anneeActuel;
     }
@@ -258,11 +261,31 @@ public class PrevisionFragment extends Fragment {
         return moisActuel;
     }
 
+    public void setMoisActuel(String moisActuel) {
+        for (int i = 0; i < mois.length; i++) {
+            if (mois[i].equals(moisActuel)) {
+                this.moisActuel = i + 1;
+            }
+        }
+    }
+
+    private void setToToday() {
+        this.moisActuel = Calendar.getInstance().get(Calendar.MONTH);
+        this.indexMois = this.moisActuel;
+
+        this.anneeActuel = Calendar.getInstance().get(Calendar.YEAR);
+        for (int i = 0; i < annee.length; i++) {
+            if (annee[i].equals(String.valueOf(this.anneeActuel))) {
+                this.indexAnnee = i;
+                break;
+            }
+        }
+    }
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putInt("mois", moisActuel);
         outState.putInt("annee", anneeActuel);
         super.onSaveInstanceState(outState);
     }
-
 }

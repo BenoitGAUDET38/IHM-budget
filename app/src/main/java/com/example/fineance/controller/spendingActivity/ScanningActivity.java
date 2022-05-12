@@ -9,8 +9,6 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.SparseIntArray;
-import android.view.Surface;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
