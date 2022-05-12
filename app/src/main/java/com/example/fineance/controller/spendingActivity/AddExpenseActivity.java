@@ -54,7 +54,6 @@ public class AddExpenseActivity extends AppCompatActivity {
             Depense d = (Depense) result.get(requestKey);
             String res;
             if (isNull(depense)){
-                createNotification(d);
                 createTransaction(d);
                 res=" ajoutée";
             }
@@ -62,6 +61,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                 updateTransaction(depense.getId(), d);
                 res=" modifiée";
             }
+            createNotification(d);
             saveData(d.getNom() +res);
             finish();
         });

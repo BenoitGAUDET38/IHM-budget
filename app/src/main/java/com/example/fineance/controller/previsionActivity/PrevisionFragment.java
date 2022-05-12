@@ -212,6 +212,7 @@ public class PrevisionFragment extends Fragment {
         Timestamp start = new Timestamp(anneeActuel - 1900, moisActuel - 1, 1, 0, 0, 0, 0);
         Timestamp end = new Timestamp(anneeActuel - 1900, moisActuel - 1, 31, 0, 0, 0, 0);
         List<Depense> depenseList = DepenseUtilities.getDepenseParDuree(PerformNetworkRequest.getDepenses(), start, end);
+        System.out.println("=========================");
         System.out.println(depenseList);
         List<DataPoint> dataPointList=new ArrayList<>();
         double montant=0;
@@ -234,7 +235,10 @@ public class PrevisionFragment extends Fragment {
         // set manual X bounds
         graphView.getViewport().setYAxisBoundsManual(true);
         graphView.getViewport().setMinY(0);
-        graphView.getViewport().setMaxY(series.getHighestValueY());
+        if (montant==0)
+            graphView.getViewport().setMaxY(100);
+        else
+            graphView.getViewport().setMaxY(series.getHighestValueY());
 
         graphView.getViewport().setXAxisBoundsManual(true);
         graphView.getViewport().setMinX(0);
@@ -243,6 +247,7 @@ public class PrevisionFragment extends Fragment {
         // enable scaling and scrolling
         graphView.getViewport().setScalable(true);
         graphView.getViewport().setScalableY(true);
+        graphView.getViewport().setScalable(true);
         graphView.addSeries(series);
         System.out.println("bla");
     }

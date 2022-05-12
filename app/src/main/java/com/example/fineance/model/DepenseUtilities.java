@@ -74,6 +74,7 @@ public class DepenseUtilities {
         System.out.println(fin);
         System.out.println(depenses);
         depenses.stream().filter(depense -> depense.getDate().compareTo(debut) > 0 && depense.getDate().compareTo(fin) < 0).forEach(depense -> depenseList.add(depense));
+        System.out.println(depenseList);
         return depenseList;
     }
 
