@@ -26,7 +26,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     public static final int CODE_GET_REQUEST = 1024;
     public static final int CODE_POST_REQUEST = 1025;
 
-    private static final String ROOT_URL = "https://fineance.000webhostapp.com/FineAnceApi/v1/Api.php?apicall=";
+    private static final String ROOT_URL = "https://fineance.000webhostapp.com/FineAnceApi/Api.php?apicall=";
 
     public static final String URL_CREATE_DEPENSE = ROOT_URL + "createtransaction";
     public static final String URL_GET_TRANSACTIONS = ROOT_URL + "gettransactions";
