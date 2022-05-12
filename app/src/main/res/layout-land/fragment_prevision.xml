@@ -23,7 +23,7 @@
             android:textSize="30sp" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.1"
             android:gravity="center"
@@ -38,18 +38,18 @@
 
             <Spinner
                 android:id="@+id/spinner_prevision_mois"
-                style="#FFFFFF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:popupBackground="@color/secondary_green"
                 android:textSize="30sp" />
 
             <Spinner
                 android:id="@+id/spinner_prevision_année"
-                style="#FFFFFF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:popupBackground="@color/secondary_green"
                 android:textSize="30sp" />
 
         </LinearLayout>
@@ -89,6 +89,7 @@
         android:id="@+id/btn_swap"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Agrandir le diagramme" />
+        android:background="@color/secondary_green"
+        android:text=" Agrandir le diagramme " />
 
 </LinearLayout>

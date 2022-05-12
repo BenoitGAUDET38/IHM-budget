@@ -28,6 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:popupBackground="@color/secondary_green"
             android:textSize="30sp" />
 
         <Spinner
@@ -36,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:popupBackground="@color/secondary_green"
             android:textSize="30sp" />
 
     </LinearLayout>
@@ -53,7 +55,7 @@
         android:layout_marginBottom="10dp"
         android:layout_weight="0"
         android:text="Seuils de dépense par catégorie"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
 
     <com.razerdp.widget.animatedpieview.AnimatedPieView
@@ -76,7 +78,7 @@
         android:layout_marginBottom="10dp"
         android:layout_weight="0"
         android:text="Seuils de dépense"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graphView"
@@ -89,6 +91,7 @@
         android:id="@+id/btn_swap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Affichage par défaut" />
+        android:background="@color/secondary_green"
+        android:text=" Agrandir le diagramme " />
 
 </LinearLayout>

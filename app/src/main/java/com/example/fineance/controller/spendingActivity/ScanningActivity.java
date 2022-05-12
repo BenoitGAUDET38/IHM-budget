@@ -9,8 +9,6 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.SparseIntArray;
-import android.view.Surface;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -28,15 +26,6 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 public class ScanningActivity extends AppCompatActivity {
 
     public static final int CAMERA_REQUEST_CODE = 1;
-
-    private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
-
-    static {
-        ORIENTATIONS.append(Surface.ROTATION_0, 0);
-        ORIENTATIONS.append(Surface.ROTATION_90, 90);
-        ORIENTATIONS.append(Surface.ROTATION_180, 180);
-        ORIENTATIONS.append(Surface.ROTATION_270, 270);
-    }
 
     private final TextRecognizer recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
     private final Intent intentResult = new Intent();
@@ -101,13 +90,7 @@ public class ScanningActivity extends AppCompatActivity {
         double montantTmp = 0;
         String resultText = result.getText();
         for (Text.TextBlock block : result.getTextBlocks()) {
-            String blockText = block.getText();
-            Point[] blockCornerPoints = block.getCornerPoints();
-            Rect blockFrame = block.getBoundingBox();
             for (Text.Line line : block.getLines()) {
-                String lineText = line.getText();
-                Point[] lineCornerPoints = line.getCornerPoints();
-                Rect lineFrame = line.getBoundingBox();
                 for (Text.Element element : line.getElements()) {
                     String elementText = element.getText();
                     try {

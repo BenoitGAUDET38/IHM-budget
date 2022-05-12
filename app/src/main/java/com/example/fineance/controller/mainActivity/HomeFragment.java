@@ -38,11 +38,9 @@ import java.util.List;
  */
 public class HomeFragment extends Fragment {
     private List<Depense> depenseList;
-    private final String devise = "€";
-    private double totalDepenses = 0;
-    User u ;
-    ListView listView;
-    TextView welcome;
+    private User u;
+    private ListView listView;
+    private TextView welcome;
 
     public HomeFragment() {
         depenseList = new ArrayList<>();
@@ -74,7 +72,7 @@ public class HomeFragment extends Fragment {
         ImageView account = view.findViewById(R.id.accountOptionImageView);
         account.setOnClickListener(v -> this.startActivity(new Intent(getActivity(), SettingsActivity.class)));
 
-        welcome  = view.findViewById(R.id.welcome_message);
+        welcome = view.findViewById(R.id.welcome_message);
         Log.d("DEBUG", String.valueOf(holder));
 
         listView = view.findViewById(R.id.recent_transactions);
@@ -89,21 +87,22 @@ public class HomeFragment extends Fragment {
 
     public void updateTotal(List<Depense> depenseArrayList) {
         if (this.getActivity() != null) {
-            totalDepenses = DepenseUtilities.getMontantTotal(depenseArrayList);
+            double totalDepenses = DepenseUtilities.getMontantTotal(depenseArrayList);
             TextView montant = this.requireActivity().findViewById(R.id.info_total);
-            montant.setText(totalDepenses +" "+ devise);
+            String devise = "€";
+            montant.setText(totalDepenses + " " + devise);
             depenseList = depenseArrayList;
-            listView.setAdapter(new DepenseListAdapter(getActivity(),depenseArrayList,true));
+            listView.setAdapter(new DepenseListAdapter(getActivity(), depenseArrayList, true));
         }
     }
 
-    public void userUpdate(){
-        Log.d("MVC","User I "+holder);
-        if(u == null)
+    public void userUpdate() {
+        Log.d("MVC", "User I " + holder);
+        if (u == null)
             u = new User();
         u.setUser(holder);
-        if(!holder.getName().equals(" ") && !holder.getName().equals("Default")){
-            welcome.setText("Fineance\nBienvenue "+holder.getName());
+        if (!holder.getName().equals(" ") && !holder.getName().equals("Default")) {
+            welcome.setText("Fineance\nBienvenue " + holder.getName());
         }
     }
 }
