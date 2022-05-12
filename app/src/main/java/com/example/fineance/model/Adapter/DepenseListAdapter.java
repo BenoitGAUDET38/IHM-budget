@@ -73,11 +73,6 @@ public class DepenseListAdapter extends BaseAdapter {
         if (!this.shorten)  holder.provenanceView.setText(depense.getProvenance());
         holder.nomEtPrixView.setText(depense.getNom() + "    " + depense.getMontant() + " " + depense.getDevise());
         view.setOnClickListener(e -> {
-            Intent in = new Intent(e.getContext(), AddExpenseActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putParcelable("depense",depense);
-            in.putExtras(bundle);
-            e.getContext().startActivity(in);
         });
         return view;
     }

@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Date(mois/année) : "
-                android:textSize="30sp" />
+                android:textSize="26sp" />
 
             <Spinner
                 android:id="@+id/spinner_prevision_mois"
