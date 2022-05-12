@@ -33,6 +33,23 @@ public class DisplayCategorieActivity extends AppCompatActivity {
             }
         getSupportFragmentManager().beginTransaction().replace(R.id.categorie_edit, new CategorieFragment(categorie)).commit();
 
+        getSupportFragmentManager().setFragmentResultListener("categorie", this, (requestKey, result) -> {
+            Categorie d = (Categorie) result.get(requestKey);
+            Log.d("DEBUG","result "+d.toString());
+            Log.d("DEBUG","precedent "+categorie);
+            if (isNull(categorie))
+                createCategorie(d);
+            else {
+                updateCategorie(categorie.getId(), d);
+            }
+            finish();
+        });
+        getSupportFragmentManager().setFragmentResultListener("delete", this, (requestKey, result) -> {
+            Log.d("DEBUG","supprimer "+categorie);
+            if (!isNull(categorie))
+                deleteCategorie(categorie.getId());
+            finish();
+        });
     }
 
 }
