@@ -55,8 +55,8 @@ public class AddExpenseActivity extends AppCompatActivity {
             String res;
             Log.d("RUSH","Listenr ?");
             if (isNull(depense)){
-//                createNotification(d);
                 createTransaction(d);
+                createNotification(d);
                 res=" ajoutée";
             }
             else {
