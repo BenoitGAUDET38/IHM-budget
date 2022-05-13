@@ -6,7 +6,7 @@
     android:background="@color/primary_green"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".controller.previsionActivity.PrevisionFragment">
+    tools:context=".PrevisionFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

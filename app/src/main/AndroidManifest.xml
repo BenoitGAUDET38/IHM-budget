@@ -13,7 +13,7 @@
         android:required="true" />
 
     <application
-        android:name=".model.ApplicationStart"
+        android:name=".notifications.ApplicationStart"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,32 +21,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FineAnce.NoActionBar">
         <activity
-            android:name=".mvc.UserActivity"
+            android:name=".settings.mvc.UserActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.categoryActivity.DisplayDepenseActivity"
+            android:name=".categories.DisplayDepenseActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.categoryActivity.DisplayCategorieActivity"
+            android:name=".categories.DisplayCategorieActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.spendingActivity.AddExpenseActivity"
+            android:name=".depenses.AddExpenseActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".controller.categoryActivity.AddCategoryActivity"
+            android:name=".categories.AddCategoryActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".controller.spendingActivity.ScanningActivity"
+            android:name=".depenses.ScanningActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".controller.optionsActivity.SettingsActivity"
+            android:name=".settings.SettingsActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".controller.mainActivity.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
