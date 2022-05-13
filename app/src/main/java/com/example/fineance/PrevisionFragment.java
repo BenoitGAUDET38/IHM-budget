@@ -49,10 +49,10 @@ public class PrevisionFragment extends Fragment {
     private static final String[] annee;
 
     static {
-        annee = new String[10]; // 10 years before current year and 10 years after current year
+        annee = new String[5]; // 10 years before current year and 10 years after current year
         int current_year = Calendar.getInstance().get(Calendar.YEAR);
         for (int i = 0; i < annee.length; i++) {
-            annee[i] = String.valueOf(current_year - annee.length / 2 + i);
+            annee[i] = String.valueOf(current_year - annee.length + i + 2);
         }
     }
 
@@ -243,14 +243,14 @@ public class PrevisionFragment extends Fragment {
             dataPointList.add(new DataPoint(depense.getDate().getDate(), montant));
             Log.d("DEBUG", "drawLineGraph: ");
         }
-        Log.d("FIX",dataPointList+"");
+        Log.d("FIX", dataPointList + "");
         // on below line we are adding data to our graph view.
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPointList.toArray(new DataPoint[0]));
 
         // set manual X bounds
         graphView.getViewport().setYAxisBoundsManual(true);
         graphView.getViewport().setMinY(0);
-        if (montant==0)
+        if (montant == 0)
             graphView.getViewport().setMaxY(100);
         else
             graphView.getViewport().setMaxY(series.getHighestValueY());
