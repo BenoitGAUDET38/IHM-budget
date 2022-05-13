@@ -1,7 +1,7 @@
 <?php
 
 //getting the dboperation class
-require_once '/includes/DbOperation.php';
+require_once 'includes/DbOperation.php';
 
 //function validating all the paramters are available
 //we will pass the required parameters to this function
