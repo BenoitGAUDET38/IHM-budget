@@ -144,8 +144,6 @@ public class DepenseFragment extends Fragment {
             provenanceEditText.setText(depense.getProvenance());
             commentaireEditText.setText(depense.getCommentaire());
             currencySpinner.setSelection(deviseCodeList.indexOf(depense.getDevise()));
-            Log.d("DEBUG", "devise code index : " + deviseCodeList.indexOf(depense.getDevise()));
-
             annulerButton.setText(R.string.delete);
             validerButton.setText(R.string.update);
         }

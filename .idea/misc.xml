@@ -64,6 +64,8 @@
         <entry key="..\:/Users/moura/OneDrive/Bureau/test/IHM-budget/app/src/main/res/layout/list_item_layout.xml" value="0.1" />
         <entry key="..\:/Users/moura/OneDrive/Bureau/test/IHM-budget/app/src/main/res/layout/liste_transaction.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/categorie_item_layout.xml" value="0.13179347826086957" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22" />
       </map>
     </option>
   </component>

@@ -7,7 +7,6 @@ import static java.util.Objects.isNull;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,15 +27,12 @@ public class DisplayCategorieActivity extends AppCompatActivity {
             Bundle bundle = in.getExtras();
             if (!isNull(bundle)) {
                 categorie = (Categorie) bundle.get("categorie");
-                Log.d("DEBUG","Bundle "+categorie);
             }
             }
         getSupportFragmentManager().beginTransaction().replace(R.id.categorie_edit, new CategorieFragment(categorie)).commit();
 
         getSupportFragmentManager().setFragmentResultListener("categorie", this, (requestKey, result) -> {
             Categorie d = (Categorie) result.get(requestKey);
-            Log.d("DEBUG","result "+d.toString());
-            Log.d("DEBUG","precedent "+categorie);
             if (isNull(categorie))
                 createCategorie(d);
             else {
@@ -45,7 +41,6 @@ public class DisplayCategorieActivity extends AppCompatActivity {
             finish();
         });
         getSupportFragmentManager().setFragmentResultListener("delete", this, (requestKey, result) -> {
-            Log.d("DEBUG","supprimer "+categorie);
             if (!isNull(categorie))
                 deleteCategorie(categorie.getId());
             finish();

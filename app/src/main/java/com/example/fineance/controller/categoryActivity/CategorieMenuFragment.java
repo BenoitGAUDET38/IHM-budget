@@ -6,7 +6,6 @@ import static com.example.fineance.model.PerformNetworkRequest.getDepenses;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +34,7 @@ public class CategorieMenuFragment extends Fragment {
     private ArrayList<Depense> depenseList = new ArrayList<>();
     private List<Categorie> categorieList = new ArrayList<>();
     private SwitchCompat categoriesOn;
+    private ListView listView;
 
     public CategorieMenuFragment() {
         getDepenses();
@@ -54,22 +54,16 @@ public class CategorieMenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         this.requireActivity().getWindow().setStatusBarColor(ContextCompat.getColor(this.requireActivity(), R.color.primary_red));
-        Log.d("FRAGMENT", "onCreateView");
-        Log.d("FRAGMENT", String.valueOf(depenseList));
         View view = inflater.inflate(R.layout.fragment_categorie, container, false);
 
-        ListView listView = view.findViewById(R.id.categorieListView);
+        listView = view.findViewById(R.id.categorieListView);
         TextView montant = view.findViewById(R.id.ajout_depense_montant_editText);
         categoriesOn = view.findViewById(R.id.categorieSwitch);
         categoriesOn.setOnClickListener(viewSwitch -> {
-            if (categoriesOn.isChecked()) {
-                setCategories(listView);
-            } else {
-                Log.d("DEBUG", "affiche");
-                setDepenses(listView);
-//                listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList));
-
-            }
+            if (categoriesOn.isChecked())
+                setCategories();
+            else
+                setDepenses();
         });
         montant.setText(String.valueOf(DepenseUtilities.getMontantTotal(depenseList)));
         ImageView addButon = view.findViewById(R.id.addButton);
@@ -82,13 +76,13 @@ public class CategorieMenuFragment extends Fragment {
         return view;
     }
 
-    private void setCategories(ListView listView) {
+    private void setCategories() {
         listView.setAdapter(new CategorieListAdapter(getActivity(), categorieList));
         if (getParentFragmentManager().findFragmentById(R.id.list_content) != null)
             getParentFragmentManager().beginTransaction().remove(getParentFragmentManager().findFragmentById(R.id.list_content)).commit();
     }
 
-    private void setDepenses(ListView listView) {
+    private void setDepenses() {
         listView.setAdapter(new DepenseListAdapter(getActivity(), new ArrayList<>()));
         DepenseListFragment f = DepenseListFragment.newDepenseList(depenseList);
         getParentFragmentManager().beginTransaction().replace(R.id.list_content, f).commit();
@@ -96,18 +90,23 @@ public class CategorieMenuFragment extends Fragment {
 
     public void updateList(List depenses) {
         TextView montant;
-        Log.d("OBS", " " + depenses.get(0).getClass());
         if (getActivity() != null) {
-            ListView listView = getActivity().findViewById(R.id.categorieListView);
             if (depenses.get(0).getClass().equals(Depense.class)) {
                 depenseList = (ArrayList<Depense>) depenses;
-                setDepenses(listView);
+                setDepenses();
                 montant = getActivity().findViewById(R.id.ajout_depense_montant_editText);
                 montant.setText(String.valueOf(DepenseUtilities.getMontantTotal(depenseList)));
             } else if (depenses.get(0).getClass().equals(Categorie.class)) {
                 categorieList = (List<Categorie>) depenses;
-                setCategories(listView);
+                setCategories();
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        categoriesOn.setChecked(false);
+        setDepenses();
     }
 }

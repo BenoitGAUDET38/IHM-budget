@@ -1,5 +1,7 @@
 package com.example.fineance.model;
 
+import androidx.annotation.NonNull;
+
 public class User {
 
     private String name;
@@ -48,11 +50,12 @@ public class User {
     }
 
     public void setUser(User u){
-        holder.setCurrency(u.getCurrency());
-        holder.setName(u.getName());
-        holder.setSeuil(u.getSeuil());
+        setCurrency(u.getCurrency());
+        setName(u.getName());
+        setSeuil(u.getSeuil());
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "User{" +

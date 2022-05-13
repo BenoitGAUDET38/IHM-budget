@@ -1,7 +1,6 @@
 package com.example.fineance.mvc;
 
 import android.text.Editable;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,13 +34,10 @@ public class UserController {
     public void setListenersView(){
         layout.findViewById(R.id.leave_button).setOnClickListener(e -> {
             updateUser(name.getText(),seuil.getText(),spinner.getSelectedItem().toString());
-            Log.d("MVC",ModelUser.getInstance().getUser().toString());
             activity.stop(ModelUser.getInstance().getUser());
         });
 
-        layout.findViewById(R.id.settings_reset).setOnClickListener(e -> {
-            ModelUser.getInstance().resetUser();
-        });
+        layout.findViewById(R.id.settings_reset).setOnClickListener(e -> ModelUser.getInstance().resetUser());
         spinner = layout.findViewById(R.id.user_currency);
         name = layout.findViewById(R.id.user_name);
         seuil = layout.findViewById(R.id.user_seuil);
@@ -55,7 +51,6 @@ public class UserController {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-               Log.d("DEBUG",deviseCodeList.get(position));
                updateUser(name.getText(),seuil.getText(),deviseCodeList.get(position));
             }
             @Override
@@ -73,9 +68,8 @@ public class UserController {
     }
 
     public void update(User u){
-        Log.d("MVC","button back "+u);
         name.setText(u.getName());
-        seuil.setText(u.getSeuil()+"");
+        seuil.setText(String.valueOf(u.getSeuil()));
         int i=0;
         for(String s :deviseCodeList){
             if (s.equals(u.getCurrency()))

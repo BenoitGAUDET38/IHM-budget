@@ -1,7 +1,6 @@
 package com.example.fineance.mvc;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -29,11 +28,8 @@ public class UserView implements Observer {
 
     @Override
     public void update(Observable observable, Object o) {
-        Log.d("DEBUG",o+"");
         User user = (User) o;
         TextView name = layout.findViewById(R.id.user_name);
-//        TextView seuil = layout.findViewById(R.id.user_seuil);
         name.setText(user.getName());
-//        seuil.setText(user.getSeuil());
     }
 }

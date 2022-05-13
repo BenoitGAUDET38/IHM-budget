@@ -73,8 +73,6 @@ public class HomeFragment extends Fragment {
         account.setOnClickListener(v -> this.startActivity(new Intent(getActivity(), SettingsActivity.class)));
 
         welcome = view.findViewById(R.id.welcome_message);
-        Log.d("DEBUG", String.valueOf(holder));
-
         listView = view.findViewById(R.id.recent_transactions);
         listView.setAdapter(new DepenseListAdapter(getActivity(), depenseList, true));
 
@@ -90,19 +88,19 @@ public class HomeFragment extends Fragment {
             double totalDepenses = DepenseUtilities.getMontantTotal(depenseArrayList);
             TextView montant = this.requireActivity().findViewById(R.id.info_total);
             String devise = "€";
-            montant.setText(totalDepenses + " " + devise);
+            String res = totalDepenses + " " + devise;
+            montant.setText(res);
             depenseList = depenseArrayList;
             listView.setAdapter(new DepenseListAdapter(getActivity(), depenseArrayList, true));
         }
     }
 
     public void userUpdate() {
-        Log.d("MVC", "User I " + holder);
         if (u == null)
             u = new User();
+        Log.d("USER", holder + "\n" + u);
         u.setUser(holder);
-        if (!holder.getName().equals(" ") && !holder.getName().equals("Default")) {
-            welcome.setText("Fineance\nBienvenue " + holder.getName());
-        }
+        String res = "Bienvenue " + u.getName();
+        welcome.setText(res);
     }
 }

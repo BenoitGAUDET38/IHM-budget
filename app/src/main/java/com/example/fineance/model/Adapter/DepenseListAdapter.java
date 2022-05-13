@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +17,7 @@ import com.example.fineance.controller.spendingActivity.AddExpenseActivity;
 import com.example.fineance.model.Categorie;
 import com.example.fineance.model.Depense;
 
+import java.util.Collections;
 import java.util.List;
 
 public class DepenseListAdapter extends BaseAdapter {
@@ -29,6 +29,7 @@ public class DepenseListAdapter extends BaseAdapter {
     public DepenseListAdapter(Context aContext, List<Depense> listData) {
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
+        Collections.reverse(listData);
     }
 
     public DepenseListAdapter(Context aContext, List<Depense> listData, boolean shorten) {

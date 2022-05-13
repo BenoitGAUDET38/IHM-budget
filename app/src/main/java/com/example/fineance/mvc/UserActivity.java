@@ -3,7 +3,6 @@ package com.example.fineance.mvc;
 import static com.example.fineance.model.User.holder;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,7 +27,6 @@ public class UserActivity extends AppCompatActivity {
 
     public void stop(User u) {
         holder.setUser(u);
-        Log.d("MVC"," Holder + User"+holder+"\n"+u);
         finish();
     }
 }

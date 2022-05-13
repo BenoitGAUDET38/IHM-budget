@@ -7,7 +7,6 @@ import static java.util.Objects.isNull;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,8 +37,6 @@ public class AddCategoryActivity extends AppCompatActivity {
     private void setListeners() {
         getSupportFragmentManager().setFragmentResultListener("categorie", this, (requestKey, result) -> {
             Categorie d = (Categorie) result.get(requestKey);
-            Log.d("DEBUG","result "+d.toString());
-            Log.d("DEBUG","precedent "+categorie);
             if (isNull(categorie))
                 createCategorie(d);
             else {
