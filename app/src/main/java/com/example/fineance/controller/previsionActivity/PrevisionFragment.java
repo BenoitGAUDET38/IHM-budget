@@ -124,6 +124,7 @@ public class PrevisionFragment extends Fragment {
                 if (adapter.getItem(position) != null) {
                     setMoisActuel((String) adapter.getItem(position));
                     drawLineGraph();
+                    drawPieChart();
                 }
             }
 
@@ -139,6 +140,7 @@ public class PrevisionFragment extends Fragment {
                 if (adapter.getItem(position) != null) {
                     setAnneeActuel(Integer.parseInt(annee[position]));
                     drawLineGraph();
+                    drawPieChart();
                 }
             }
 
@@ -185,8 +187,12 @@ public class PrevisionFragment extends Fragment {
 
     void drawPieChart() {
         String[] rgb = {"#07108c", "#661600", "#348f94", "#BB0306", "#308958", "#6E125C"};
-        Map<String, Double> mapInfo = DepenseUtilities.getDepenseConvertionParCategorie(PerformNetworkRequest.getDepenses());
-
+        Timestamp start = new Timestamp(anneeActuel - 1900, moisActuel - 1, 1, 0, 0, 0, 0);
+        Timestamp end = new Timestamp(anneeActuel - 1900, moisActuel - 1, 31, 0, 0, 0, 0);
+        List<Depense> depenseList = DepenseUtilities.getDepenseParDuree(PerformNetworkRequest.getDepenses(), start, end);
+        Map<String, Double> mapInfo = DepenseUtilities.getDepenseConvertionParCategorie(depenseList);
+        System.out.println("**********************************************************************************");
+        System.out.println(depenseList);
         Random rnd = new Random();
 
         AnimatedPieViewConfig config = new AnimatedPieViewConfig();
@@ -206,6 +212,7 @@ public class PrevisionFragment extends Fragment {
             } else {
                 color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
             }
+
             config.addData(new SimplePieInfo(entry.getValue(),
                     color,
                     entry.getKey() + " : " + Math.round(entry.getValue() * 100) / 100.0 + "€"));

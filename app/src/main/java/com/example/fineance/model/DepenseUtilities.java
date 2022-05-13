@@ -69,12 +69,7 @@ public class DepenseUtilities {
 
     public static List<Depense> getDepenseParDuree(List<Depense> depenses, Timestamp debut, Timestamp fin) {
         List<Depense> depenseList = new ArrayList<>();
-        System.out.println("===========================================");
-        System.out.println(debut);
-        System.out.println(fin);
-        System.out.println(depenses);
         depenses.stream().filter(depense -> depense.getDate().compareTo(debut) > 0 && depense.getDate().compareTo(fin) < 0).forEach(depense -> depenseList.add(depense));
-        System.out.println(depenseList);
         return depenseList;
     }
 
