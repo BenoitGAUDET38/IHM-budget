@@ -1,4 +1,4 @@
-package com.example.fineance.adapter;
+package com.example.fineance.categories;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,8 +16,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.fineance.R;
-import com.example.fineance.categories.DisplayCategorieActivity;
-import com.example.fineance.categories.DisplayDepenseActivity;
 import com.example.fineance.modeles.Categorie;
 import com.example.fineance.modeles.DepenseUtilities;
 import com.example.fineance.modeles.PerformNetworkRequest;

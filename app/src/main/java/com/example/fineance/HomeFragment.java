@@ -25,7 +25,7 @@ import com.example.fineance.modeles.DepenseUtilities;
 import com.example.fineance.modeles.User;
 import com.example.fineance.settings.SettingsActivity;
 import com.example.fineance.depenses.AddExpenseActivity;
-import com.example.fineance.adapter.DepenseListAdapter;
+import com.example.fineance.depenses.DepenseListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

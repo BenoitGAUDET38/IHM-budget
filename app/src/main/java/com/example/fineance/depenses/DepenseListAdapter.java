@@ -1,4 +1,4 @@
-package com.example.fineance.adapter;
+package com.example.fineance.depenses;
 
 import static com.example.fineance.modeles.PerformNetworkRequest.findCategorieById;
 
@@ -13,11 +13,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.fineance.R;
-import com.example.fineance.depenses.AddExpenseActivity;
 import com.example.fineance.modeles.Categorie;
 import com.example.fineance.modeles.Depense;
 
-import java.util.Collections;
 import java.util.List;
 
 public class DepenseListAdapter extends BaseAdapter {
@@ -29,7 +27,7 @@ public class DepenseListAdapter extends BaseAdapter {
     public DepenseListAdapter(Context aContext, List<Depense> listData) {
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
-        Collections.reverse(listData);
+        listData.sort((depense, t1) -> t1.getDate().compareTo(depense.getDate()));
     }
 
     public DepenseListAdapter(Context aContext, List<Depense> listData, boolean shorten) {

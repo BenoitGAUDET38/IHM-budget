@@ -17,8 +17,8 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.fineance.adapter.CategorieListAdapter;
-import com.example.fineance.adapter.DepenseListAdapter;
+import com.example.fineance.categories.CategorieListAdapter;
+import com.example.fineance.depenses.DepenseListAdapter;
 import com.example.fineance.categories.AddCategoryActivity;
 import com.example.fineance.depenses.AddExpenseActivity;
 import com.example.fineance.depenses.DepenseListFragment;

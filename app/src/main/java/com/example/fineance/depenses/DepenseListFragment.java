@@ -10,7 +10,6 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.example.fineance.R;
-import com.example.fineance.adapter.DepenseListAdapter;
 import com.example.fineance.modeles.Depense;
 
 import java.util.ArrayList;
